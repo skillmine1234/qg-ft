@@ -1,216 +1,193 @@
-.row
-  .col-md-6
-    .panel.panel-default
-      .panel-heading
-        %h4.panel-title
-          = FundsTransfer.human_attribute_name(:request)
-      .panel-body
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:req_no)
-          .col-md-7.attr-vals
-            = @funds_transfer.req_bitstream
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:attempt_no)
-          .col-md-7.attr-vals
-            = @funds_transfer.attempt_no
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:req_timestamp)
-          .col-md-7.attr-vals
-            = @funds_transfer.req_timestamp
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:req_version)
-          .col-md-7.attr-vals
-            = @funds_transfer.req_version
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:reconciled_at)
-          .col-md-7.attr-vals
-            = @funds_transfer.reconciled_at
-        %hr
-  .col-md-6
-    .panel.panel-default
-      .panel-heading
-        %h4.panel-title
-          = FundsTransfer.human_attribute_name(:response)
-      .panel-body
-        .row
-          .col-md-5            
-            = FundsTransfer.human_attribute_name(:rep_no)
-          .col-md-7.attr-vals
-            = @funds_transfer.rep_bitstream
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:status_code)
-          .col-md-7.attr-vals
-            = @funds_transfer.status_code
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:rep_timestamp)
-          .col-md-7.attr-vals
-            = @funds_transfer.rep_timestamp
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:rep_version)
-          .col-md-7.attr-vals
-            = @funds_transfer.rep_version
-        .row
-          .col-md-5            
-            = FundsTransfer.human_attribute_name(:notifications)
-          .col-md-6
-            = link_to @funds_transfer.notifications.count, notifications_funds_transfer_path(@funds_transfer)            
-        %hr
-.row
-  .col-md-6
-    .panel.panel-default
-      .panel-heading
-        %h4.panel-title
-          = FundsTransfer.human_attribute_name(:transfer)
-      .panel-body
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:customer_id)
-          .col-md-7.attr-vals
-            = @funds_transfer.customer_id
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:debit_account_no)
-          .col-md-7.attr-vals
-            = @funds_transfer.debit_account_no 
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:req_transfer_type)
-          .col-md-7.attr-vals
-            = @funds_transfer.req_transfer_type
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:transfer_type)
-          .col-md-7.attr-vals
-            = @funds_transfer.transfer_type
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:transfer_amount)
-          .col-md-7.attr-vals
-            = @funds_transfer.transfer_amount
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:rmtr_to_bene_note)
-          .col-md-7.attr-vals
-            = @funds_transfer.rmtr_to_bene_note
-        %hr
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:bank_ref)
-          .col-md-7.attr-vals
-            = @funds_transfer.bank_ref                 
-  .col-md-6
-    .panel.panel-default
-      .panel-heading
-        %h4.panel-title
-          = FundsTransfer.human_attribute_name(:beneficiary)
-      .panel-body
-        %ul.nav.nav-tabs
-          %li.active
-            %a{"data-toggle" => "tab", href: "#bene_code"} #{t :registered}
-          %li
-            %a{"data-toggle" => "tab", href: "#bene_account_no"} #{t :account_no}
-          %li
-            %a{"data-toggle" => "tab", href: "#bene_account_mmid"} #{t :mmid}
-          %li
-            %a{"data-toggle" => "tab", href: "#aadhaar"} #{t :aadhaar}
-        .tab-content
-          #bene_code.tab-pane.active
-            %br
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:bene_code)
-              .col-md-7.attr-vals
-                = @funds_transfer.bene_code
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:name_with_bene_bank)
-              .col-md-7.attr-vals               
-                = @funds_transfer.name_with_bene_bank
-          #bene_account_no.tab-pane
-            %br
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:bene_full_name)
-              .col-md-7.attr-vals              
-                = @funds_transfer.bene_full_name
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:bene_account_no)
-              .col-md-7.attr-vals
-                = @funds_transfer.bene_account_no
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:bene_account_ifsc)
-              .col-md-7.attr-vals
-                = @funds_transfer.bene_account_ifsc
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:name_with_bene_bank)
-              .col-md-7.attr-vals              
-                = @funds_transfer.name_with_bene_bank
-            .row
-              .col-md-12
-                .card
-                  .card-block
-                    %p.card-text #{t :address}
-                    %address              
-          #bene_account_mmid.tab-pane
-            %br
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:bene_full_name)
-              .col-md-7.attr-vals               
-                = @funds_transfer.bene_full_name
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:bene_account_mmid)
-              .col-md-7.attr-vals             
-                = @funds_transfer.bene_account_mmid
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:bene_account_mobile_no)
-              .col-md-7.attr-vals               
-                = @funds_transfer.bene_account_mobile_no
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:name_with_bene_bank)
-              .col-md-7.attr-vals               
-                = @funds_transfer.name_with_bene_bank
-          #aadhaar.tab-pane
-            %br
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:aadhaar_no)
-              .col-md-7.attr-vals              
-                = @funds_transfer.aadhaar_no
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:aadhaar_mobile_no)
-              .ccol-md-7.attr-vals              
-                = @funds_transfer.aadhaar_mobile_no
-            .row
-              .col-md-5
-                = FundsTransfer.human_attribute_name(:bene_bank_name)
-              .col-md-7.attr-vals              
-                = @funds_transfer.bene_bank_name
-      .panel-body
-        %hr
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:bene_contact_mobile_no)
-          .col-md-7.attr-vals
-            = @funds_transfer.bene_contact_mobile_no
-        .row
-          .col-md-5
-            = FundsTransfer.human_attribute_name(:bene_contact_email_id)
-          .col-md-7.attr-vals
-            = @funds_transfer.bene_contact_email_id            
-= link_to 'Back', funds_transfers_path, class: 'btn'
+- unless @funds_transfer.nil?
+  .show_ticket      
+    .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 230px; display: inline-block;'}
+      %h3
+        Request:
+        = @funds_transfer.req_bitstream
+      %h3
+        Attempt No:
+        = @funds_transfer.attempt_no
+      %h3
+        Request Timestamp:
+        = @funds_transfer.req_timestamp
+      %h3
+        Request Version:
+        = @funds_transfer.req_version
+      %h3
+        Reconciled At:
+        = @funds_transfer.reconciled_at
+      %h3
+        Picked At:
+        = @funds_transfer.picked_at
+      %h3
+        Was Store & Forward?:
+        = @funds_transfer.was_saf
+      %h3
+        Operation Name:
+        = @funds_transfer.op_name
+    .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 230px; display: inline-block;'}
+      %h3
+        Response No:
+        = @funds_transfer.rep_bitstream
+      %h3
+        Status:
+        = @funds_transfer.status_code
+      %h3 
+        Reply:
+        = @funds_transfer.rep_no
+      %h3
+        Response Timestamp:
+        = @funds_transfer.rep_timestamp
+      %h3
+        Response Version:
+        = @funds_transfer.rep_version
+      %h3
+        Steps:
+        = @funds_transfer.steps
+    .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 500px; display: inline-block;'}
+      #ticket-details
+        %h3
+          Request Details:
+        %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+          %tr
+            %td.label Customer ID
+            %td.value
+              = @funds_transfer.customer_id
+          %tr
+            %td.label Transfer Type
+            %td.value
+              = @funds_transfer.transfer_type
+          %tr
+            %td.label Request Transfer Type
+            %td.value
+              = @funds_transfer.req_transfer_type
+          %tr
+            %td.label Transfer Currency
+            %td.value
+              = @funds_transfer.transfer_ccy
+          %tr
+            %td.label Transfer Amount
+            %td.value
+              = @funds_transfer.transfer_amount
+          %tr
+            %td.label Debit Account No
+            %td.value
+              = @funds_transfer.debit_account_no
+          %tr
+            %td.label Beneficiary Account No
+            %td.value
+              = @funds_transfer.bene_account_no
+          %tr
+            %td.label Beneficiary Account IFSC
+            %td.value
+              = @funds_transfer.bene_account_ifsc
+          %tr
+            %td.label Beneficiary Account MMID
+            %td.value
+              = @funds_transfer.bene_account_mmid
+          %tr
+            %td.label Aadhar Number
+            %td.value
+              = @funds_transfer.aadhaar_no
+          %tr
+            %td.label Aadhar Mobile Number
+            %td.value
+              = @funds_transfer.aadhaar_mobile_no
+          %tr
+            %td.label Purpose Code
+            %td.value
+              = @funds_transfer.purpose_code
+          %tr
+            %td.label Bank Reference
+            %td.value
+              = @funds_transfer.bank_ref
+          %tr
+            %td.label CBS Request Reference
+            %td.value
+              = @funds_transfer.cbs_req_ref_no
+
+    .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 500px; display: inline-block;'}
+      #ticket-details
+        %h3
+          Beneficiary Details:
+        %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+          %tr
+            %td.label Code
+            %td.value
+              = @funds_transfer.bene_code
+          %tr
+            %td.label Name
+            %td.value
+              = @funds_transfer.bene_full_name
+          %tr
+            %td.label Address
+            %td.value
+              = @funds_transfer.bene_address1
+          %tr
+            %td.label
+            %td.value
+              = @funds_transfer.bene_address2
+          %tr
+            %td.label
+            %td.value
+              = @funds_transfer.bene_address3
+          %tr
+            %td.label Postal Code
+            %td.value
+              = @funds_transfer.bene_postal_code
+          %tr
+            %td.label City
+            %td.value
+              = @funds_transfer.bene_city
+          %tr
+            %td.label State
+            %td.value
+              = @funds_transfer.bene_state
+          %tr
+            %td.label Country
+            %td.value
+              = @funds_transfer.bene_country
+          %tr
+            %td.label Contact Email ID
+            %td.value
+              = @funds_transfer.bene_contact_email_id
+          %tr
+            %td.label Account Mobile No
+            %td.value
+              = @funds_transfer.bene_account_mobile_no
+          %tr
+            %td.label Beneficiary Bank
+            %td.value
+              = @funds_transfer.bene_bank_name
+          %tr
+            %td.label Name With Beneficiary Bank
+            %td.value
+              = @funds_transfer.name_with_bene_bank
+
+    .header-form-main{:style=>'background-color: #ecf5fa; height: 100px; width: 50%; display: inline-block;'}
+      %h3
+        Notification Details:
+      %table.table.no-border
+        %tr
+          %td.label Notify Status
+          %td= @funds_transfer.notify_status
+        %tr
+          %td.label Notify Attempt No
+          %td= @funds_transfer.notify_attempt_no
+    .header-form-main{:style=>'background-color: #ecf5fa; height: 100px; width: 50%; display: inline-block;'}
+      %table.table.no-border
+        %tr
+          %td.label Notify Attempt At
+          %td= @funds_transfer.notify_attempt_at
+        %tr
+          %td.label Notified At
+          %td= @funds_transfer.notified_at
+        %tr
+          %td.label Notify Result
+          %td= @funds_transfer.notify_result
+
+    .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; display: inline-block; margin-bottom: 2%;'}
+      %table.table.no-border
+        %tr
+          %td.label Remitter To Beneficiary Note
+          %td= @funds_transfer.rmtr_to_bene_note

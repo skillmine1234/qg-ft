@@ -5,6 +5,7 @@ en:
     ft_customer_account: 'Funds Transfer Customer Accounts'
     ft_saf_transfer: 'SAF Transfers'
     ft_purge_saf_transfer: 'Purge SAF Transfers'
+    funds_transfers: 'Funds Transfers'
   mmid: 'MMID'
   activerecord:
     models:
@@ -13,7 +14,7 @@ en:
       funds_transfer: &attributes
         req_no: 'Request No'
         req_version: 'Request Version No'
-        req_timestamp: 'Request Date-Time'
+        req_timestamp: 'Request Timestamp'
         customer_id: 'Customer ID'
         debit_account_no: 'Debit Account No'
         bene_code: 'Beneficiary Code'
@@ -39,7 +40,7 @@ en:
         bank_ref: 'Bank Reference No'
         rep_no: 'Response No'
         rep_version: 'Response Version No'
-        rep_timestamp: 'Response Date-Time'
+        rep_timestamp: 'Response Timestamp'
         attempt_no: 'Attempt No'
         fault_code: 'Fault Code'
         fault_reason: 'Fault Reason'

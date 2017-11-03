@@ -8,18 +8,18 @@ class FundsTransfersController < ApplicationController
       # rest parameters are in post
       @searcher = FundsTransferSearcher.new(search_params)
     end
-    @transfers = FundsTransferDecorator.decorate_collection(policy_scope(@searcher).paginate)    
+    @records = FundsTransferDecorator.decorate_collection(policy_scope(@searcher).paginate)    
   end
   
   def show
     authorize @funds_transfer = FundsTransfer.find(params[:id]).decorate
   end
-  
-  def notifications
+
+  def steps
     authorize ft = FundsTransfer.find(params[:id])
-    @steps = ft.notifications
+    @steps = FundsTransferDecorator.decorate_collection(ft.audit_steps)
     render '/audit_steps/index'
-  end  
+  end
   
   private
   

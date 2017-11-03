@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       put :index
     end
     member do
-      get :notifications
+      get :steps
     end
   end
 

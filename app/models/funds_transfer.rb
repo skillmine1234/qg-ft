@@ -6,8 +6,7 @@ class FundsTransfer < ApplicationRecord
   attribute :rep_timestamp, :datetime
 
   has_one :audit_log, class_name: 'FundsTransferAuditLog'
-  has_many :notifications, -> (object) { unscope(where: :ft_auditable_type).where(ft_auditable_type: 'FundsTransfer').where(step_name: 'NOTIFY') }, 
-    :as => :ft_auditable, class_name: 'FtAuditStep'
+  has_many :audit_steps, :class_name => 'FtAuditStep', :as => :ft_auditable
   
   as_enum :status_code, [:FAILED, :RETURNED_FROM_BENEFICIARY, :NEW, :SENT_TO_BENEFICIARY, :SCHEDULED_FOR_NEXT_WORKDAY, :IN_PROCESS, :COMPLETED], map: :string, source: :status_code
   as_enum :req_transfer_type, [:NEFT, :IMPS, :RTGS, :FT], map: :string, source: :req_transfer_type
@@ -29,5 +28,5 @@ class FundsTransfer < ApplicationRecord
   def rep_bitstream
     audit_log.reply_bitstream
   end
-    
+
 end

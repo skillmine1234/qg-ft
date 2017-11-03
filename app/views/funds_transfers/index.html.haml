@@ -1,6 +1,7 @@
 - @title = FundsTransfer.model_name.human.pluralize
-
-= render 'search'
+%h1=@title
+%br
+= render 'advanced_search'
 %br
 
 - columns = [:customer_id, :transfer_type, :bene_full_name, :transfer_amount, :debit_account_no, :req_timestamp, :rep_timestamp, :status_code, :user_action]
@@ -8,8 +9,6 @@
 .row
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
     #panels.panel.panel-primary
-      .panel-heading
-        = @title
       .panel-body 
         %table.table#transactions_table
           %thead
@@ -18,8 +17,7 @@
                 %th= FundsTransfer.human_attribute_name(column)
               %th
           %tbody
-            - @transfers.each do |transfer|
+            - @records.each do |transfer|
               %tr
                 - columns.each_with_index do |column, i|
                   %td= transfer.send(column.to_s)
-        = pagination_links(@transfers)

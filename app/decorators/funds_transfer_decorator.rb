@@ -18,7 +18,7 @@ class FundsTransferDecorator < ApplicationDecorator
       button: 'd_clip_button2',
       xml: 'rep_xml'}
   end
-            
+
   def reconciled_at
     object.reconciled_at.try(:strftime, "%d/%m/%Y %I:%M%p")
   end
@@ -36,6 +36,22 @@ class FundsTransferDecorator < ApplicationDecorator
 
   def status_code
     h.render partial: 'shared/status', locals: {id: "#{object.class.name.demodulize}_status_code_#{object.id}", object: object}
+  end
+  
+  def picked_at
+    object.picked_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+  end
+  
+  def notify_attempt_at
+    object.notify_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+  end
+  
+  def notified_at
+    object.notified_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+  end
+  
+  def steps
+    h.link_to 'Show', h.send("steps_funds_transfer_path", object)
   end
   
 end
