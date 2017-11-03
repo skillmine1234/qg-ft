@@ -1,5 +1,5 @@
 class FundsTransferPolicy < DataAccessPolicy
-  def notifications?
+  def steps?
     show?
   end
 end

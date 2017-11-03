@@ -9,5 +9,8 @@ module Qg
     TEST_MENU_ITEMS = []
     COMMON_MENU_ITEMS = [:incoming_file]
     REPORTS = true
+    OPERATIONS = [:funds_transfers]
+
+    mattr_accessor :access_all_routes
   end
 end
