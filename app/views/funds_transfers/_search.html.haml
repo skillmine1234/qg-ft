@@ -1,0 +1,13 @@
+= search_form_for @searcher, {defaults: local_assigns[:defaults]} do |f|
+  = f.standard_fields
+  - unless current_user.accessible_customers.count == 1
+    = f.input :customer_id
+  = f.input :transfer_type, as: :enum
+  = f.input :status_code, as: :enum
+  = f.input :req_timestamp, as: :between
+  = f.input :transfer_amount, as: :between
+  = f.input :req_no
+  = f.input :debit_account_no
+  = f.input :bene_account_ifsc
+
+  = f.action_buttons

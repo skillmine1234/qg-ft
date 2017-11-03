@@ -1,0 +1,29 @@
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = form_tag ft_apbs_incoming_records_path, :method => :post, :class => 'form-horizontal', :autocomplete=>"off" do
+    .control-group
+      = label_tag "APBS Transaction Code", "APBS Transaction Code", :class => 'control-label'
+      = text_field_tag :apbs_trans_code, params[:apbs_trans_code]
+
+    .control-group
+      = label_tag "Destination Bank IIN", "Destination Bank IIN", :class => 'control-label'
+      = text_field_tag :dest_bank_iin, params[:dest_bank_iin]
+
+    .control-group
+      = label_tag "Sponsor Bank IIN", "Sponsor Bank IIN", :class => 'control-label'
+      = text_field_tag :sponser_bank_iin, params[:sponser_bank_iin]
+
+    .control-group
+      = label_tag "Beneficiary Name", "Beneficiary Name", :class => 'control-label'
+      = text_field_tag :bene_acct_name, params[:bene_acct_name]
+
+    = hidden_field_tag :file_name, params[:file_name]
+    = hidden_field_tag :status, params[:status]
+    = hidden_field_tag :page, params[:page]
+    .form-actions
+      = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button",onclick: "$('#page').val(1)"
+      = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'adv_search_reset_button'
+
+= advanced_search_page_links

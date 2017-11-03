@@ -1,0 +1,32 @@
+= simple_form_for @ft_customer_account, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "ft_customer_account_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@ft_customer_account, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :is_enabled, "Enabled?", :class => 'control-label'
+      - if f.object.is_enabled.nil?
+        = f.check_box :is_enabled, {:checked => "checked"},"Y","N"
+      - else 
+        = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@ft_purpose_code, :is_enabled, :prepend_text => "")
+    .control-group
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.text_field :customer_id, :minlength => 5, :maxlength => 10
+      #msg-error
+        = error_message_for(@ft_customer_account, :customer_id, :prepend_text => "")
+    .control-group
+      = f.label :account_no, "*Account No", :class => 'control-label'
+      = f.text_field :account_no, :minlength => 5, :maxlength => 15
+      #msg-error
+        = error_message_for(@ft_customer_account, :account_no, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record? and f.object.customer_id.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => label_name + ' Customer Accounts'
+    = link_to :Cancel,'/ft_customer_accounts', :name => 'cancel', :class=>"cancel btn"

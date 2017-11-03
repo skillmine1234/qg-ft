@@ -1,0 +1,63 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 900px;'}
+    #form-details
+      %h3 Funds Transfer Customer Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @ft_customer_account
+        %a.btn{:href => "#{!(can) ? '#' : '/ft_customer_accounts/' + @ft_customer_account.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'ecol_customers/approve', :@record => @ft_customer_account
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@ft_customer_account.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@ft_customer_account)}", :controller => :ft_customer_accounts, :action => :audit_logs, :version_id => audit_count(@ft_customer_account), :id => @ft_customer_account.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@ft_customer_account, :base, :prepend_text => "")
+          %tr
+            %td.label Customer ID
+            %td.value
+              = @ft_customer_account.customer_id
+            %td#msg-error
+              = error_message_for(@ft_customer_account, :customer_id, :prepend_text => "")
+          %tr
+            %td.label Account No
+            %td.value
+              = @ft_customer_account.account_no
+            %td#msg-error
+              = error_message_for(@ft_customer_account, :account_no, :prepend_text => "")
+          %tr
+            %td.label Enabled
+            %td.value
+              = @ft_customer_account.is_enabled
+            %td#msg-error
+              = error_message_for(@ft_customer_account, :is_enabled, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @ft_customer_account.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@ft_customer_account, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @ft_customer_account.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@ft_customer_account, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @ft_customer_account.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@ft_customer_account, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @ft_customer_account.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@ft_customer_account, :updated_at, :prepend_text => "")

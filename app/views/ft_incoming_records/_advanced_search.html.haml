@@ -1,0 +1,39 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag "Request No", "Request No", :class => 'control-label'
+    = text_field_tag :req_no, params[:req_no]
+
+  .control-group
+    = label_tag "Bank Reference No", "Bank Reference No", :class => 'control-label'
+    = text_field_tag :bank_ref_no, params[:bank_ref_no]
+
+  .control-group
+    = label_tag "Debit Account No", "Debit Account No", :class => 'control-label'
+    = text_field_tag :debit_account_no, params[:debit_account_no]
+
+  .control-group
+    = label_tag "Beneficiary Account No", "Beneficiary Account No", :class => 'control-label'
+    = text_field_tag :bene_account_no, params[:bene_account_no]
+
+  .control-group
+    = label_tag "Request Transfer Type", "Request Transfer Type", :class => 'control-label'
+    = select_tag :req_transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT']],params[:req_transfer_type]),:prompt => 'ANY'
+
+  .control-group
+    = label_tag "Transfer Type", "Transfer Type", :class => 'control-label'
+    = select_tag :transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT']],params[:transfer_type]),:prompt => 'ANY'
+
+  .control-group
+    = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
+    = text_field_tag :from_transfer_amount, params[:from_transfer_amount]
+    To
+    = text_field_tag :to_transfer_amount, params[:to_transfer_amount]
+  = hidden_field_tag :file_name, params[:file_name]
+  = hidden_field_tag :status, params[:status]
+  = hidden_field_tag :advanced_search, :true
+  .form-actions
+    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'adv_search_reset_button'
+
+:javascript
+  var in_advanced_search = true;

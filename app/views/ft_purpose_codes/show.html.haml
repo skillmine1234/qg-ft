@@ -1,0 +1,71 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 FT Purpose Code Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @ft_purpose_code
+        %a.btn{:href => "#{!(can) ? '#' : '/ft_purpose_codes/' + @ft_purpose_code.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'ecol_customers/approve', :@record => @ft_purpose_code
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        - if !@ft_purpose_code.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@ft_purpose_code)}", :controller => :ft_purpose_codes, :action => :audit_logs, :version_id => audit_count(@ft_purpose_code), :id => @ft_purpose_code.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@ft_purpose_code, :base, :prepend_text => "")
+          %tr
+            %td.label Purpose Code
+            %td.value
+              = @ft_purpose_code.code
+            %td#msg-error
+              = error_message_for(@ft_purpose_code, :code, :prepend_text => "")
+          %tr
+            %td.label Enabled?
+            %td.value
+              = @ft_purpose_code.is_enabled
+            %td#msg-error
+              = error_message_for(@ft_purpose_code, :is_enabled, :prepend_text => "")
+          %tr
+            %td.label Frozen?
+            %td.value
+              = @ft_purpose_code.is_frozen
+            %td#msg-error
+              = error_message_for(@ft_purpose_code, :is_frozen, :prepend_text => "")
+          %tr
+            %td.label Description
+            %td.value
+              = @ft_purpose_code.description
+            %td#msg-error
+              = error_message_for(@ft_purpose_code, :description, :prepend_text => "")
+          %tr
+            %td.label Allow only Registered Beneficiaries?
+            %td.value
+              = @ft_purpose_code.allow_only_registered_bene
+            %td#msg-error
+              = error_message_for(@ft_purpose_code, :allow_only_registered_bene, :prepend_text => "")
+          %tr
+            %td.label Allowed Transfer Types
+            %td.value
+              = @ft_purpose_code.allowed_transfer_types
+            %td#msg-error
+              = error_message_for(@ft_purpose_code, :allowed_transfer_types, :prepend_text => "")
+          %tr
+            - if @ft_purpose_code.settings_cnt > 0
+              %table.table.datatable{style: 'width: 50%'}
+                %thead
+                  %tr
+                    %th Setting Name
+                    %th Setting Value
+                %tbody
+                  - (1..@ft_purpose_code.settings_cnt).each do |i|
+                    %tr
+                      %td
+                        = @ft_purpose_code.send("setting#{i}_name")
+                      %td
+                        = @ft_purpose_code.send("setting#{i}_value")

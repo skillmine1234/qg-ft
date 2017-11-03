@@ -1,0 +1,67 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 600px; padding-left: 10px'}
+    #form-details
+      %h3 SAF Transfer Details
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        %tr
+          %td.label App UUID
+          %td.value
+            = @ft_saf_transfer.app_uuid
+          %td
+        %tr
+          %td.label Customer ID
+          %td.value
+            = @ft_saf_transfer.customer_id
+          %td
+        %tr
+          %td.label Operation Name
+          %td.value
+            = @ft_saf_transfer.op_name
+          %td
+        %tr
+          %td.label Request Transfer Type
+          %td.value
+            = @ft_saf_transfer.req_transfer_type
+          %td
+        %tr
+          %td.label Request Timestamp
+          %td.value
+            = @ft_saf_transfer.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td
+        %tr
+          %td.label Request Bitstream
+          %td.value
+            = show_xml('Show Request','request-link',@ft_saf_transfer.req_bitstream)
+          %td
+        %tr
+          %td.label Reply Timestamp
+          %td.value
+            = @ft_saf_transfer.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td
+        %tr
+          %td.label Reply Bitstream
+          %td.value
+            = show_xml('Show Reply','reply-link',@ft_saf_transfer.rep_bitstream)
+          %td
+#requestText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Request
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button1.my_clip_button1{"data-clipboard-target" => "req_xml"}
+        %b Copy To Clipboard...
+    %pre#req_xml{:style => 'word-wrap: break-word'}
+      .request{:style => 'word-wrap: break-word'}
+#replyText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Reply
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "reply_xml"}
+        %b Copy To Clipboard...
+    %pre#reply_xml{:style => 'word-wrap: break-word'}
+      .reply{:style => 'word-wrap: break-word'}

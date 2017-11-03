@@ -1,0 +1,58 @@
+%br
+= link_to 'FT New Purpose Code', new_ft_purpose_code_path
+%br
+%br
+%h1 Listing FT Purpose Codes
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@ft_purpose_codes_count}"
+%br
+= will_paginate @ft_purpose_codes
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Purpose Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Enabled?
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Description
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Allow only Registered Beneficiaries?
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Created By
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Created At
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Updated By
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Updated At
+  .tbody
+    - @ft_purpose_codes.each do |ft_purpose_code|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', ft_purpose_code
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_ft_purpose_code_path(ft_purpose_code)
+        %td{:style=>'text-align:left;'}
+          = ft_purpose_code.code
+        %td{:style=>'text-align:left;'}
+          = ft_purpose_code.is_enabled
+        %td{:style=>'text-align:left;'}
+          = ft_purpose_code.description
+        %td{:style=>'text-align:left;'}
+          = ft_purpose_code.allow_only_registered_bene
+        %td{:style=>'text-align:left;'}
+          = ft_purpose_code.created_user.try(:username)
+        %td{:style=>'text-align:left;'}
+          = ft_purpose_code.created_at.strftime("%d/%m/%Y %I:%M%p")
+        %td{:style=>'text-align:left;'}
+          = ft_purpose_code.updated_user.try(:username)
+        %td{:style=>'text-align:left;'}
+          = ft_purpose_code.updated_at.strftime("%d/%m/%Y %I:%M%p")
