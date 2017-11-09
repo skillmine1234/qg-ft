@@ -6,6 +6,7 @@ en:
     ft_saf_transfer: 'SAF Transfers'
     ft_purge_saf_transfer: 'Purge SAF Transfers'
     funds_transfers: 'Funds Transfers'
+    nach_member: 'Nach Members'
   mmid: 'MMID'
   activerecord:
     models:

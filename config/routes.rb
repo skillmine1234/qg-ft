@@ -39,6 +39,17 @@ Rails.application.routes.draw do
       put :approve
     end
   end
+  
+  resources :nach_members do
+    collection do
+      get :index
+      put :index
+    end
+    member do
+      put :approve
+      get :audit_logs
+    end
+  end
   get 'ft_incoming_file_summary' => 'ft_incoming_records#incoming_file_summary'
   get '/ft_incoming_records/:id/audit_logs' => 'ft_incoming_records#audit_logs'
   get '/ft_purpose_code/:id/audit_logs' => 'ft_purpose_codes#audit_logs'
