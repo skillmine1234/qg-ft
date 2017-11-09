@@ -14,6 +14,11 @@
             %td.value
               = link_to "#{audit_count(@nach_member)}", :controller => :nach_members, :action => :audit_logs, :version_id => audit_count(@nach_member), :id => @nach_member.id
           %tr
+            %td.label Enabled?
+            %td.value
+              = @nach_member.is_enabled
+            %td              
+          %tr
             %td.label IIN
             %td.value
               = @nach_member.iin
@@ -22,11 +27,6 @@
             %td.label Name
             %td.value
               = @nach_member.name
-            %td
-          %tr
-            %td.label Enabled?
-            %td.value
-              = @nach_member.is_enabled
             %td
           %tr
             %td.label Created By
