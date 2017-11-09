@@ -2,8 +2,8 @@ class FundsTransferSearcher < Searcher
   attr_searchable :req_no, :debit_account_no, :from_transfer_amount, :to_transfer_amount, :from_req_timestamp, :to_req_timestamp, 
                   :from_rep_timestamp, :to_rep_timestamp, :transfer_type, :bene_account_ifsc, :status_code, :customer_id
   
-  as_enum :status_code, [:FAILED, :RETURNED_FROM_BENEFICIARY, :NEW, :SENT_TO_BENEFICIARY, :SCHEDULED_FOR_NEXT_WORKDAY, :IN_PROCESS, :COMPLETED], map: :string, source: :status_code
-  as_enum :transfer_type, [:NEFT, :IMPS, :RTGS, :FT], map: :string, source: :transfer_type
+  as_enum :status_code, [:FAILED, :RETURNED_FROM_BENEFICIARY, :NEW, :SENT_TO_BENEFICIARY, :SCHEDULED_FOR_NEXT_WORKDAY, :IN_PROCESS, :COMPLETED, :ONHOLD], map: :string, source: :status_code
+  as_enum :transfer_type, [:NEFT, :IMPS, :RTGS, :FT, :APBS], map: :string, source: :transfer_type
 
   private
 

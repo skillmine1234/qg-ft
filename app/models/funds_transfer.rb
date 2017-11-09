@@ -8,9 +8,9 @@ class FundsTransfer < ApplicationRecord
   has_one :audit_log, class_name: 'FundsTransferAuditLog'
   has_many :audit_steps, :class_name => 'FtAuditStep', :as => :ft_auditable
   
-  as_enum :status_code, [:FAILED, :RETURNED_FROM_BENEFICIARY, :NEW, :SENT_TO_BENEFICIARY, :SCHEDULED_FOR_NEXT_WORKDAY, :IN_PROCESS, :COMPLETED], map: :string, source: :status_code
-  as_enum :req_transfer_type, [:NEFT, :IMPS, :RTGS, :FT], map: :string, source: :req_transfer_type
-  as_enum :transfer_type, [:NEFT, :IMPS, :RTGS, :FT], map: :string, source: :transfer_type
+  as_enum :status_code, [:FAILED, :RETURNED_FROM_BENEFICIARY, :NEW, :SENT_TO_BENEFICIARY, :SCHEDULED_FOR_NEXT_WORKDAY, :IN_PROCESS, :COMPLETED, :ONHOLD], map: :string, source: :status_code
+  as_enum :req_transfer_type, [:NEFT, :IMPS, :RTGS, :FT, :APBS], map: :string, source: :req_transfer_type
+  as_enum :transfer_type, [:NEFT, :IMPS, :RTGS, :FT, :APBS], map: :string, source: :transfer_type
 
   # searcher needs a scope to limit access to authorized records
   scope :accessible_records, lambda { |customer_ids|
