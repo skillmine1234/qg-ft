@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    qg-ft (1.0.2)
+    qg-ft (1.0.3)
       draper
       pundit
       rails (>= 4.2.2)
@@ -53,7 +53,7 @@ GEM
     arel (8.0.0)
     builder (3.2.3)
     concurrent-ruby (1.0.5)
-    crass (1.0.2)
+    crass (1.0.3)
     draper (3.0.1)
       actionpack (~> 5.0)
       activemodel (~> 5.0)
@@ -133,7 +133,7 @@ GEM
       thread_safe (~> 0.1)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.2)
+    websocket-extensions (0.1.3)
 
 PLATFORMS
   ruby
