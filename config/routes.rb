@@ -14,10 +14,17 @@ Rails.application.routes.draw do
     member do
       put :resend_notification
     end
+    collection do
+      put :index
+    end
   end
-  resources :ft_purpose_codes
-  resources :ft_customer_accounts
-  resources :ft_incoming_records
+
+  resources :ft_customer_accounts, :ft_purpose_codes, :ft_incoming_records do
+    collection do
+      put :index
+    end
+  end
+
   resources :ft_apbs_incoming_records, except: :index do
     collection do
       get :index
