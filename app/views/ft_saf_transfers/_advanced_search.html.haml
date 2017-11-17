@@ -14,10 +14,13 @@
       = text_field_tag :req_no, params[:req_no]
     .control-group
       = label_tag "Operation Name", "Operation Name", :class => 'control-label'
-      = select_tag :op_name, options_for_select([['startTransfer','startTransfer'],['transfer','transfer']], params[:op_name]),:prompt => 'ANY'
+      = select_tag :op_name, options_for_select([['startTransfer','startTransfer'],['transfer','transfer']], params[:op_name]),:prompt => 'Select'
+    .control-group
+      = label_tag "Status", "Status", :class => 'control-label'
+      = select_tag :status, options_for_select([['NEW','NEW'],['FAILED','FAILED']],params[:status]),:prompt => 'Select'
     .control-group
       = label_tag "Request Transfer Type", "Request Transfer Type" , :class => 'control-label'
-      = select_tag :req_transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT'],['APBS','APBS'] ],params[:req_transfer_type]),:prompt => 'ANY'
+      = select_tag :req_transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT'],['APBS','APBS'] ],params[:req_transfer_type]),:prompt => 'Select'
     .control-group
       = label_tag "Request Timestamp", "Request Timestamp", :class => 'control-label'
       = text_field_tag :from_request_timestamp, params[:from_request_timestamp]

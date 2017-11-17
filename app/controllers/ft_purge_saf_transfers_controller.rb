@@ -23,7 +23,7 @@ class FtPurgeSafTransfersController < ApplicationController
 
   def show
     @ft_purge_saf_transfer = FtPurgeSafTransfer.unscoped.find_by_id(params[:id])
-    @rows_count = @ft_purge_saf_transfer.get_txns_count
+    @rows_count = 1#@ft_purge_saf_transfer.get_txns_count
   rescue ::Fault::ProcedureFault, OCIError => e
     @error = "Error: #{e.message}" 
   end
@@ -58,6 +58,7 @@ class FtPurgeSafTransfersController < ApplicationController
 
   def ft_purge_saf_transfer_params
     params.require(:ft_purge_saf_transfer).permit(:reference_no, :from_req_timestamp, :to_req_timestamp, :customer_id, :op_name, :req_transfer_type, 
-                                                  :created_at, :updated_at, :created_by, :updated_by, :lock_version, :approved_id, :approved_version)
+                                                  :created_at, :updated_at, :created_by, :updated_by, :lock_version, :approved_id, :approved_version,
+                                                  :status_code)
   end
 end
