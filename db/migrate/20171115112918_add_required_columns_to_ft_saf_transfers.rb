@@ -13,7 +13,7 @@ class AddRequiredColumnsToFtSafTransfers < ActiveRecord::Migration
     add_column :ft_saf_transfers, :status_code, :string, :limit => 25, :null => false, :comment => "the status of the transaction"
     change_column :ft_saf_transfers, :customer_id, :string, :null => false
     if Rails.configuration.database_configuration[Rails.env]["adapter"] == 'oracle_enhanced'
-      execute 'create unique index uk_ft_saf_transfers_01 on ft_saf_transfers (customer_id, req_no)'
+      execute 'create unique index ft_saf_transfers_01 on ft_saf_transfers (customer_id, req_no)'
       execute 'create index ft_saf_transfers_02 on ft_saf_transfers (trunc(req_timestamp), req_transfer_type, customer_id)'
     end
   end
