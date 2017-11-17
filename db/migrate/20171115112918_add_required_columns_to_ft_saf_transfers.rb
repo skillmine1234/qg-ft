@@ -1,8 +1,8 @@
 class AddRequiredColumnsToFtSafTransfers < ActiveRecord::Migration
   def change
+    remove_index :ft_saf_transfers, name: 'ft_saf_transfers_01'
     if Rails.configuration.database_configuration[Rails.env]["adapter"] == 'oracle_enhanced'
-    execute 'drop index ft_saf_transfers_01'
-    execute 'drop index ft_saf_transfers_02'
+      execute 'drop index ft_saf_transfers_02'
     end
     add_column :ft_saf_transfers, :app_id, :string, :limit => 50, :null => false, :comment => 'the app_id asssigned to a customer'
     add_column :ft_saf_transfers, :fault_code, :string, :limit => 50, :comment => 'the code that identifies the business failure reason/exception'
@@ -12,8 +12,8 @@ class AddRequiredColumnsToFtSafTransfers < ActiveRecord::Migration
     add_column :ft_saf_transfers, :fault_timestamp, :datetime, :comment => "the SYSDATE when the failure was logged"
     add_column :ft_saf_transfers, :status_code, :string, :limit => 25, :null => false, :comment => "the status of the transaction"
     change_column :ft_saf_transfers, :customer_id, :string, :null => false
+    add_index :ft_saf_transfers, [:customer_id, :req_no], :unique => true, :name => "ft_saf_transfers_01"
     if Rails.configuration.database_configuration[Rails.env]["adapter"] == 'oracle_enhanced'
-      execute 'create unique index ft_saf_transfers_01 on ft_saf_transfers (customer_id, req_no)'
       execute 'create index ft_saf_transfers_02 on ft_saf_transfers (trunc(req_timestamp), req_transfer_type, customer_id)'
     end
   end
