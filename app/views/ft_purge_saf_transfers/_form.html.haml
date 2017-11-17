@@ -39,7 +39,7 @@
         = error_message_for(@ft_purge_saf_transfer, :req_transfer_type, :prepend_text => "")
     .control-group
       = f.label :status_code, "Status", :class => 'control-label'
-      = f.select :status_code, options_for_select(FtPurgeSafTransfer::STATUS_CODES, @ft_purge_saf_transfer.status_code)
+      = f.select :status_code, options_for_select(FtPurgeSafTransfer::STATUS_CODES, @ft_purge_saf_transfer.status_code),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ft_purge_saf_transfer, :status_code, :prepend_text => "")
 
