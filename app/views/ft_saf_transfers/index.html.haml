@@ -10,6 +10,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Request No
@@ -29,6 +31,8 @@
           = link_to 'Show', ft_saf_transfer
         %td{:style=>'text-align:left;'}
           = link_to 'Delete', ft_saf_transfer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td{:style=>'text-align:left;'}
+          = ft_saf_transfer.status_code
         %td{:style=>'text-align:left;'}
           = ft_saf_transfer.customer_id
         %td{:style=>'text-align:left;'}

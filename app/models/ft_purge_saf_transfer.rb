@@ -1,6 +1,8 @@
 class FtPurgeSafTransfer < ActiveRecord::Base
   include Approval
   include FtApproval
+  
+  STATUS_CODES = [['NEW','NEW'],['FAILED','FAILED']]
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
@@ -28,6 +30,7 @@ class FtPurgeSafTransfer < ActiveRecord::Base
     unless Rails.env.test?
       result = plsql.pk_qg_ft_saf.get_pending_txns_count(pi_from_date: self.from_req_timestamp,
                                                          pi_to_date: self.to_req_timestamp,
+                                                         pi_status_code: self.status_code,
                                                          pi_customer_id: self.customer_id,
                                                          pi_op_name: self.op_name,
                                                          pi_req_transfer_type: self.req_transfer_type,
@@ -45,6 +48,7 @@ class FtPurgeSafTransfer < ActiveRecord::Base
                                           pi_approver_id: self.created_by,
                                           pi_from_date: self.from_req_timestamp,
                                           pi_to_date: self.to_req_timestamp,
+                                          pi_status_code: self.status_code,
                                           pi_customer_id: self.customer_id,
                                           pi_op_name: self.op_name,
                                           pi_req_transfer_type: self.req_transfer_type)

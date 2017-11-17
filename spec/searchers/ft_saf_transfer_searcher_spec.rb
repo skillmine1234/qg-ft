@@ -16,6 +16,10 @@ describe FtSafTransferSearcher do
       FtSafTransferSearcher.new({op_name: 'transfer'}).paginate.should == [ft_saf_transfer]
       FtSafTransferSearcher.new({op_name: 'getBalance'}).paginate.should == []
       
+      ft_saf_transfer = Factory(:ft_saf_transfer, status_code: 'FAILED')
+      FtSafTransferSearcher.new({status: 'FAILED'}).paginate.should == [ft_saf_transfer]
+      FtSafTransferSearcher.new({status: 'NEW'}).paginate.should == []
+      
       ft_saf_transfer = Factory(:ft_saf_transfer, req_no: '2211')
       FtSafTransferSearcher.new({req_no: '2211'}).paginate.should == [ft_saf_transfer]
       FtSafTransferSearcher.new({req_no: 'D234'}).paginate.should == []
