@@ -1,7 +1,7 @@
 class AddRequiredColumnsToFtSafTransfers < ActiveRecord::Migration
   def change
     if Rails.configuration.database_configuration[Rails.env]["adapter"] == 'oracle_enhanced'
-    execute 'drop index uk_ft_saf_transfers_01'
+    execute 'drop index ft_saf_transfers_01'
     execute 'drop index ft_saf_transfers_02'
     end
     add_column :ft_saf_transfers, :app_id, :string, :limit => 50, :null => false, :comment => 'the app_id asssigned to a customer'
