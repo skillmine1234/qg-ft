@@ -42,6 +42,11 @@
             = @ft_purge_saf_transfer.req_transfer_type
           %td
         %tr
+          %td.label Status
+          %td.value
+            = @ft_purge_saf_transfer.status_code
+          %td
+        %tr
           %td.label Created By
           %td.value
             = @ft_purge_saf_transfer.created_user.try(:username)

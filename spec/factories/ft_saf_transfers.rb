@@ -4,6 +4,8 @@ FactoryGirl.define do
     app_uuid 'MyString'
     req_no 'MyString'
     op_name 'MyString'
+    app_id 'MyString'
+    status_code 'MyString'
     req_timestamp Time.now
     rep_timestamp Time.now
   end
