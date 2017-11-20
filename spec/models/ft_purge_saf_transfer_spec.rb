@@ -13,6 +13,7 @@ describe FtPurgeSafTransfer do
     [:reference_no, :from_req_timestamp, :to_req_timestamp].each do |att|
       it { should validate_presence_of(att) }
     end
+    it { should validate_length_of(:customer_id).is_at_most(15) }
   end
   
   context "default_scope" do 

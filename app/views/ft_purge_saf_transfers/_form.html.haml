@@ -24,7 +24,7 @@
         = error_message_for(@ft_purge_saf_transfer, :to_req_timestamp, :prepend_text => "")
     .control-group
       = f.label :customer_id, "Customer ID", :class => 'control-label'
-      = f.text_field :customer_id
+      = f.text_field :customer_id, maxlength: 15
       #msg-error
         = error_message_for(@ft_purge_saf_transfer, :customer_id, :prepend_text => "")
     .control-group
