@@ -13,6 +13,12 @@ describe FtPurgeSafTransfer do
     [:reference_no, :from_req_timestamp, :to_req_timestamp].each do |att|
       it { should validate_presence_of(att) }
     end
+    it { should validate_length_of(:customer_id).is_at_most(15) }
+
+    it do 
+      ft_purge_saf_transfer = Factory(:ft_purge_saf_transfer, :approval_status => 'A')
+      should validate_uniqueness_of(:reference_no).scoped_to(:approval_status)  
+    end
   end
   
   context "default_scope" do 
