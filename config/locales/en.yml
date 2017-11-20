@@ -63,7 +63,7 @@ en:
         purpose_code: 'Purpose Code'
         picked_at: 'Picked At'
         was_saf: 'Was it Store and Forward'
-        op_name: 'Operation Name'
+        optn_name: 'Operation Name'
         user_action: 'Action'
   activemodel:
     models:
