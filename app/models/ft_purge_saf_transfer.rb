@@ -46,13 +46,14 @@ class FtPurgeSafTransfer < ActiveRecord::Base
   private
   
   def purge_transactions
-    plsql.pk_qg_ft_saf.purge_pending_txns(pi_user_id: self.created_by,
-                                          pi_approver_id: self.created_by,
-                                          pi_from_date: self.from_req_timestamp,
-                                          pi_to_date: self.to_req_timestamp,
-                                          pi_status_code: self.status_code,
-                                          pi_customer_id: self.customer_id,
-                                          pi_op_name: self.op_name,
-                                          pi_req_transfer_type: self.req_transfer_type)
+    result = plsql.pk_qg_ft_saf.purge_pending_txns(pi_user_id: self.created_by,
+                                                   pi_approver_id: self.created_by,
+                                                   pi_from_date: self.from_req_timestamp,
+                                                   pi_to_date: self.to_req_timestamp,
+                                                   pi_status_code: self.status_code,
+                                                   pi_customer_id: self.customer_id,
+                                                   pi_op_name: self.op_name,
+                                                   pi_req_transfer_type: self.req_transfer_type)
+    self.update_column(:row_count, result)
   end
 end
