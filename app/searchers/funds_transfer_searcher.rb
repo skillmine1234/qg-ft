@@ -4,7 +4,7 @@ class FundsTransferSearcher < Searcher
   
   as_enum :status_code, [:FAILED, :RETURNED_FROM_BENEFICIARY, :NEW, :SENT_TO_BENEFICIARY, :SCHEDULED_FOR_NEXT_WORKDAY, :IN_PROCESS, :COMPLETED, :ONHOLD], map: :string, source: :status_code
   as_enum :transfer_type, [:NEFT, :IMPS, :RTGS, :FT, :APBS], map: :string, source: :transfer_type
-  as_enum :optn_name, [:startTransfer, :transfer], map: :string, source: :op_name
+  as_enum :optn_name, [:startTransfer, :transfer], map: :string, source: :optn_name
   as_enum :ws_saf, [:Y, :N], map: :string, source: :ws_saf
 
   private
