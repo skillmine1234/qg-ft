@@ -32,7 +32,7 @@ class FundsTransfersController < ApplicationController
         :from_rep_timestamp, :to_rep_timestamp, 
         :from_transfer_amount, :to_transfer_amount, 
         :req_no, :debit_account_no, :bene_account_ifsc, 
-        :customer_id)
+        :customer_id, :op_name, :ws_saf)
     end
   end
 end
