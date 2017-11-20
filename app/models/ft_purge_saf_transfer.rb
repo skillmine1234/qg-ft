@@ -9,6 +9,7 @@ class FtPurgeSafTransfer < ActiveRecord::Base
 
   before_validation :get_reference_no, if: "approval_status=='U'"
   
+  validates_uniqueness_of :reference_no, scope: [:approval_status]
   validates_presence_of :reference_no, :from_req_timestamp, :to_req_timestamp
   validates_length_of :customer_id, maximum: 15, allow_blank: true
   
