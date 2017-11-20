@@ -9,7 +9,10 @@
         %tr
           %td.label Rows Count
           %td.value
-            = @rows_count || @error
+            - if @ft_purge_saf_transfer.approval_status == 'U'
+              = @rows_count || @error
+            - else
+              = @ft_purge_saf_transfer.row_count
           %td
         %tr
           %td.label Reference No
