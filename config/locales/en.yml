@@ -72,4 +72,4 @@ en:
       funds_transfer_searcher:
         <<: *attributes
         ws_saf: 'Was SAF?'
-        
+        optn_name: 'Operation Name'
