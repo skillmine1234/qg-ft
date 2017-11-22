@@ -14,7 +14,7 @@ class FundsTransferDecorator < ApplicationDecorator
     h.render partial: 'shared/bitstream', locals: {id: "#{object.class.name.demodulize}_rep_bitstream_#{object.id}", 
       title: "reply_message".humanize, 
       bitstream: object.audit_log.reply_bitstream, 
-      ref_no: object.rep_no,
+      ref_no: (object.rep_no || 'Show'),
       button: 'd_clip_button2',
       xml: 'rep_xml'}
   end
