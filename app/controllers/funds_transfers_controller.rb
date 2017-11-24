@@ -35,4 +35,8 @@ class FundsTransfersController < ApplicationController
         :customer_id, :optn_name, :ws_saf)
     end
   end
+  
+  def protected_by_pundit
+    true
+  end
 end
