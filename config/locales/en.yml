@@ -6,7 +6,7 @@ en:
     ft_saf_transfer: 'SAF Transfers'
     ft_purge_saf_transfer: 'Purge SAF Transfers'
     funds_transfers: 'Funds Transfers'
-    nach_member: 'Nach Members'
+    nach_member: 'NACH Members'
   mmid: 'MMID'
   activerecord:
     models:
@@ -73,3 +73,26 @@ en:
         <<: *attributes
         ws_saf: 'Was SAF?'
         optn_name: 'Operation Name'
+
+  enums:
+    transfer_type: 
+      NEFT: 'NEFT'
+      IMPS: 'IMPS'
+      RTGS: 'RTGS'
+      FT: 'FT'
+      APBS: 'APBS'
+    status_code:
+      FAILED: 'FAILED'
+      RETURNED_FROM_BENEFICIARY: 'RETURNED_FROM_BENEFICIARY'
+      NEW: 'NEW'
+      SENT_TO_BENEFICIARY: 'SENT_TO_BENEFICIARY'
+      SCHEDULED_FOR_NEXT_WORKDAY: 'SCHEDULED_FOR_NEXT_WORKDAY'
+      IN_PROCESS: 'IN_PROCESS'
+      COMPLETED: 'COMPLETED'
+      ONHOLD: 'ONHOLD'
+    optn_name:
+      startTransfer: 'startTransfer'
+      transfer: 'transfer'
+    ws_saf:
+      Y: 'Yes'
+      N: 'No'

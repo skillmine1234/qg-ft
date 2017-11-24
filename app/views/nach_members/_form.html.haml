@@ -25,5 +25,5 @@
 
   .form-actions
     - (f.object.new_record? and f.object.iin.blank?) ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_nach_member', :value => label_name + ' Nach Member'
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_nach_member', :value => label_name + ' NACH Member'
     = link_to :Cancel,'/nach_members', :name => 'cancel', :class=>"cancel btn"
