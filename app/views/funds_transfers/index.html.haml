@@ -5,7 +5,7 @@
 %br
 
 - columns = [:customer_id, :transfer_type, :bene_full_name, :transfer_amount, :debit_account_no, :req_timestamp, :rep_timestamp, :status_code, :user_action]
-- columns.delete(:customer_id) if current_user.accessible_customers.count == 1
+- columns.delete(:customer_id) if current_user.present? && current_user.try(:accessible_customers).try(:count) == 1
 .row
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
     #panels.panel.panel-primary
