@@ -20,7 +20,7 @@ describe FundsTransferCustomersHelper do
   
   context "options_for_notify_app_code" do
     it "should return options for notify_app_code" do
-      sc_service = Factory(:sc_service, code: 'FUNDSTRANSFER')
+      sc_service = Factory(:sc_service, code: 'FUNDSTRANSFER', approval_status: 'A')
       ns_callbacks = []
       ns_callbacks << Factory(:ns_callback, app_code: 'STD1', sc_service_id: sc_service.id, approval_status: 'A')
       ns_callbacks << Factory(:ns_callback, app_code: 'STD2', sc_service_id: sc_service.id, approval_status: 'A')
