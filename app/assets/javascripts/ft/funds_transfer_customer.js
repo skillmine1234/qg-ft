@@ -3,7 +3,7 @@ $(document).ready(function(){
   $('#funds_transfer_customer_allowed_relns').multiselect({selectedList: 6});
   
   var mandatory_mark = '*';
-  if($('#funds_transfer_customer_use_std_relns').attr('checked')){
+  if($('#funds_transfer_customer_use_std_relns').is(":checked")){
     $('#funds_transfer_customer_allowed_relns').val('');
     $('#funds_transfer_customer_allowed_relns').multiselect('disable');
     $("#funds_transfer_customer_allowed_relns").prop('required',false);
@@ -16,7 +16,7 @@ $(document).ready(function(){
   }
 
   $("#funds_transfer_customer_use_std_relns").on("click", function () {
-    if ($(this).attr('checked')){
+    if ($(this).is(":checked")){
       $('#funds_transfer_customer_allowed_relns').val('');
       $('#funds_transfer_customer_allowed_relns').multiselect('disable');
       $('#funds_transfer_customer_allowed_relns').multiselect('refresh');
@@ -26,7 +26,7 @@ $(document).ready(function(){
     else{
       $('#funds_transfer_customer_allowed_relns').multiselect('enable');
       $("#funds_transfer_customer_allowed_relns").prop('required',true);
-      if (!$("#funds_transfer_customer_is_retail").attr('checked')){
+      if (!$("#funds_transfer_customer_is_retail").is(":checked")){
         $('#funds_transfer_customer_allowed_relns').multiselect('checkAll',true);
         $('#funds_transfer_customer_allowed_relns').multiselect('refresh');
       }
@@ -39,7 +39,7 @@ $(document).ready(function(){
     }
   });
 	
-  if(!$('#funds_transfer_customer_allow_imps').attr('checked')){
+  if(!$('#funds_transfer_customer_allow_imps').is(":checked")){
 		$('#funds_transfer_customer_mmid').val('');
     $('#funds_transfer_customer_mmid').prop('disabled',true);
   }
@@ -48,7 +48,7 @@ $(document).ready(function(){
 	}
 
   $("#funds_transfer_customer_allow_imps").on("click", function () {
-    if (!$(this).attr('checked')){
+    if (!$(this).is(":checked")){
       $('#funds_transfer_customer_mmid').val('');
       $('#funds_transfer_customer_mmid').prop('disabled',true);
     }
@@ -58,7 +58,7 @@ $(document).ready(function(){
   });
 
   $("#funds_transfer_customer_is_retail").on("click", function () {
-    if ($(this).attr('checked')){
+    if ($(this).is(":checked")){
       $('#funds_transfer_customer_customer_id').val('');
       $('#funds_transfer_customer_customer_id').prop('disabled',true);
     }
@@ -95,7 +95,7 @@ $(document).ready(function(){
       $(this).find(':input').removeAttr('disabled');
   });
 
-  if ($("#funds_transfer_customer_notify_on_status_change").attr('checked')) {
+  if ($("#funds_transfer_customer_notify_on_status_change").is(":checked")) {
     toggle_required_fields('Y');
   }
   else {
@@ -103,7 +103,7 @@ $(document).ready(function(){
   }
 
   $("#funds_transfer_customer_notify_on_status_change").on("change",function(){
-    if ($(this).attr('checked')) {
+    if ($(this).is(":checked")) {
       toggle_required_fields('Y');
     } 
     else {

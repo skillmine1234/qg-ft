@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    qg-ft (1.1.7)
+    qg-ft (1.1.8)
       draper
       pundit
       rails (>= 4.2.2)
