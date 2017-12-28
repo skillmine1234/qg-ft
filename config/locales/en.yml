@@ -7,10 +7,12 @@ en:
     ft_purge_saf_transfer: 'Purge SAF Transfers'
     funds_transfers: 'Funds Transfers'
     nach_member: 'NACH Members'
+    ft_invoice_detail: 'Failed Invoices'
   mmid: 'MMID'
   activerecord:
     models:
       funds_transfer: 'Funds Transfer'
+      ft_invoice_detail: 'Invoice Details'
     attributes:
       funds_transfer: &attributes
         req_no: 'Request No'
@@ -96,3 +98,32 @@ en:
     ws_saf:
       Y: 'Yes'
       N: 'No'
+  attributes:
+    customer_id: 'Customer ID'
+    invoice_number: 'Invoice Number'
+    invoice_date: 'Invoice Date'
+    req_no: 'Request'
+    rep_no: 'Reply'
+    req_version: 'Request Version'
+    rep_version: 'Reply Version'
+    app_id: 'App ID'
+    customer_name: 'Customer Name'
+    supplier_code: 'Supplier Code'
+    purchase_order_number: 'Purchase Order No'
+    invoice_amount: 'Invoice Amount'
+    retained_amount: 'Retained Amount'
+    deducted_amount: 'Deducted Amount'
+    tds_amount: 'TDS Amount'
+    paid_amount: 'Paid Amount'
+    payment_reference: 'Payment Reference'
+    note: 'Note'
+    cgst_amount: 'CGST Amount'
+    sgst_amount: 'SGST Amount'
+    igst_amount: 'IGST Amount'
+    gstin: 'GSTIN'
+    advice_file_name: 'Advice File Name'
+    cnb_file_name: 'CNB File Name'
+    advice_status: 'Advice Status'
+    advice_email_id: 'Advice Email ID'
+    advice_sent_at: 'Advice Sent At'
+    

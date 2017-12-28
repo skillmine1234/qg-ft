@@ -54,4 +54,9 @@ class FundsTransferDecorator < ApplicationDecorator
     h.link_to 'Show', h.send("steps_funds_transfer_path", object)
   end
   
+  def ft_invoice_detail
+    if object.ft_invoice_detail.present?
+      h.link_to object.ft_invoice_detail_id, h.ft_invoice_detail_path(object.ft_invoice_detail)
+    end
+  end
 end
