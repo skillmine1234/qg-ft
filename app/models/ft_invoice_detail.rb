@@ -6,7 +6,7 @@ class FtInvoiceDetail < ApplicationRecord
   has_one :audit_log, class_name: 'FundsTransferAuditLog'
   has_many :audit_steps, :class_name => 'FtAuditStep', :as => :ft_auditable
   
-  as_enum :status_code, [:FAILED, :RETURNED_FROM_BENEFICIARY, :NEW, :SENT_TO_BENEFICIARY, :SCHEDULED_FOR_NEXT_WORKDAY, :IN_PROCESS, :COMPLETED, :ONHOLD], map: :string, source: :status_code
+  as_enum :status_code, [:FAILED, :RETURNED_FROM_BENEFICIARY, :NEW, :SENT_TO_BENEFICIARY, :SCHEDULED_FOR_NEXT_WORKDAY, :IN_PROCESS, :COMPLETED, :ONHOLD, :'TIMED OUT'], map: :string, source: :status_code
 
   # searcher needs a scope to limit access to authorized records
   scope :accessible_records, lambda { |customer_ids|

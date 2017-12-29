@@ -92,6 +92,7 @@ en:
       IN_PROCESS: 'IN_PROCESS'
       COMPLETED: 'COMPLETED'
       ONHOLD: 'ONHOLD'
+      TIMED OUT: 'TIMED OUT'
     optn_name:
       startTransfer: 'startTransfer'
       transfer: 'transfer'
