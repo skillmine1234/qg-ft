@@ -57,6 +57,18 @@ Rails.application.routes.draw do
       get :audit_logs
     end
   end
+  
+  resources :ft_invoice_details do
+    collection do
+      put :index
+    end
+    member do
+      get :steps
+    end
+  end
+
+  # operation_routes_for 'ft_invoice_details'
+
   get 'ft_incoming_file_summary' => 'ft_incoming_records#incoming_file_summary'
   get '/ft_incoming_records/:id/audit_logs' => 'ft_incoming_records#audit_logs'
   get '/ft_purpose_code/:id/audit_logs' => 'ft_purpose_codes#audit_logs'

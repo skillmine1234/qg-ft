@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    qg-ft (1.1.8)
+    qg-ft (1.1.9)
       draper
       pundit
       rails (>= 4.2.2)
@@ -86,7 +86,7 @@ GEM
     multi_json (1.12.2)
     multipart-post (2.0.0)
     netrc (0.11.0)
-    nio4r (2.1.0)
+    nio4r (2.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     pundit (1.1.0)

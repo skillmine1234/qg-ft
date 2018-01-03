@@ -1,0 +1,6 @@
+- panel = [[],[],[]]
+- panel[0] << {title: 'Request', height: '200px', fields: [:req_no, :req_version, :attempt_no, :customer_id, :req_timestamp]}
+- panel[0] << {fields: [:rep_no, :rep_version, :status_code, :rep_timestamp, :steps]}
+- panel[1] << {title: 'Request Details', height: '850px', fields: [:app_id, :customer_name, :supplier_code, :purchase_order_number, :invoice_number, :invoice_date, :invoice_amount, :retained_amount, :deducted_amount, :tds_amount, :paid_amount, :payment_reference, :note, :cgst_amount, :sgst_amount, :igst_amount, :gstin, :advice_file_name, :cnb_file_name, :advice_status, :advice_email_id, :advice_sent_at]}
+
+= render partial: 'shared/show', locals: {record: @ft_invoice_detail, toolbar: nil, panel: panel}
