@@ -44,6 +44,16 @@
             = @ft_saf_transfer.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
           %td
         %tr
+          %td.label Transfer Amount
+          %td.value
+            = @ft_saf_transfer.transfer_amount
+          %td
+        %tr
+          %td.label Transfer Currency
+          %td.value
+            = @ft_saf_transfer.transfer_ccy
+          %td
+        %tr
           %td.label Request Bitstream
           %td.value
             = show_xml('Show Request','request-link',@ft_saf_transfer.req_bitstream)
