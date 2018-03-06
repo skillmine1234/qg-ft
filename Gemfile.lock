@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    qg-ft (1.2.3)
+    qg-ft (1.2.4)
       draper
       pundit
       rails (>= 4.2.2)
@@ -60,7 +60,7 @@ GEM
       activemodel-serializers-xml (~> 1.0)
       activesupport (~> 5.0)
       request_store (~> 1.0)
-    erubi (1.7.0)
+    erubi (1.7.1)
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
     gemfury (0.7.0)
