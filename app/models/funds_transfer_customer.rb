@@ -89,31 +89,29 @@ class FundsTransferCustomer < ActiveRecord::Base
   end
 
   def should_allow_neft?
-    return true
-    # fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
-    # if fcr_customer.nil?
-    #   errors.add(:customer_id, "no record found in FCR for #{self.customer_id}")
-    # else
-    #   errors.add(:allow_neft, "NEFT is not allowed for #{self.customer_id} as the data setup in FCR is invalid") unless fcr_customer.transfer_type_allowed?('NEFT')
-    # end
+    fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
+    if fcr_customer.nil?
+      errors.add(:customer_id, "no record found in FCR for #{self.customer_id}")
+    else
+      errors.add(:allow_neft, "NEFT is not allowed for #{self.customer_id} as the data setup in FCR is invalid") unless fcr_customer.transfer_type_allowed?('NEFT')
+    end
   end
   
   def should_allow_imps?
-    return true
-    # fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
-    #
-    # if fcr_customer.present?
-    #   debit_accounts = fcr_customer.accounts
-    #
-    #   if debit_accounts.present?
-    #     res = Atom::Customer.imps_allowed_for_accounts?(debit_accounts, fcr_customer.ref_phone_mobile)
-    #     errors[:base] << res[:reason] unless res == true
-    #   else
-    #     errors[:base] << "no accounts found in FCR for #{self.customer_id}"
-    #   end
-    # else
-    #   errors.add(:customer_id, "no record found in FCR for #{self.customer_id}")
-    # end
+    fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
+
+    if fcr_customer.present?
+      debit_accounts = fcr_customer.accounts
+
+      if debit_accounts.present?
+        res = Atom::Customer.imps_allowed_for_accounts?(debit_accounts, fcr_customer.ref_phone_mobile)
+        errors[:base] << res[:reason] unless res == true
+      else
+        errors[:base] << "no accounts found in FCR for #{self.customer_id}"
+      end
+    else
+      errors.add(:customer_id, "no record found in FCR for #{self.customer_id}")
+    end
   end
 
   def use_std_relns_value
