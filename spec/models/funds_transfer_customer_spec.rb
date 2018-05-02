@@ -292,57 +292,57 @@ describe FundsTransferCustomer do
     end
   end
   
-  # context "should_allow_neft?" do
-  #   it "should allow neft for the funds_transfer_customer when the customer setup is complete in FCR" do
-  #     fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
-  #     funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '2345', allow_neft: 'Y', allow_imps: 'N')
-  #     funds_transfer_customer.errors_on(:customer_id).should == []
-  #   end
-  #
-  #   it "should raise error when the mobile no. and email are not present in the customer setup in FCR" do
-  #     fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: nil)
-  #     funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '2345', allow_neft: 'Y', allow_imps: 'N')
-  #     funds_transfer_customer.errors_on(:allow_neft).should == ["NEFT is not allowed for 2345 as the data setup in FCR is invalid"]
-  #   end
-  #
-  #   it "should raise error when there is no corresponding record in FCR" do
-  #     fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
-  #     funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '234', allow_neft: 'Y', allow_imps: 'N')
-  #     funds_transfer_customer.errors_on(:customer_id).should == ["no record found in FCR for 234"]
-  #   end
-  # end
-  #
-  # context "should_allow_imps?" do
-  #   it "should allow imps for the funds_transfer_customer when the customer setup is complete in FCR and ATOM" do
-  #     fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
-  #     fcr_cust_acct = Factory(:fcr_cust_acct, cod_cust: '2345', cod_acct_cust_rel: 'GUR', cod_acct_no: '1234567890')
-  #     atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1')
-  #     funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '2345', allow_neft: 'N', allow_imps: 'Y', allow_all_accounts: 'Y')
-  #     funds_transfer_customer.errors_on(:customer_id).should == []
-  #   end
-  #
-  #   it "should raise error when there is no corresponding record in FCR" do
-  #     fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
-  #     fcr_cust_acct = Factory(:fcr_cust_acct, cod_cust: '2345', cod_acct_cust_rel: 'GUR', cod_acct_no: '1234500000')
-  #     atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
-  #     funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '234', allow_neft: 'N', allow_imps: 'Y', allow_all_accounts: 'Y')
-  #     funds_transfer_customer.errors_on(:customer_id).should == ["no record found in FCR for 234"]
-  #   end
-  #
-  #   it "should raise error when there is no accounts in FCR for any the customer" do
-  #     fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
-  #     fcr_cust_acct = Factory(:fcr_cust_acct, cod_cust: '0000', cod_acct_cust_rel: 'GUR', cod_acct_no: '1234500000')
-  #     atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
-  #     funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '2345', allow_neft: 'N', allow_imps: 'Y', allow_all_accounts: 'Y')
-  #     funds_transfer_customer.errors_on(:base).should == ["no accounts found in FCR for 2345"]
-  #   end
-  #
-  #   it "should raise error when the mobile no.s in FCR and ATOM do not match for the customer" do
-  #     atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
-  #     fcr_cust_acct = Factory(:fcr_cust_acct, cod_cust: '2345', cod_acct_cust_rel: 'GUR', cod_acct_no: '1234567890')
-  #     fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '9999000099', ref_cust_email: 'aaa@gmail.com')
-  #     funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '2345', allow_neft: 'N', allow_imps: 'Y', allow_all_accounts: 'Y')
-  #     funds_transfer_customer.errors_on(:base).should == ["IMPS is not allowed for account_no 1234567890"]
-  #   end
-  # end
+  context "should_allow_neft?" do
+    it "should allow neft for the funds_transfer_customer when the customer setup is complete in FCR" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '2345', allow_neft: 'Y', allow_imps: 'N')
+      funds_transfer_customer.errors_on(:customer_id).should == []
+    end
+
+    it "should raise error when the mobile no. and email are not present in the customer setup in FCR" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: nil)
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '2345', allow_neft: 'Y', allow_imps: 'N')
+      funds_transfer_customer.errors_on(:allow_neft).should == ["NEFT is not allowed for 2345 as the data setup in FCR is invalid"]
+    end
+
+    it "should raise error when there is no corresponding record in FCR" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '234', allow_neft: 'Y', allow_imps: 'N')
+      funds_transfer_customer.errors_on(:customer_id).should == ["no record found in FCR for 234"]
+    end
+  end
+
+  context "should_allow_imps?" do
+    it "should allow imps for the funds_transfer_customer when the customer setup is complete in FCR and ATOM" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      fcr_cust_acct = Factory(:fcr_cust_acct, cod_cust: '2345', cod_acct_cust_rel: 'GUR', cod_acct_no: '1234567890')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1')
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '2345', allow_neft: 'N', allow_imps: 'Y', allow_all_accounts: 'Y')
+      funds_transfer_customer.errors_on(:customer_id).should == []
+    end
+
+    it "should raise error when there is no corresponding record in FCR" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      fcr_cust_acct = Factory(:fcr_cust_acct, cod_cust: '2345', cod_acct_cust_rel: 'GUR', cod_acct_no: '1234500000')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '234', allow_neft: 'N', allow_imps: 'Y', allow_all_accounts: 'Y')
+      funds_transfer_customer.errors_on(:customer_id).should == ["no record found in FCR for 234"]
+    end
+
+    it "should raise error when there is no accounts in FCR for any the customer" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      fcr_cust_acct = Factory(:fcr_cust_acct, cod_cust: '0000', cod_acct_cust_rel: 'GUR', cod_acct_no: '1234500000')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '2345', allow_neft: 'N', allow_imps: 'Y', allow_all_accounts: 'Y')
+      funds_transfer_customer.errors_on(:base).should == ["no accounts found in FCR for 2345"]
+    end
+
+    it "should raise error when the mobile no.s in FCR and ATOM do not match for the customer" do
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
+      fcr_cust_acct = Factory(:fcr_cust_acct, cod_cust: '2345', cod_acct_cust_rel: 'GUR', cod_acct_no: '1234567890')
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '9999000099', ref_cust_email: 'aaa@gmail.com')
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, customer_id: '2345', allow_neft: 'N', allow_imps: 'Y', allow_all_accounts: 'Y')
+      funds_transfer_customer.errors_on(:base).should == ["IMPS is not allowed for account_no 1234567890"]
+    end
+  end
 end
