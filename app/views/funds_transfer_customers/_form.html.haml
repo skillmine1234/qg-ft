@@ -128,6 +128,18 @@
       = f.select :bene_backend, options_for_select(FundsTransferCustomer::BENE_BACKENDS, @funds_transfer_customer.bene_backend), prompt: 'Select'
       #msg-error
         = error_message_for(@funds_transfer_customer, :bene_backend, :prepend_text => "")
+    
+    .control-group
+      = f.label :is_special_client, "Is Special Client ?", :class => 'control-label'
+      = f.check_box :is_special_client, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :is_special_client, :prepend_text => "")
+
+    .control-group
+      = f.label :is_payment, "Is Payment ?", :class => 'control-label'
+      = f.check_box :is_payment, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :is_payment, :prepend_text => "")        
 
   .form-actions
     - (f.object.new_record? and f.object.app_id.nil?) ? label_name = "Create" : label_name = "Update"

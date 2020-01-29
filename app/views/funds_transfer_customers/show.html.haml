@@ -146,6 +146,18 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :notify_app_code, :prepend_text => "")
           %tr
+            %td.label Is Special Client ?
+            %td.value
+              = @funds_transfer_customer.is_special_client
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :is_special_client, :prepend_text => "")
+          %tr
+            %td.label Is Payment ?
+            %td.value
+              = @funds_transfer_customer.is_payment
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :is_payment, :prepend_text => "")
+          %tr
             %td.label Notification Sent At
             %td
               = @funds_transfer_customer.notification_sent_at.try(:strftime, "%d/%m/%Y %I:%M%p")

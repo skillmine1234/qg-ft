@@ -36,6 +36,10 @@
       Allow All Accounts
     %th{:style=>'text-align:left; background-color: lightblue;'}
       FiletoApi Allowed
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Special Client
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Payment    
   .tbody
     - @funds_transfer_customers.each do |funds_transfer_customer|
       %tr
@@ -66,3 +70,7 @@
           = funds_transfer_customer.allow_all_accounts
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.is_filetoapi_allowed
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.is_special_client
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.is_payment    
