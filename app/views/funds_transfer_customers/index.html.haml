@@ -10,6 +10,7 @@
   = render :partial => 'advanced_search'
 %br
 = "Total Count: #{@funds_transfer_customers_count}"
+= link_to "Replicate", "#my-modal", :class => "btn btn-primary", "data-toggle" => "modal",style: "float:right;"
 %br
 = will_paginate @funds_transfer_customers
 %br
@@ -39,7 +40,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Special Client
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Is Payment    
+      Is Payment   
+    %th{:style=>'text-align:left; background-color: lightblue;'}
   .tbody
     - @funds_transfer_customers.each do |funds_transfer_customer|
       %tr
@@ -74,3 +76,68 @@
           = funds_transfer_customer.is_special_client
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.is_payment    
+        %td{:style=>'text-align:left;'}
+          =# link_to "Replicate", replicate_funds_transfer_customer_path(id: funds_transfer_customer.id), remote: true,:class => "btn btn-primary"
+
+#my-modal.modal.hide.fade{:title => "My modal"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Clone Fund Transfer Account
+  .modal-body.a-unique-class
+    = form_tag '', :method => 'post', :class => 'form-horizontal', :autocomplete=>"off" do
+      = hidden_field_tag "app_id2"
+      .control-group
+        = label_tag "App ID", "App ID", :class => 'control-label'
+        = text_field_tag :app_id1
+        #customer-id-div1
+        #app-id-not-exist{:style=>'display:none;'}
+          %h5{:style => 'text-align:center;color:red;padding-left: 47px;'} App ID Not Present,please setup.
+          = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;"
+        #app-id-allow-account-not-exist{:style=>'display:none;'}
+          %h5{:style => 'text-align:center;color:red;padding-left: 47px;'} Allow All Account Check Is Applicable to above APP ID 
+          = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;",id: "new-fund-transfer-customer"
+      .form-actions{:style=>'display:none;'}
+        = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "clone_ft_customer"
+    #replicate-form-div
+
+
+
+:javascript
+  $("#app_id1").change(function(){
+    $("#app_id2").val($(this).val());
+    var cur_val = $(this).val();
+    $.ajax({
+      type: 'GET',
+      url: "/funds_transfer_customers/validate_app_id_ft_customer",
+      data: { app_id1: $(this).val()},
+      success: function(data){
+      },
+      error: function(error) {
+      }
+    });
+  });
+
+  $('#add_account').click(function () {
+    $.ajax({
+      type: 'GET',
+      url: "/funds_transfer_customers/display_associated_customer_id",
+      data: { app_id2: $("#app_id2").val()},
+      success: function(data){
+      },
+      error: function(error) {
+      }
+    });
+  });
+
+  $('#add_customer_id').click(function () {
+    $.ajax({
+      type: 'GET',
+      url: "/funds_transfer_customers/replicate",
+      data: { app_id2: $("#app_id2").val()},
+      success: function(data){
+      },
+      error: function(error) {
+      }
+    });
+  });
+  

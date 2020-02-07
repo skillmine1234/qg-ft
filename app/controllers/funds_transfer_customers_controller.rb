@@ -53,6 +53,7 @@ class FundsTransferCustomersController < ApplicationController
   end
 
   def index
+    @ft_customer = FundsTransferCustomer.new
     if params[:advanced_search].present?
       funds_transfer_customers = find_funds_transfer_customers(params).order("id desc")
     else
@@ -61,6 +62,57 @@ class FundsTransferCustomersController < ApplicationController
     @funds_transfer_customers_count = funds_transfer_customers.count
     @funds_transfer_customers = funds_transfer_customers.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
+
+  def validate_app_id_ft_customer
+    if params[:app_id1].present?
+      @funds_transfer_customer = FundsTransferCustomer.where(app_id: params[:app_id1])
+    end
+  end
+
+  def validate_customer_id_ft_customer
+    if params[:customer_id1].present?
+      @funds_transfer_customer = FundsTransferCustomer.where(customer_id: params[:customer_id1]).first
+      if @funds_transfer_customer.present?
+        render json: {}, status: 400
+      else
+        render json: {}, status: 200
+      end
+    end
+    if @funds_transfer_customer.nil?
+      @funds_transfer_customer = FundsTransferCustomer.new
+    end
+  end
+
+  def display_associated_customer_id
+    @funds_transfer_customer = FundsTransferCustomer.where(app_id: params[:app_id2])
+  end
+
+  def check_duplicate_account_no
+    @ft_customer = FundsTransferCustomer.find_by(app_id: params[:app_id4],customer_id: params[:ft_customer_id2])
+    if @ft_customer.present?
+      @ft_account = FtCustomerAccount.where(account_no: params[:account_no1],customer_id: @ft_customer.customer_id)
+      @ft_account_all = FtCustomerAccount.where(account_no: params[:account_no1])
+      if @ft_account.present? || @ft_account_all.present?
+        puts "Account_No Exist!!"
+      else
+        puts "Account_No not Exist!!"
+      end
+    end
+  end
+
+  def create_clone_accounts
+    if params[:fund_transfer].present?
+      ft_customer = FundsTransferCustomer.find_by(customer_id: params[:ft_customer_id])
+      params[:fund_transfer][:account_no].each do |account_no|
+        ft_customer_account = FtCustomerAccount.find_by(account_no: account_no,customer_id: params[:ft_customer_id])
+        if !ft_customer_account.present?
+          ft_account = FtCustomerAccount.new(account_no: account_no,customer_id: ft_customer.customer_id,is_enabled: "Y").save!
+        end
+      end
+      flash[:alert] = "Account Replicated successfully"
+      redirect_to "/funds_transfer_customers"
+    end
+  end 
 
   def audit_logs
     @funds_transfer_customer = FundsTransferCustomer.unscoped.find(params[:id]) rescue nil
@@ -98,6 +150,10 @@ class FundsTransferCustomersController < ApplicationController
     @funds_transfer_customer = FundsTransferCustomer.find(params[:id]) rescue nil
     flash[:alert] = @funds_transfer_customer.resend_setup
     redirect_to @funds_transfer_customer
+  end
+
+  def replicate
+    @fund_transfer_customer = FundsTransferCustomer.find_by(app_id: params[:app_id2])
   end
 
   private

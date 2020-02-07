@@ -16,6 +16,12 @@ Rails.application.routes.draw do
     end
     collection do
       put :index
+      get :validate_customer_id_ft_customer
+      get :validate_app_id_ft_customer
+      post :create_clone_accounts
+      get :check_duplicate_account_no
+      get :display_associated_customer_id
+      get :replicate
     end
   end
 
