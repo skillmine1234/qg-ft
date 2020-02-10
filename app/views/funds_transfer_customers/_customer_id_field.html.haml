@@ -3,7 +3,7 @@
   %tr
     .control-group
       = label_tag "Customer ID", "Customer ID", :class => 'control-label'
-      = select_tag(:customer_id4, options_for_select(ft_customer.pluck(:customer_id), params[:customer_id] ),:prompt=>"Please Select Customer ID",class:"select")
+      = select_tag(:customer_id4, options_for_select(ft_customer.present? ? ft_customer.pluck(:customer_id) : '', params[:customer_id] ),:prompt=>"Please Select Customer ID",class:"select")
     %td.label
       = form_tag(create_clone_accounts_funds_transfer_customers_path, method: 'post',id: "fund-transfer-form") do
         = hidden_field_tag "authenticity_token", form_authenticity_token
@@ -52,7 +52,7 @@
         if ($(this).val().length == 0) {
           empty = true;
         }
-        else if(!$(this).val().length.between(4, 15)) {
+        else if(!$(this).val().length.between(4, 16)) {
           empty = 'maximum-value';
         }
     });
@@ -83,14 +83,18 @@
     $("#ft_customer_id").val($("#customer_id4").find('option:selected').text());
   });
 
+
+
   $("#customer_id4").change(function() {
     $("#ft_customer_id").val($(this).find('option:selected').text());
     if($(this).val() == ''){
       $("#add_account_no").hide();
+      $("#multiple-account-submit").hide();
     }
     else
     {
       $("#add_account_no").show();
+      $("#multiple-account-submit").show();
     }
   });
 

@@ -92,7 +92,8 @@ class FundsTransferCustomersController < ApplicationController
     if @ft_customer.present?
       @ft_account = FtCustomerAccount.where(account_no: params[:account_no1],customer_id: @ft_customer.customer_id)
       @ft_account_all = FtCustomerAccount.where(account_no: params[:account_no1])
-      if @ft_account.present? || @ft_account_all.present?
+      @ft_account_unapproved = FtCustomerAccount.unscoped.where(account_no: params[:account_no1])
+      if @ft_account.present? || @ft_account_all.present? || @ft_account_unapproved.present?
         puts "Account_No Exist!!"
       else
         puts "Account_No not Exist!!"

@@ -9,7 +9,7 @@ class FundsTransfer < ApplicationRecord
   has_many :audit_steps, :class_name => 'FtAuditStep', :as => :ft_auditable
   has_one :ft_invoice_detail
 
-  as_enum :status_code, [:FAILED, :RETURNED_FROM_BENEFICIARY, :NEW, :SENT_TO_BENEFICIARY, :SCHEDULED_FOR_NEXT_WORKDAY, :IN_PROCESS, :COMPLETED, :ONHOLD], map: :string, source: :status_code
+  as_enum :status_code, [:FAILED, :RETURNED_FROM_BENEFICIARY, :NEW, :SENT_TO_BENEFICIARY, :SCHEDULED_FOR_NEXT_WORKDAY, :IN_PROCESS, :COMPLETED, :ONHOLD, :Accepted, :Pending, :SettlementInProcess, :SettlementCompleted, :Failed, :SettlementReversed, :AcceptedSettlementCompleted], map: :string, source: :status_code
   as_enum :req_transfer_type, [:ANY, :NEFT, :IMPS, :RTGS, :FT, :APBS], map: :string, source: :req_transfer_type
   as_enum :transfer_type, [:NEFT, :IMPS, :RTGS, :FT, :APBS], map: :string, source: :transfer_type
 
