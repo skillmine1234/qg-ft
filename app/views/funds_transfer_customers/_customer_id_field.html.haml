@@ -61,7 +61,7 @@
       $("#multiple-account-submit").attr("disabled", true);
     }
     else if(empty == 'maximum-value'){
-      alert("Account No length is not Valid!");
+      alert("Account No length is not Valid - length should be minimum 5 and maximum 15");
       $("#multiple-account-submit").attr("disabled", true);
     }
     else {
@@ -83,8 +83,6 @@
     $("#ft_customer_id").val($("#customer_id4").find('option:selected').text());
   });
 
-
-
   $("#customer_id4").change(function() {
     $("#ft_customer_id").val($(this).find('option:selected').text());
     if($(this).val() == ''){
@@ -100,11 +98,16 @@
 
   $(document).on('click', '.remove-btn', function() {
     $(this).parent().remove();
-    $("#multiple-account-submit").attr("disabled", false);
     var_input_element_count = document.querySelectorAll('#new_div .abcd').length;
     if(var_input_element_count == 0){
       $("#submit-div").hide();
       $("#already-exist-tag").hide();
+    }
+
+    var non_empyty_count = $('.abcd').filter(function(){
+    return !$(this).val();
+    }).length;
+    if(non_empyty_count == 0){
       $("#multiple-account-submit").attr("disabled", false);
     }
   });
