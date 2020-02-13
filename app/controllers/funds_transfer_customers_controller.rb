@@ -102,12 +102,13 @@ class FundsTransferCustomersController < ApplicationController
   end
 
   def create_clone_accounts
+    binding.pry
     if params[:fund_transfer].present?
       ft_customer = FundsTransferCustomer.find_by(customer_id: params[:ft_customer_id])
       params[:fund_transfer][:account_no].each do |account_no|
         ft_customer_account = FtCustomerAccount.find_by(account_no: account_no,customer_id: params[:ft_customer_id])
         if !ft_customer_account.present?
-          ft_account = FtCustomerAccount.new(account_no: account_no,customer_id: ft_customer.customer_id,is_enabled: "Y").save!
+          ft_account = FtCustomerAccount.new(account_no: account_no,customer_id: ft_customer.customer_id,is_enabled: "Y",created_by: current_user.id).save!
         end
       end
       flash[:alert] = "Account Replicated successfully"
