@@ -102,7 +102,6 @@ class FundsTransferCustomersController < ApplicationController
   end
 
   def create_clone_accounts
-    binding.pry
     if params[:fund_transfer].present?
       ft_customer = FundsTransferCustomer.find_by(customer_id: params[:ft_customer_id])
       params[:fund_transfer][:account_no].each do |account_no|
