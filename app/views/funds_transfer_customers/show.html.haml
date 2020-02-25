@@ -1,5 +1,5 @@
 .form-horizontal.show_form
-  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 1000px; padding-bottom: 2%;'}
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 100%; padding-bottom: 2%;'}
     #form-details
       %h3 Funds Transfer Customer Details 
       %br
@@ -157,6 +157,20 @@
               = @funds_transfer_customer.is_payment
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :is_payment, :prepend_text => "")
+
+          %tr
+            %td.label Beneficiary SMS Allowed ?
+            %td.value
+              = @funds_transfer_customer.beneficiary_sms_allowed
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :beneficiary_sms_allowed, :prepend_text => "")
+          %tr
+            %td.label Beneficiary EMAIL Allowed ?
+            %td.value
+              = @funds_transfer_customer.beneficiary_email_allowed
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :beneficiary_email_allowed, :prepend_text => "")
+
           %tr
             %td.label Notification Sent At
             %td

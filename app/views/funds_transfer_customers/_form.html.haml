@@ -141,6 +141,18 @@
       #msg-error
         = error_message_for(@funds_transfer_customer, :is_payment, :prepend_text => "")        
 
+    .control-group
+      = f.label :beneficiary_sms_allowed, "Beneficiary SMS Allowed ?", :class => 'control-label'
+      = f.check_box :beneficiary_sms_allowed, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :beneficiary_sms_allowed, :prepend_text => "")
+
+    .control-group
+      = f.label :beneficiary_email_allowed, "Beneficiary EMAIL Allowed ?", :class => 'control-label'
+      = f.check_box :beneficiary_email_allowed, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :beneficiary_email_allowed, :prepend_text => "")     
+
   .form-actions
     - (f.object.new_record? and f.object.app_id.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => label_name + ' Funds Transfer Customer'

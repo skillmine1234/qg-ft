@@ -42,6 +42,9 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Payment   
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Beneficiary SMS Allowed
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Beneficiary EMAIL Allowed   
   .tbody
     - @funds_transfer_customers.each do |funds_transfer_customer|
       %tr
@@ -75,7 +78,11 @@
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.is_special_client
         %td{:style=>'text-align:left;'}
-          = funds_transfer_customer.is_payment    
+          = funds_transfer_customer.is_payment   
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.beneficiary_sms_allowed   
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.beneficiary_email_allowed    
         %td{:style=>'text-align:left;'}
           =# link_to "Replicate", replicate_funds_transfer_customer_path(id: funds_transfer_customer.id), remote: true,:class => "btn btn-primary"
 
