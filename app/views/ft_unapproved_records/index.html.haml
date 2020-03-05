@@ -3,7 +3,7 @@
 %br
 - unless @records.nil?
   %br
-  = will_paginate @records
+  = will_paginate @records, :page_links => true
   %br
   %table.table.table-bordered.table-striped.table-hover
     .thead

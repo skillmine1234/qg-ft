@@ -11,7 +11,7 @@
 %br
 = "Total Count: #{@ft_customer_accounts_count}"
 %br
-= will_paginate @ft_customer_accounts
+= will_paginate @ft_customer_accounts, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead

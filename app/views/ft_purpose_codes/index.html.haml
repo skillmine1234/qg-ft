@@ -11,7 +11,7 @@
 %br
 = "Total Count: #{@ft_purpose_codes_count}"
 %br
-= will_paginate @ft_purpose_codes
+= will_paginate @ft_purpose_codes, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead

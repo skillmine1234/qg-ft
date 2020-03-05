@@ -12,7 +12,7 @@
 = "Total Count: #{@funds_transfer_customers_count}"
 = link_to "Replicate", "#my-modal", :class => "btn btn-primary", "data-toggle" => "modal",style: "float:right;"
 %br
-= will_paginate @funds_transfer_customers
+= will_paginate @funds_transfer_customers, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead

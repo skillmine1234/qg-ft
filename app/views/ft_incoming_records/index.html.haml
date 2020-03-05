@@ -11,7 +11,7 @@
   %br
   = "Total Count: #{@records_count}"
 %br
-= will_paginate @records
+= will_paginate @records, :page_links => true
 
 = simple_form_for :ic_incoming_record, :url => override_records_path, :html => { :method => :get, :class => 'form-horizontal', :autocomplete=>"off", :id => 'update_records', :style=> 'overflow: auto;'} do |f| 
   %table.table.table-bordered.table-striped.table-hover{:style => 'width:100%; border:1px'}
