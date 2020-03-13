@@ -3,12 +3,14 @@ class FundsTransfersController < ApplicationController
     authorize FundsTransfer
     if request.get?
       # only 'safe/non-personal' parameters are allowed as search parameters in a query string
-      @searcher = FundsTransferSearcher.new(params.permit(:page))
+      @advance_search = false
+      @searcher = FundsTransferSearcher.new
     else
-      # rest parameters are in post
+      # rest parameters are in post\
+      @advance_search = true
       @searcher = FundsTransferSearcher.new(search_params)
     end
-    @records = FundsTransferDecorator.decorate_collection(policy_scope(@searcher).paginate)    
+    @records = FundsTransferDecorator.decorate_collection(policy_scope(@searcher).paginate) 
   end
   
   def show

@@ -6,18 +6,20 @@
 
 - columns = [:customer_id, :transfer_type, :bene_full_name, :transfer_amount, :debit_account_no, :req_timestamp, :rep_timestamp, :status_code, :user_action]
 - columns.delete(:customer_id) if current_user.present? && current_user.try(:accessible_customers).try(:count) == 1
-.row
-  .col-xs-12.col-sm-12.col-md-12.col-lg-12
-    #panels.panel.panel-primary
-      .panel-body 
-        %table.table#transactions_table
-          %thead
-            %tr
-              - columns.each do |column|
-                %th= FundsTransfer.human_attribute_name(column)
-              %th
-          %tbody
-            - @records.each do |transfer|
+
+-if @advance_search == true
+  .row
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      #panels.panel.panel-primary
+        .panel-body 
+          %table.table#transactions_table
+            %thead
               %tr
-                - columns.each_with_index do |column, i|
-                  %td= transfer.send(column.to_s)
+                - columns.each do |column|
+                  %th= FundsTransfer.human_attribute_name(column)
+                %th
+            %tbody
+              - @records.each do |transfer|
+                %tr
+                  - columns.each_with_index do |column, i|
+                    %td= transfer.send(column.to_s)
