@@ -24,9 +24,9 @@ class FtSafTransferSearcher
 
   def find
     reln = FtSafTransfer.order("id desc")
-    reln = reln.where("app_uuid=?", app_uuid) if app_uuid.present?
-    reln = reln.where("customer_id=?", customer_id) if customer_id.present?
-    reln = reln.where("req_no=?", req_no) if req_no.present?
+    reln = reln.where("app_uuid IN (?) ", app_uuid.split(",").collect(&:strip)) if app_uuid.present?
+    reln = reln.where("customer_id IN (?) ", customer_id.split(",").collect(&:strip)) if customer_id.present?
+    reln = reln.where("req_no IN (?)", req_no.split(",").collect(&:strip)) if req_no.present?
     reln = reln.where("op_name=?",op_name) if op_name.present?
     reln = reln.where("status_code=?",status) if status.present?
     reln = reln.where("req_transfer_type=?",req_transfer_type) if req_transfer_type.present?
