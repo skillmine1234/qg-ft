@@ -55,9 +55,11 @@ class FtPurposeCodesController < ApplicationController
   end
 
   def index
-    if params[:advanced_search].present?
+    if params[:advanced_search].present? && params[:approval_status] == 'U'
+      ft_purpose_codes = find_ft_purpose_codes(params).where("approval_status =?",'U').order("id desc")
+    elsif params[:advanced_search].present?
       ft_purpose_codes = find_ft_purpose_codes(params).order("id desc")
-    else
+    else  
       ft_purpose_codes = (params[:approval_status].present? and params[:approval_status] == 'U') ? FtPurposeCode.unscoped.where("approval_status =?",'U').order("id desc") : FtPurposeCode.order("id desc")
     end
     @ft_purpose_codes_count = ft_purpose_codes.count

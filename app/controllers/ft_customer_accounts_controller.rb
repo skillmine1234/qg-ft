@@ -53,7 +53,9 @@ class FtCustomerAccountsController < ApplicationController
   end
 
   def index
-    if params[:advanced_search].present?
+    if params[:advanced_search].present? && params[:approval_status] == 'U'
+      ft_customer_accounts = find_ft_customer_accounts(params).where("approval_status =?",'U').order("id desc")
+    elsif params[:advanced_search].present?
       ft_customer_accounts = find_ft_customer_accounts(params).order("id desc")
     else
       ft_customer_accounts = (params[:approval_status].present? and params[:approval_status] == 'U') ? FtCustomerAccount.unscoped.where("approval_status =?",'U').order("id desc") : FtCustomerAccount.order("id desc")
