@@ -2,6 +2,7 @@ class FundsTransfer < ApplicationRecord
   
   alias_attribute :fault_subcode, :sub_code
 
+
   attribute :req_timestamp, :datetime
   attribute :rep_timestamp, :datetime
 

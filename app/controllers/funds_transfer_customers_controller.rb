@@ -52,11 +52,14 @@ class FundsTransferCustomersController < ApplicationController
     @funds_transfer_customer = FundsTransferCustomer.unscoped.find_by_id(params[:id])
   end
 
-  def index
+
+def index
     @ft_customer = FundsTransferCustomer.new
-    if params[:advanced_search].present?
+    if params[:advanced_search].present? && params[:approval_status] == 'U'
+      funds_transfer_customers = find_funds_transfer_customers(params).where("approval_status =?",'U').order("id desc")
+    elsif params[:advanced_search].present?
       funds_transfer_customers = find_funds_transfer_customers(params).order("id desc")
-    else
+    else  
       funds_transfer_customers = (params[:approval_status].present? and params[:approval_status] == 'U') ? FundsTransferCustomer.unscoped.where("approval_status =?",'U').order("id desc") : FundsTransferCustomer.order("id desc")
     end
     @funds_transfer_customers_count = funds_transfer_customers.count
