@@ -1,7 +1,7 @@
 = form_tag '', :method => 'put', :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
     = label_tag "Code", nil, :class => 'control-label'
-    = text_field_tag :code, params[:code]
+    = text_field_tag :code, params[:code],placeholder: 'Multisearch Search Enabled'
   .control-group
     = label_tag "Enabled", nil, :class => 'control-label'
     = select_tag :enabled, options_for_select([['Yes','Y'],['No','N']],params[:enabled]),:prompt => 'All'

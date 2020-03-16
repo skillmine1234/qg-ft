@@ -5,13 +5,13 @@
   = form_tag ft_saf_transfers_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
     .control-group
       = label_tag "App UUID", "App UUID", :class => 'control-label'
-      = text_field_tag :app_uuid, params[:app_uuid]
+      = text_field_tag :app_uuid, params[:app_uuid],placeholder: 'Multisearch Search Enabled'
     .control-group
       = label_tag "Customer ID", "Customer ID", :class => 'control-label'
-      = text_field_tag :customer_id, params[:customer_id]
+      = text_field_tag :customer_id, params[:customer_id],placeholder: 'Multisearch Search Enabled'
     .control-group
       = label_tag "Request No", "Request No", :class => 'control-label'
-      = text_field_tag :req_no, params[:req_no]
+      = text_field_tag :req_no, params[:req_no],placeholder: 'Multisearch Search Enabled'
     .control-group
       = label_tag "Operation Name", "Operation Name", :class => 'control-label'
       = select_tag :op_name, options_for_select([['startTransfer','startTransfer'],['transfer','transfer']], params[:op_name]),:prompt => 'Select'

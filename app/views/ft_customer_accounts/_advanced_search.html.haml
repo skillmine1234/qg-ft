@@ -1,7 +1,7 @@
 = form_tag '', :method => 'put', :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
     = label_tag "Customer ID", "Customer ID", :class => 'control-label'
-    = text_field_tag :customer_id, params[:customer_id]
+    = text_field_tag :customer_id, params[:customer_id],placeholder: 'Multisearch Search Enabled'
     = hidden_field_tag :approval_status, params[:approval_status]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"

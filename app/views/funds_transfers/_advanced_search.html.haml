@@ -15,4 +15,5 @@
   = f.action_buttons
 %br
 
-= pagination_links(@records)
+= "Total Count: #{@records.count}"
+= will_paginate @records, :page_links => true

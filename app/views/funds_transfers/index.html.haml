@@ -23,3 +23,6 @@
                 %tr
                   - columns.each_with_index do |column, i|
                     %td= transfer.send(column.to_s)
+
+:javascript
+  $(".collapsible").click()
