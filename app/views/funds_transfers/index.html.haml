@@ -8,6 +8,8 @@
 - columns.delete(:customer_id) if current_user.present? && current_user.try(:accessible_customers).try(:count) == 1
 
 -if @advance_search == true
+  = "Total Count: #{@records.count}"
+  = pagination_links(@records)
   .row
     .col-xs-12.col-sm-12.col-md-12.col-lg-12
       #panels.panel.panel-primary
@@ -27,4 +29,5 @@
 :javascript
   $(document).ready(function(){
     $(".collapsible").click();
+    $('input[type="text"]'). attr("placeholder", "Multisearch Search Enabled");
   });
