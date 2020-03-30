@@ -146,17 +146,17 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :notify_app_code, :prepend_text => "")
           %tr
-            %td.label Is Special Client ?
+            %td.label Is Bulk ?
             %td.value
-              = @funds_transfer_customer.is_special_client
+              = @funds_transfer_customer.is_bulk
             %td#msg-error
-              = error_message_for(@funds_transfer_customer, :is_special_client, :prepend_text => "")
+              = error_message_for(@funds_transfer_customer, :is_bulk, :prepend_text => "")
           %tr
-            %td.label Is Payment ?
+            %td.label BTID
             %td.value
-              = @funds_transfer_customer.is_payment
+              = @funds_transfer_customer.btid
             %td#msg-error
-              = error_message_for(@funds_transfer_customer, :is_payment, :prepend_text => "")
+              = error_message_for(@funds_transfer_customer, :btid, :prepend_text => "")
 
           %tr
             %td.label Beneficiary SMS Allowed ?

@@ -40,6 +40,7 @@ class FundsTransferCustomer < ActiveRecord::Base
 
   validate :presence_of_iam_cust_user
   validate :apbs_values
+  validate :btid_values
 
   validates_presence_of :notify_app_code, :message => "is mandatory if Notify On Status Change? is Y", :if => 'notify_on_status_change?'
 
@@ -78,6 +79,10 @@ class FundsTransferCustomer < ActiveRecord::Base
   def apbs_values
     errors.add(:apbs_user_no, 'is mandatory if Allow APBS is Y') if allow_apbs == 'Y' and apbs_user_no.blank?
     errors.add(:apbs_user_name, 'is mandatory if Allow APBS is Y') if allow_apbs == 'Y' and apbs_user_name.blank?
+  end
+
+  def btid_values
+    errors.add(:btid, 'is mandatory if Is Bulk is Y') if is_bulk == 'Y' and btid.blank?
   end
   
   def check_needs_purpose_code
