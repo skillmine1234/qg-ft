@@ -8,7 +8,7 @@
 - columns.delete(:customer_id) if current_user.present? && current_user.try(:accessible_customers).try(:count) == 1
 
 -if @advance_search == true
-  = "Total Count: #{@records.count}"
+  = "Total Count: #{FundsTransfer.all.size}"
   = pagination_links(@records)
   .row
     .col-xs-12.col-sm-12.col-md-12.col-lg-12

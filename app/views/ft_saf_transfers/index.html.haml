@@ -3,6 +3,8 @@
 %h1 Listing SAF Transfers
 = render :partial => 'advanced_search'
 %br
+= "Total Count: #{@records.count}"
+= will_paginate @records, :page_links => true
 %br
 
 %table.table.table-bordered.table-striped.table-hover

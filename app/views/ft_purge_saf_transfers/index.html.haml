@@ -4,6 +4,8 @@
 %br
 %h1 Listing Purge SAF Transfer Records
 %br
+= "Total Count: #{@records.count}"
+= will_paginate @records, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead
