@@ -32,7 +32,7 @@ class FtPurgeSafTransfersController < ApplicationController
     if params[:advanced_search].present?
       @records = FtPurgeSafTransfer.order("id desc").paginate(:per_page => 10, :page => params[:page])
     else
-      @records = (params[:approval_status].present? and params[:approval_status] == 'U') ? FtPurgeSafTransfer.unscoped.where("approval_status =?",'U').order("id desc") : FtPurgeSafTransfer.order("id desc")
+      @records = (params[:approval_status].present? and params[:approval_status] == 'U') ? FtPurgeSafTransfer.unscoped.where("approval_status =?",'U').order("id desc").paginate(:per_page => 10, :page => params[:page]) : FtPurgeSafTransfer.order("id desc").paginate(:per_page => 10, :page => params[:page])
     end
   end
   
