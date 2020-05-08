@@ -10,7 +10,7 @@ class FundsTransferSearcher < Searcher
   private
 
   def find
-    #reln = FundsTransfer.order("id desc")
+    reln = FundsTransfer.order("id desc")
     reln = reln.where("transfer_amount>=? and transfer_amount<=?",from_transfer_amount,to_transfer_amount) if from_transfer_amount.present? and to_transfer_amount.present?
     reln = reln.where("req_timestamp>=? and req_timestamp<=?",Time.zone.parse(from_req_timestamp),Time.zone.parse(to_req_timestamp)) if from_req_timestamp.present? and to_req_timestamp.present?
     reln = reln.where("rep_timestamp>=? and rep_timestamp<=?",Time.zone.parse(from_rep_timestamp),Time.zone.parse(to_rep_timestamp)) if from_rep_timestamp.present? and to_rep_timestamp.present?
