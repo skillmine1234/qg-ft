@@ -38,6 +38,10 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       FiletoApi Allowed
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Bulk
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      BTID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Beneficiary SMS Allowed
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Beneficiary EMAIL Allowed   
@@ -71,6 +75,10 @@
           = funds_transfer_customer.allow_all_accounts
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.is_filetoapi_allowed
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.is_bulk
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.btid
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.beneficiary_sms_allowed   
         %td{:style=>'text-align:left;'}

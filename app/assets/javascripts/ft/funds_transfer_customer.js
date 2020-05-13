@@ -91,6 +91,23 @@ $(document).ready(function(){
     }
   });
 
+  if(!$('#funds_transfer_customer_is_bulk').is(":checked")){
+    $('#funds_transfer_customer_btid').val('');
+    $('#funds_transfer_customer_btid').prop('readOnly',true);
+  }
+  else {
+    $('#funds_transfer_customer_btid').prop('readOnly',false);
+  }
+
+  $("#funds_transfer_customer_is_bulk").on("click", function () {
+    if (!$(this).is(":checked")){
+      $('#funds_transfer_customer_btid').val('');
+      $('#funds_transfer_customer_btid').prop('readOnly',true);
+    }
+    else {
+      $('#funds_transfer_customer_btid').prop('readOnly',false);
+    }
+  });
 	
   $('#funds_transfer_customer_form').bind('submit', function() {
       $(this).find(':input').removeAttr('disabled');
