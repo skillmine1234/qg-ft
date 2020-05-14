@@ -9,7 +9,7 @@
 .collapsible-content
   = render :partial => 'advanced_search'
 %br
-= "Total Count: #{@funds_transfer_customers_count}"
+= "Total Count: #{@funds_transfer_customers.count}"
 = link_to "Replicate", "#my-modal", :class => "btn btn-primary", "data-toggle" => "modal",style: "float:right;"
 %br
 = will_paginate @funds_transfer_customers, :page_links => true

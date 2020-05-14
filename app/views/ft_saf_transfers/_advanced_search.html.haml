@@ -2,7 +2,7 @@
   Advanced Search
   %span.caret
 .collapsible-content
-  = form_tag ft_saf_transfers_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
+  = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
     .control-group
       = label_tag "App UUID", "App UUID", :class => 'control-label'
       = text_field_tag :app_uuid, params[:app_uuid],placeholder: 'Multisearch Search Enabled'
@@ -23,16 +23,20 @@
       = select_tag :req_transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT'],['APBS','APBS'] ],params[:req_transfer_type]),:prompt => 'Select'
     .control-group
       = label_tag "Request Timestamp", "Request Timestamp", :class => 'control-label'
-      = text_field_tag :from_request_timestamp, params[:from_request_timestamp]
+      = date_field_tag(:from_request_timestamp1, params[:from_request_timestamp1])
       To
-      = text_field_tag :to_request_timestamp, params[:to_request_timestamp]
+      = date_field_tag(:to_request_timestamp1, params[:to_request_timestamp1])
     .control-group
       = label_tag "Reply Timestamp", "Reply Timestamp", :class => 'control-label'
-      = text_field_tag :from_reply_timestamp, params[:from_reply_timestamp]
+      = date_field_tag(:from_reply_timestamp1, params[:from_reply_timestamp1])
       To
-      = text_field_tag :to_reply_timestamp, params[:to_reply_timestamp]
-      
-    = hidden_field_tag :page, params[:page] || 1
+      = date_field_tag(:to_reply_timestamp1, params[:to_reply_timestamp1])
     .form-actions
-      = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button",onclick: "$('#page').val(1)"
-      = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'adv_search_reset_button'
+      = button_tag "Search", :class => 'btn btn-primary'
+      = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'ft_saf_transfer_reset'
+    = hidden_field_tag :advanced_search, :true
+
+:javascript
+  $("#ft_saf_transfer_reset").click(function() {
+    $(this).closest('form').find("input,select").val("");
+  });

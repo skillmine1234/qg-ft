@@ -4,14 +4,15 @@ class FtSafTransfersController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
+  include FtSafTransferHelper
 
   def index
-    if request.get?
-      @searcher = FtSafTransferSearcher.new(params.permit(:page))
+    if params[:advanced_search].present?
+      ft_saf_transfers = find_ft_saf_transfers(params).order("id DESC")
     else
-      @searcher = FtSafTransferSearcher.new(search_params)
+      ft_saf_transfers = FtSafTransfer.order("id desc")
     end
-    @records = @searcher.paginate
+    @ft_saf_transfers = ft_saf_transfers.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
   def show

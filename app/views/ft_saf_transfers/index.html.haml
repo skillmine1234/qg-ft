@@ -3,8 +3,8 @@
 %h1 Listing SAF Transfers
 = render :partial => 'advanced_search'
 %br
-= "Total Count: #{@records.count}"
-= will_paginate @records, :page_links => true
+= "Total Count: #{@ft_saf_transfers.count}"
+= will_paginate @ft_saf_transfers, :page_links => true
 %br
 
 %table.table.table-bordered.table-striped.table-hover
@@ -27,7 +27,7 @@
       Reply Timestamp
 
   .tbody
-    - @records.each do |ft_saf_transfer|
+    - @ft_saf_transfers.each do |ft_saf_transfer|
       %tr
         %td{:style=>'text-align:left;'}
           = link_to 'Show', ft_saf_transfer

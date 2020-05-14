@@ -55,15 +55,12 @@ class FtPurposeCodesController < ApplicationController
   end
 
   def index
-    if params[:advanced_search].present? && params[:approval_status] == 'U'
-      ft_purpose_codes = find_ft_purpose_codes(params).where("approval_status =?",'U').order("id desc")
-    elsif params[:advanced_search].present?
-      ft_purpose_codes = find_ft_purpose_codes(params).order("id desc")
-    else  
+    if params[:advanced_search].present?
+      ft_purpose_codes = find_ft_purpose_codes(params).order("id DESC")
+    else
       ft_purpose_codes = (params[:approval_status].present? and params[:approval_status] == 'U') ? FtPurposeCode.unscoped.where("approval_status =?",'U').order("id desc") : FtPurposeCode.order("id desc")
     end
-    @ft_purpose_codes_count = ft_purpose_codes.count
-    @ft_purpose_codes = ft_purpose_codes.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @purpose_codes = ft_purpose_codes.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
   def audit_logs

@@ -9,9 +9,9 @@
 .collapsible-content
   = render :partial => 'advanced_search'
 %br
-= "Total Count: #{@ft_purpose_codes_count}"
+= "Total Count: #{@purpose_codes.count}"
 %br
-= will_paginate @ft_purpose_codes, :page_links => true
+= will_paginate @purpose_codes, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead
@@ -34,7 +34,7 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Updated At
   .tbody
-    - @ft_purpose_codes.each do |ft_purpose_code|
+    - @purpose_codes.each do |ft_purpose_code|
       %tr
         %td{:style=>'text-align:left;'}
           = link_to 'Show', ft_purpose_code
