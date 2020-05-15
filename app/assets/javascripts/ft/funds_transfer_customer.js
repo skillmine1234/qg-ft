@@ -94,18 +94,24 @@ $(document).ready(function(){
   if(!$('#funds_transfer_customer_is_bulk').is(":checked")){
     $('#funds_transfer_customer_btid').val('');
     $('#funds_transfer_customer_btid').prop('readOnly',true);
+    $('#funds_transfer_customer_customer_code').val('');
+    $('#funds_transfer_customer_customer_code').prop('readOnly',true);
   }
   else {
     $('#funds_transfer_customer_btid').prop('readOnly',false);
+    $('#funds_transfer_customer_customer_code').prop('readOnly',false);
   }
 
   $("#funds_transfer_customer_is_bulk").on("click", function () {
     if (!$(this).is(":checked")){
       $('#funds_transfer_customer_btid').val('');
       $('#funds_transfer_customer_btid').prop('readOnly',true);
+      $('#funds_transfer_customer_customer_code').val('');
+      $('#funds_transfer_customer_customer_code').prop('readOnly',true);
     }
     else {
       $('#funds_transfer_customer_btid').prop('readOnly',false);
+      $('#funds_transfer_customer_customer_code').prop('readOnly',false);
     }
   });
 	

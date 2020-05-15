@@ -42,6 +42,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       BTID
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Beneficiary SMS Allowed
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Beneficiary EMAIL Allowed   
@@ -77,8 +79,10 @@
           = funds_transfer_customer.is_filetoapi_allowed
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.is_bulk
+        %td{:style=>'text-align:left;',:title => "#{funds_transfer_customer.btid}"}
+          = funds_transfer_customer.btid.present? ? truncate(funds_transfer_customer.btid.html_safe, length:10) : ""
         %td{:style=>'text-align:left;'}
-          = funds_transfer_customer.btid
+          = funds_transfer_customer.customer_code
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.beneficiary_sms_allowed   
         %td{:style=>'text-align:left;'}
