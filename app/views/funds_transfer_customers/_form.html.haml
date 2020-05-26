@@ -129,24 +129,6 @@
       = f.select :bene_backend, options_for_select(FundsTransferCustomer::BENE_BACKENDS, @funds_transfer_customer.bene_backend), prompt: 'Select'
       #msg-error
         = error_message_for(@funds_transfer_customer, :bene_backend, :prepend_text => "")
-    
-    .control-group
-      = f.label :is_bulk, "Is Bulk ?", :class => 'control-label'
-      = f.check_box :is_bulk, {},"Y","N"
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :is_bulk, :prepend_text => "")
-
-    .control-group
-      = f.label :btid, "BTID", :class => 'control-label'
-      = f.text_field :btid, :maxlength => 50, :style => "width: 400px;"
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :btid, :prepend_text => "")
-
-    .control-group
-      = f.label :customer_code, "Customer Code", :class => 'control-label'
-      = f.text_field :customer_code, :maxlength => 20
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :customer_code, :prepend_text => "")
 
     .control-group
       = f.label :beneficiary_sms_allowed, "Beneficiary SMS Allowed ?", :class => 'control-label'

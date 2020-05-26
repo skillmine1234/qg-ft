@@ -1,16 +1,15 @@
 class FundsTransfersController < ApplicationController  
+  before_filter :authenticate_user!
+  before_filter :block_inactive_user!
+  include FundsTransferHelper
+
   def index
-    authorize FundsTransfer
-    if request.get?
-      # only 'safe/non-personal' parameters are allowed as search parameters in a query string
-      @advance_search = false
-      @searcher = FundsTransferSearcher.new
+    if params[:advanced_search].present?
+      funds_transfers = find_funds_transfers(params).order("id DESC")
     else
-      # rest parameters are in post\
-      @advance_search = true
-      @searcher = FundsTransferSearcher.new(search_params)
+      funds_transfers = FundsTransfer.order("id desc")
     end
-    @records = FundsTransferDecorator.decorate_collection(policy_scope(@searcher).paginate) 
+    @funds_transfers = funds_transfers.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
   
   def show
