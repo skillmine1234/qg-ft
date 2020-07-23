@@ -198,6 +198,18 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :bene_backend, :prepend_text => "")
           %tr
+            %td.label Working Day Limit
+            %td.value
+              = @funds_transfer_customer.working_day_limit
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :working_day_limit, :prepend_text => "")
+          %tr
+            %td.label Non Working Day Limit
+            %td.value
+              = @funds_transfer_customer.non_working_day_limit
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :non_working_day_limit, :prepend_text => "")
+          %tr
             %td.label Created By
             %td.value
               = @funds_transfer_customer.created_user.try(:username)

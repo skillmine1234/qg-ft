@@ -11,6 +11,8 @@ module FtSafTransferHelper
     # ft_saf_transfers = ft_saf_transfers.where("rep_timestamp>=? and rep_timestamp<=?",Time.zone.parse(params[:from_reply_timestamp1]).beginning_of_day,Time.zone.parse(params[:to_reply_timestamp1]).end_of_day) if params[:from_reply_timestamp1].present? and params[:to_reply_timestamp1].present?
     ft_saf_transfers = ft_saf_transfers.where("req_timestamp>=? and req_timestamp<=?",Time.zone.parse(params[:from_request_timestamp1]),Time.zone.parse(params[:to_request_timestamp1])) if params[:from_request_timestamp1].present? and params[:to_request_timestamp1].present?
     ft_saf_transfers = ft_saf_transfers.where("rep_timestamp>=? and rep_timestamp<=?",Time.zone.parse(params[:from_reply_timestamp1]),Time.zone.parse(params[:to_reply_timestamp1])) if params[:from_reply_timestamp1].present? and params[:to_reply_timestamp1].present?
+    ft_saf_transfers = ft_saf_transfers.where("neft_limit_check=?",params[:neft_limit_check]) if params[:neft_limit_check].present?
+    
     ft_saf_transfers
   end
 end

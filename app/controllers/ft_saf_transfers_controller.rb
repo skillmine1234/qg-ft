@@ -32,6 +32,6 @@ class FtSafTransfersController < ApplicationController
   private
 
   def search_params
-    params.permit(:page, :app_uuid, :customer_id, :req_no, :op_name, :status, :req_transfer_type, :from_request_timestamp, :to_request_timestamp, :from_reply_timestamp, :to_reply_timestamp)
+    params.permit(:page, :app_uuid, :customer_id, :req_no, :op_name, :status, :req_transfer_type, :from_request_timestamp, :to_request_timestamp, :from_reply_timestamp, :to_reply_timestamp,:neft_limit_check)
   end
 end

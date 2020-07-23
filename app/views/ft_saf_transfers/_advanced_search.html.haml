@@ -31,6 +31,10 @@
       = date_field_tag(:from_reply_timestamp1, params[:from_reply_timestamp1])
       To
       = date_field_tag(:to_reply_timestamp1, params[:to_reply_timestamp1])
+    .control-group
+      = label_tag "NEFT Limit Check", "NEFT Limit Check" , :class => 'control-label'
+      = text_field_tag :neft_limit_check, params[:neft_limit_check],placeholder: 'Multisearch Search Enabled'
+
     .form-actions
       = button_tag "Search", :class => 'btn btn-primary'
       = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'ft_saf_transfer_reset'
