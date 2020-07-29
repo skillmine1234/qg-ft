@@ -8,7 +8,7 @@
     = select_tag :transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT'],['APBS','APBS']],params[:transfer_type]),:prompt => 'ANY'
   .control-group
     = label_tag "Transfer Status", "Transfer Status", :class => 'control-label'
-    = select_tag :status_code, options_for_select([['FAILED','FAILED'],['RETURNED_FROM_BENEFICIARY','RETURNED_FROM_BENEFICIARY'],['NEW','NEW'],['SENT_TO_BENEFICIARY','SENT_TO_BENEFICIARY'],['SCHEDULED_FOR_NEXT_WORKDAY','SCHEDULED_FOR_NEXT_WORKDAY'],['IN_PROCESS','IN_PROCESS'],['COMPLETED','COMPLETED'],['ONHOLD','ONHOLD'],['Accepted','Accepted'],['Pending','Pending'],['SettlementInProcess','SettlementInProcess'],['SettlementCompleted','SettlementCompleted'],['Failed','Failed'],['SettlementReversed','SettlementReversed'],['AcceptedSettlementCompleted','AcceptedSettlementCompleted']],params[:status_code]),:prompt => 'ANY'
+    = select_tag :status_code, options_for_select([['FAILED','FAILED'],['RETURNED_FROM_BENEFICIARY','RETURNED_FROM_BENEFICIARY'],['NEW','NEW'],['SENT_TO_BENEFICIARY','SENT_TO_BENEFICIARY'],['SCHEDULED_FOR_NEXT_WORKDAY','SCHEDULED_FOR_NEXT_WORKDAY'],['IN_PROCESS','IN_PROCESS'],['COMPLETED','COMPLETED'],['ONHOLD','ONHOLD'],['Pending','Pending'],['SettlementInProcess','SettlementInProcess'],['SettlementCompleted','SettlementCompleted'],['SettlementReversed','SettlementReversed']],params[:status_code]),:prompt => 'ANY'
   .control-group
     = label_tag "Request Timestamp", "Request Timestamp", :class => 'control-label'
     = date_field_tag(:from_req_timestamp, params[:from_req_timestamp])
