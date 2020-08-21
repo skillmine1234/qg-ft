@@ -15,12 +15,12 @@
         = error_message_for(@funds_transfer_customer, :neft_limit_check, :prepend_text => "")
     .control-group
       = f.label :working_day_limit, "Working Day Limit", :class => 'control-label'
-      = f.number_field :working_day_limit, :maxlength => 20, :step => 0.01
+      = f.text_field :working_day_limit, :maxlength => 20, :class => 'numbers'
       #msg-error
         = error_message_for(@funds_transfer_customer, :working_day_limit, :prepend_text => "")
     .control-group
       = f.label :non_working_day_limit, "Non Working Day Limit", :class => 'control-label'
-      = f.number_field :non_working_day_limit, :maxlength => 20, :step => 0.01
+      = f.text_field :non_working_day_limit, :maxlength => 20, :class => 'numbers'
       #msg-error
         = error_message_for(@funds_transfer_customer, :non_working_day_limit, :prepend_text => "")
     .control-group
@@ -47,19 +47,19 @@
         = f.text_field :customer_id, :maxlength => 10
       #msg-error
         = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
-    / .control-group
-    /   = f.label :use_std_relns, "Use Standard Relationships ?", :class => 'control-label'
-    /   - if f.object.allowed_relns.empty? && f.object.use_std_relns.nil?
-    /     = f.check_box :use_std_relns, {checked: true},"Y","N"
-    /   - else
-    /     = f.check_box :use_std_relns, {},"Y","N"
-    /   #msg-error
-    /     = error_message_for(@funds_transfer_customer, :use_std_relns, :prepend_text => "")
-    / .control-group
-    /   = f.label :allowed_relns, "Allowed Relationships", :class => 'control-label', :id => "allowed_relns_lbl"
-    /   = f.select :allowed_relns, options_for_select(FundsTransferCustomer::RELATIONS, f.object.allowed_relns), {}, {multiple: true}
-    /  #msg-error
-    /    = error_message_for(@funds_transfer_customer, :allowed_relns, :prepend_text => "")
+    .control-group
+      = f.label :use_std_relns, "Use Standard Relationships ?", :class => 'control-label'
+      - if f.object.allowed_relns.empty? && f.object.use_std_relns.nil?
+        = f.check_box :use_std_relns, {checked: true},"Y","N"
+      - else
+        = f.check_box :use_std_relns, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :use_std_relns, :prepend_text => "")
+    .control-group
+      = f.label :allowed_relns, "Allowed Relationships", :class => 'control-label', :id => "allowed_relns_lbl"
+      = f.select :allowed_relns, options_for_select(FundsTransferCustomer::RELATIONS, f.object.allowed_relns), {}, {multiple: true}
+     #msg-error
+       = error_message_for(@funds_transfer_customer, :allowed_relns, :prepend_text => "")
     .control-group
       = f.label :name, "*Name", :class => 'control-label'
       = f.text_field :name, :maxlength => 100, :style => "width: 400px;"
@@ -100,11 +100,11 @@
       = f.check_box :allow_apbs, {},"Y","N"
       #msg-error
         = error_message_for(@funds_transfer_customer, :allow_apbs, :prepend_text => "")
-    / .control-group
-    /   = f.label :apbs_user_no, "APBS User No", :class => 'control-label'
-    /   = f.text_field :apbs_user_no, :minlength => 7, :maxlength => 7
-    /   #msg-error
-    /     = error_message_for(@funds_transfer_customer, :apbs_user_no, :prepend_text => "")
+    .control-group
+      = f.label :apbs_user_no, "APBS User No", :class => 'control-label'
+      = f.text_field :apbs_user_no, :minlength => 7, :maxlength => 7
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :apbs_user_no, :prepend_text => "")
     .control-group
       = f.label :apbs_user_name, "APBS Username", :class => 'control-label'
       = f.text_field :apbs_user_name
@@ -130,22 +130,21 @@
       = f.check_box :notify_on_status_change, {},"Y","N"
       #msg-error
         = error_message_for(@funds_transfer_customer, :notify_on_status_change, :prepend_text => "")
-    / .control-group
-    /   = f.label :notify_app_code, "Notify App Code", :class => 'control-label', :id => "notify_app_code_lbl"
-    /   = f.select(:notify_app_code, options_for_notify_app_code, prompt: 'Select')
-    /   #msg-error
-    /     = error_message_for(@funds_transfer_customer, :notify_app_code, :prepend_text => "")
+    .control-group
+      = f.label :notify_app_code, "Notify App Code", :class => 'control-label', :id => "notify_app_code_lbl"
+      = f.select(:notify_app_code, options_for_notify_app_code, prompt: 'Select')
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :notify_app_code, :prepend_text => "")
     .control-group
       = f.label :force_saf, "Force Store & Forward ?", :class => 'control-label'
       = f.check_box :force_saf, {},"Y","N"
       #msg-error
         = error_message_for(@funds_transfer_customer, :force_saf, :prepend_text => "")
-    / .control-group
-    /   = f.label :bene_backend, "Beneficiary Backend", :class => 'control-label', :id => "notify_app_code_lbl"
-    /   = f.select :bene_backend, options_for_select(FundsTransferCustomer::BENE_BACKENDS, @funds_transfer_customer.bene_backend), prompt: 'Select'
-    /   #msg-error
-    /     = error_message_for(@funds_transfer_customer, :bene_backend, :prepend_text => "")
-    
+    .control-group
+      = f.label :bene_backend, "Beneficiary Backend", :class => 'control-label', :id => "notify_app_code_lbl"
+      = f.select :bene_backend, options_for_select(FundsTransferCustomer::BENE_BACKENDS, @funds_transfer_customer.bene_backend), prompt: 'Select'
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :bene_backend, :prepend_text => "")
     .control-group
       = f.label :is_bulk, "Is Bulk ?", :class => 'control-label'
       = f.check_box :is_bulk, {},"Y","N"
@@ -207,7 +206,14 @@
 
       } 
       else{
-        $("funds_transfer_customer_working_day_limit").attr("value", "");
-        $("funds_transfer_customer_non_working_day_limit").attr("value", "");
+        $("#funds_transfer_customer_working_day_limit").val('');
+        $("#funds_transfer_customer_non_working_day_limit").val('');
+        $("#funds_transfer_customer_working_day_limit").prop("disabled", true);
+        $("#funds_transfer_customer_non_working_day_limit").prop("disabled", true);
       }
+    });
+
+
+    $('.numbers').keyup(function () { 
+    this.value = this.value.replace(/[^0-9\.]/g,'');
     });
