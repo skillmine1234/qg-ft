@@ -13,12 +13,25 @@
             %td.label Version
             %td.value
               = link_to "#{audit_count(@funds_transfer_customer)}", :controller => :funds_transfer_customers, :action => :audit_logs, :version_id => audit_count(@funds_transfer_customer), :id => @funds_transfer_customer.id
+
           %tr
-            %td.label Form Errors
+            %td.label Neft Limit Check
             %td.value
-              = ' '
+              = @funds_transfer_customer.neft_limit_check
             %td#msg-error
-              = error_message_for(@funds_transfer_customer, :base, :prepend_text => "")
+              = error_message_for(@funds_transfer_customer, :neft_limit_check, :prepend_text => "")
+          %tr
+            %td.label Working Day Limit
+            %td.value
+              = @funds_transfer_customer.working_day_limit
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :working_day_limit, :prepend_text => "")
+          %tr
+            %td.label Non Working Day Limit
+            %td.value
+              = @funds_transfer_customer.non_working_day_limit
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :non_working_day_limit, :prepend_text => "")
           %tr
             %td.label Enabled
             %td.value
@@ -197,18 +210,6 @@
               = @funds_transfer_customer.bene_backend
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :bene_backend, :prepend_text => "")
-          %tr
-            %td.label Working Day Limit
-            %td.value
-              = @funds_transfer_customer.working_day_limit
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :working_day_limit, :prepend_text => "")
-          %tr
-            %td.label Non Working Day Limit
-            %td.value
-              = @funds_transfer_customer.non_working_day_limit
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :non_working_day_limit, :prepend_text => "")
           %tr
             %td.label Created By
             %td.value

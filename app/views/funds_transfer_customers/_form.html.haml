@@ -58,8 +58,8 @@
     .control-group
       = f.label :allowed_relns, "Allowed Relationships", :class => 'control-label', :id => "allowed_relns_lbl"
       = f.select :allowed_relns, options_for_select(FundsTransferCustomer::RELATIONS, f.object.allowed_relns), {}, {multiple: true}
-     #msg-error
-       = error_message_for(@funds_transfer_customer, :allowed_relns, :prepend_text => "")
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :allowed_relns, :prepend_text => "")
     .control-group
       = f.label :name, "*Name", :class => 'control-label'
       = f.text_field :name, :maxlength => 100, :style => "width: 400px;"
