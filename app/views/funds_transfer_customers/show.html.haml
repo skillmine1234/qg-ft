@@ -39,6 +39,13 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :enabled, :prepend_text => "")
           %tr
+            %td.label N10 Notification ?
+            %td.value
+              = @funds_transfer_customer.try(:n10_notification_enabled)
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :n10_notification_enabled, :prepend_text => "")
+                  
+          %tr
             %td.label App ID
             %td.value
               = @funds_transfer_customer.app_id
