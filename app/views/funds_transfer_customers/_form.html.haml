@@ -176,12 +176,16 @@
         = error_message_for(@funds_transfer_customer, :beneficiary_email_allowed, :prepend_text => "")  
 
     .control-group
-      = f.label :n10_notification_enabled, "N10 Notification ?", :class => 'control-label'
+      = f.label :n10_notification_enabled, "Credit Confirmation ?", :class => 'control-label'
       = f.check_box :n10_notification_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@funds_transfer_customer, :n10_notification_enabled, :prepend_text => "")     
-    
-    
+
+    .control-group
+      = f.label :rtgs_confirmation_enabled, "Rtgs Confirmation Enabled ?", :class => 'control-label'
+      = f.check_box :rtgs_confirmation_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :rtgs_confirmation_enabled, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record? and f.object.app_id.nil?) ? label_name = "Create" : label_name = "Update"

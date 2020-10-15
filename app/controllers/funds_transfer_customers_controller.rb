@@ -164,6 +164,6 @@ class FundsTransferCustomersController < ApplicationController
                                                     :reply_with_bene_name, :allow_all_accounts, :is_filetoapi_allowed, :allow_apbs, :apbs_user_no, 
                                                     :apbs_user_name, :notify_on_status_change, :notify_app_code, :notification_sent_at, :force_saf,
                                                     {allowed_relns: []},:use_std_relns, :bene_backend,:beneficiary_sms_allowed,:beneficiary_email_allowed,
-                                                    :is_bulk,:btid,:customer_code,:working_day_limit,:non_working_day_limit,:neft_limit_check,:n10_notification_enabled)
+                                                    :is_bulk,:btid,:customer_code,:working_day_limit,:non_working_day_limit,:neft_limit_check,:n10_notification_enabled,:rtgs_confirmation_enabled)
   end
 end
