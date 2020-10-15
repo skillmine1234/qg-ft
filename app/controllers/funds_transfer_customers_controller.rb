@@ -16,6 +16,7 @@ class FundsTransferCustomersController < ApplicationController
       render "new"
     else
       @funds_transfer_customer.created_by = current_user.id
+      @funds_transfer_customer.rtgs_confirmation_enabled = "Y" if @funds_transfer_customer.n10_notification_enabled == "Y"
       @funds_transfer_customer.save!
       flash[:alert] = "Customer successfully #{@funds_transfer_customer.approved_id.nil? ? 'created' : 'updated'} and is pending for approval"
       redirect_to @funds_transfer_customer
