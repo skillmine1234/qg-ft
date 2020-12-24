@@ -22,6 +22,10 @@ Rails.application.routes.draw do
       get :check_duplicate_account_no
       get :display_associated_customer_id
       get :replicate
+      get :validate_app_id_child_ft_customer
+      post :create_child_ft_customers
+      get :check_duplicate_customer_id
+      get :validate_app_id_customer_id_ft_customer
     end
   end
 

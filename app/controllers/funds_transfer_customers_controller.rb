@@ -112,7 +112,90 @@ class FundsTransferCustomersController < ApplicationController
       flash[:alert] = "Account Replicated successfully"
       redirect_to "/funds_transfer_customers"
     end
-  end 
+  end
+
+  def validate_app_id_child_ft_customer
+    if params[:child_app_id1].present?
+      @funds_transfer_customer = FundsTransferCustomer.where(app_id: params[:child_app_id1])
+    end
+  end
+
+  def check_duplicate_customer_id
+    @ft_customers = FundsTransferCustomer.where(app_id: params[:app_id4],customer_id: params[:ft_customer_id2])
+    if @ft_customers.present?
+      puts "FT Customer already associated with this Customer ID!"
+      # render json: {}, status: 400
+    else
+      puts "FT Customer not associated with this Customer ID!"
+      # render json: {}, status: 200
+    end
+  end
+
+  def validate_app_id_customer_id_ft_customer
+    @funds_transfer_customer = FundsTransferCustomer.where(app_id: params[:app_id],category: "Master")
+    if @funds_transfer_customer.present?
+      render json: {}, status: 400
+    else
+      render json: {}, status: 200
+    end
+  end
+
+  def create_child_ft_customers
+    if params[:fund_transfer].present?
+      ft_customer = FundsTransferCustomer.find_by(app_id: params[:ft_app_id],category: "Master")
+      customer_id_params = params[:fund_transfer][:customer_id].reject { |c| c.empty? }
+      if customer_id_params.present?
+        customer_id_params.each do |customer_id|
+          ft_customer_child = FundsTransferCustomer.find_by(app_id: ft_customer.app_id,customer_id: customer_id,category: [""])
+          if !ft_customer_child.present?
+            ft_cust = FundsTransferCustomer.new(app_id: ft_customer.app_id,
+                                                customer_id: customer_id,
+                                                name: ft_customer.name,
+                                                low_balance_alert_at:  ft_customer.low_balance_alert_at,
+                                                identity_user_id: ft_customer.identity_user_id,
+                                                allow_neft: ft_customer.allow_neft,
+                                                allow_imps: ft_customer.allow_imps,
+                                                allow_rtgs: ft_customer.allow_rtgs,
+                                                enabled: ft_customer.enabled,
+                                                is_retail: ft_customer.is_retail,
+                                                created_by: current_user.id,
+                                                needs_purpose_code: ft_customer.needs_purpose_code,
+                                                reply_with_bene_name: ft_customer.reply_with_bene_name,
+                                                allow_all_accounts: ft_customer.allow_all_accounts,
+                                                notify_app_code: ft_customer.notify_app_code,
+                                                notify_on_status_change: ft_customer.notify_on_status_change,
+                                                is_filetoapi_allowed: ft_customer.is_filetoapi_allowed,
+                                                allow_apbs: ft_customer.allow_apbs,
+                                                apbs_user_no: ft_customer.apbs_user_no,
+                                                apbs_user_name: ft_customer.apbs_user_name,
+                                                notification_sent_at: ft_customer.notification_sent_at,
+                                                force_saf: ft_customer.force_saf,
+                                                allowed_relns: ft_customer.allowed_relns,
+                                                bene_backend: ft_customer.bene_backend,
+                                                allow_upi: ft_customer.allow_upi,
+                                                beneficiary_sms_allowed: ft_customer.beneficiary_sms_allowed,
+                                                beneficiary_email_allowed: ft_customer.beneficiary_email_allowed,
+                                                is_special_client: ft_customer.is_special_client,
+                                                is_payment: ft_customer.is_payment,
+                                                is_bulk: ft_customer.is_bulk,
+                                                btid: ft_customer.btid,
+                                                customer_code: ft_customer.customer_code,
+                                                working_day_limit: ft_customer.working_day_limit,
+                                                non_working_day_limit: ft_customer.non_working_day_limit,
+                                                neft_limit_check: ft_customer.neft_limit_check,
+                                                n10_notification_enabled: ft_customer.n10_notification_enabled,
+                                                rtgs_confirmation_enabled: ft_customer.rtgs_confirmation_enabled,
+                                                category: "Child").save!
+          end
+        end
+        flash[:alert] = "Child Setup Created successfully"
+        redirect_to "/funds_transfer_customers"
+      else
+        flash[:alert] = "Child Setup can't be Created since Customer ID's are blank!"
+        redirect_to "/funds_transfer_customers"
+      end
+    end
+  end
 
   def audit_logs
     @funds_transfer_customer = FundsTransferCustomer.unscoped.find(params[:id]) rescue nil
@@ -165,6 +248,6 @@ class FundsTransferCustomersController < ApplicationController
                                                     :reply_with_bene_name, :allow_all_accounts, :is_filetoapi_allowed, :allow_apbs, :apbs_user_no, 
                                                     :apbs_user_name, :notify_on_status_change, :notify_app_code, :notification_sent_at, :force_saf,
                                                     {allowed_relns: []},:use_std_relns, :bene_backend,:beneficiary_sms_allowed,:beneficiary_email_allowed,
-                                                    :is_bulk,:btid,:customer_code,:working_day_limit,:non_working_day_limit,:neft_limit_check,:n10_notification_enabled,:rtgs_confirmation_enabled)
+                                                    :is_bulk,:btid,:customer_code,:working_day_limit,:non_working_day_limit,:neft_limit_check,:n10_notification_enabled,:rtgs_confirmation_enabled,:category)
   end
 end

@@ -58,6 +58,13 @@
               = @funds_transfer_customer.app_id
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :app_id, :prepend_text => "")
+
+          %tr
+            %td.label Category
+            %td.value
+              = @funds_transfer_customer.category
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :category, :prepend_text => "")
           %tr
             %td.label Customer ID
             %td.value

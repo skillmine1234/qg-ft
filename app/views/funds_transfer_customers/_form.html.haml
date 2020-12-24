@@ -33,7 +33,11 @@
       = f.text_field :app_id, :maxlength => 20
       #msg-error
         = error_message_for(@funds_transfer_customer, :app_id, :prepend_text => "")
-    
+    .control-group
+      = f.label :category, "Category", :class => 'control-label'
+      = f.select :category, ['Master'], {:include_blank => 'Select Category'}
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :category, :prepend_text => "")
     .control-group
       = f.label :is_retail, "Retail ?", :class => 'control-label'
       = f.check_box :is_retail, {},"Y","N"
@@ -189,6 +193,40 @@
 
 
   :javascript
+
+    $(document).ready(function(){
+      $.ajax({
+        type: 'GET',
+        url: "/funds_transfer_customers/validate_app_id_customer_id_ft_customer",
+        data: { app_id: $("#funds_transfer_customer_app_id").val(),customer_id: $("#funds_transfer_customer_customer_id").val()},
+        success: function(data){
+          $("#funds_transfer_customer_category").attr('readonly', false);
+          $("#funds_transfer_customer_category").css("pointer-events","auto");
+        },
+        error: function(error) {
+          $('#funds_transfer_customer_category').val('');
+          $("#funds_transfer_customer_category").attr('readonly', 'readonly');
+          $("#funds_transfer_customer_category").css("pointer-events","none");
+        }
+      });
+    });
+
+    $("#funds_transfer_customer_app_id,#funds_transfer_customer_customer_id").change(function(){
+      $.ajax({
+        type: 'GET',
+        url: "/funds_transfer_customers/validate_app_id_customer_id_ft_customer",
+        data: { app_id: $("#funds_transfer_customer_app_id").val(),customer_id: $("#funds_transfer_customer_customer_id").val()},
+        success: function(data){
+          $("#funds_transfer_customer_category").attr('readonly', false);
+          $("#funds_transfer_customer_category").css("pointer-events","auto");
+        },
+        error: function(error) {
+          $('#funds_transfer_customer_category').val('');
+          $("#funds_transfer_customer_category").attr('readonly', 'readonly');
+          $("#funds_transfer_customer_category").css("pointer-events","none");
+        }
+      });
+    });
 
     if ($("#funds_transfer_customer_neft_limit_check").is(':checked')){
         $("#funds_transfer_customer_working_day_limit").prop("disabled", false);

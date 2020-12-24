@@ -1,0 +1,10 @@
+<%if @funds_transfer_customer.present?%>
+	$("#app-id-not-exist1").css("display", "none");
+	$("#add_customer_id").css("display", "block");
+	$('#customer-id-listing-div').css("display", "block");
+	$('#customer-id-listing-div').html("<%= j render 'ft_customer_listing', ft_customers: @funds_transfer_customer %>");
+<%else%>
+	$("#app-id-not-exist1").css("display", "block");
+	$("#add_customer_id").css("display", "none");
+	$('#customer-id-listing-div').css("display", "none");
+<% end%>

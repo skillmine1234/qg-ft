@@ -11,6 +11,7 @@
 %br
 = "Total Count: #{@funds_transfer_customers.count}"
 = link_to "Replicate", "#my-modal", :class => "btn btn-primary", "data-toggle" => "modal",style: "float:right;"
+= link_to "Child Setup", "#child-setup", :class => "btn btn-primary", "data-toggle" => "modal",style: "float:right;position: relative;right: 15px;"
 %br
 = will_paginate @funds_transfer_customers, :page_links => true
 %br
@@ -25,6 +26,8 @@
       Customer ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Category
     %th{:style=>'text-align:left; background-color: lightblue;'}
       NEFT Allowed
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -66,6 +69,8 @@
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.name
         %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.category
+        %td{:style=>'text-align:left;'}
           = funds_transfer_customer.allow_neft
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.allow_imps
@@ -90,7 +95,7 @@
         %td{:style=>'text-align:left;'}
           =# link_to "Replicate", replicate_funds_transfer_customer_path(id: funds_transfer_customer.id), remote: true,:class => "btn btn-primary"
 
-#my-modal.modal.hide.fade{:title => "My modal"}
+#my-modal.modal.hide.fade
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3#myModalLabel Clone Fund Transfer Account
@@ -102,6 +107,27 @@
         = text_field_tag :app_id1
         #customer-id-div1
         #app-id-not-exist{:style=>'display:none;'}
+          %h5{:style => 'text-align:center;color:red;padding-left: 47px;'} App ID Not Present,please setup.
+          = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;"
+        #app-id-allow-account-not-exist{:style=>'display:none;'}
+          %h5{:style => 'text-align:center;color:red;padding-left: 47px;'}
+          = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;",id: "new-fund-transfer-customer"
+      .form-actions{:style=>'display:none;'}
+        = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "clone_ft_customer"
+    #replicate-form-div
+
+#child-setup.modal.hide.fade
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Clone Child Setup
+  .modal-body.a-unique-class
+    = form_tag '', :method => 'post', :class => 'form-horizontal', :autocomplete=>"off" do
+      = hidden_field_tag "child_app_id2"
+      .control-group
+        = label_tag "App ID", "App ID", :class => 'control-label'
+        = text_field_tag :child_app_id1
+        #customer-id-listing-div
+        #app-id-not-exist1{:style=>'display:none;'}
           %h5{:style => 'text-align:center;color:red;padding-left: 47px;'} App ID Not Present,please setup.
           = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;"
         #app-id-allow-account-not-exist{:style=>'display:none;'}
@@ -140,11 +166,13 @@
     });
   });
 
-  $('#add_customer_id').click(function () {
+  $("#child_app_id1").change(function(){
+    $("#child_app_id2").val($(this).val());
+    var cur_val = $(this).val();
     $.ajax({
       type: 'GET',
-      url: "/funds_transfer_customers/replicate",
-      data: { app_id2: $("#app_id2").val()},
+      url: "/funds_transfer_customers/validate_app_id_child_ft_customer",
+      data: { child_app_id1: $(this).val()},
       success: function(data){
       },
       error: function(error) {

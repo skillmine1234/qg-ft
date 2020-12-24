@@ -2,10 +2,10 @@
   = hidden_field_tag :approval_status, params[:approval_status]
   .control-group
     = label_tag "Customer Name", "Customer Name", :class => 'control-label'
-    = text_field_tag :name, params[:name]
+    = text_field_tag :name, params[:name],placeholder: 'Multisearch Search Enabled'
   .control-group
     = label_tag "App ID", "App ID", :class => 'control-label'
-    = text_field_tag :app_id, params[:app_id]
+    = text_field_tag :app_id, params[:app_id],placeholder: 'Multisearch Search Enabled'
   .form-actions
     = button_tag "Search", :class => 'btn btn-primary'
     = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'ft_customer_reset'
@@ -13,10 +13,6 @@
 
 
 :javascript
-  $(document).ready(function(){
-    $('input[type="text"]'). attr("placeholder", "Multisearch Search Enabled");
-  });
-
   $("#ft_customer_reset").click(function() {
     $(this).closest('form').find("input").val("");
   });
