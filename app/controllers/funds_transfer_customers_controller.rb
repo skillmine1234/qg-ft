@@ -142,7 +142,7 @@ class FundsTransferCustomersController < ApplicationController
 
   def create_child_ft_customers
     if params[:fund_transfer].present?
-      ft_customer = FundsTransferCustomer.find_by(app_id: params[:ft_app_id])
+      ft_customer = FundsTransferCustomer.find_by(app_id: params[:ft_app_id],category: ["Master",""])
       customer_id_params = params[:fund_transfer][:customer_id].reject { |c| c.empty? }
       if customer_id_params.present?
         customer_id_params.each do |customer_id|
