@@ -142,49 +142,53 @@ class FundsTransferCustomersController < ApplicationController
 
   def create_child_ft_customers
     if params[:fund_transfer].present?
-      ft_customer = FundsTransferCustomer.find_by(app_id: params[:ft_app_id],category: ["Master",""])
+      ft_cust1 = FundsTransferCustomer.find_by(app_id: params[:ft_app_id],category: ["Master",""])
+      puts "--------FT Customer Present?----->#{ft_cust1.present?}----------"
+      puts "--------App ID Value----->#{params[:ft_app_id]}----------"
       customer_id_params = params[:fund_transfer][:customer_id].reject { |c| c.empty? }
       if customer_id_params.present?
         customer_id_params.each do |customer_id|
-          ft_customer_child = FundsTransferCustomer.find_by(app_id: ft_customer.app_id,customer_id: customer_id,category: [""])
+          puts "--------Inside Each FT Customer Present?----->#{ft_cust1.present?}----------"
+          puts "--------Inside Each App ID Value----->#{ft_cust1.app_id}----------" if ft_cust1.present?
+          ft_customer_child = FundsTransferCustomer.find_by(app_id: ft_cust1.app_id,customer_id: customer_id)
           if !ft_customer_child.present?
-            ft_cust = FundsTransferCustomer.new(app_id: ft_customer.app_id,
+            ft_cust = FundsTransferCustomer.new(app_id: ft_cust1.app_id,
                                                 customer_id: customer_id,
-                                                name: ft_customer.name,
-                                                low_balance_alert_at:  ft_customer.low_balance_alert_at,
-                                                identity_user_id: ft_customer.identity_user_id,
-                                                allow_neft: ft_customer.allow_neft,
-                                                allow_imps: ft_customer.allow_imps,
-                                                allow_rtgs: ft_customer.allow_rtgs,
-                                                enabled: ft_customer.enabled,
-                                                is_retail: ft_customer.is_retail,
+                                                name: ft_cust1.name,
+                                                low_balance_alert_at:  ft_cust1.low_balance_alert_at,
+                                                identity_user_id: ft_cust1.identity_user_id,
+                                                allow_neft: ft_cust1.allow_neft,
+                                                allow_imps: ft_cust1.allow_imps,
+                                                allow_rtgs: ft_cust1.allow_rtgs,
+                                                enabled: ft_cust1.enabled,
+                                                is_retail: ft_cust1.is_retail,
                                                 created_by: current_user.id,
-                                                needs_purpose_code: ft_customer.needs_purpose_code,
-                                                reply_with_bene_name: ft_customer.reply_with_bene_name,
-                                                allow_all_accounts: ft_customer.allow_all_accounts,
-                                                notify_app_code: ft_customer.notify_app_code,
-                                                notify_on_status_change: ft_customer.notify_on_status_change,
-                                                is_filetoapi_allowed: ft_customer.is_filetoapi_allowed,
-                                                allow_apbs: ft_customer.allow_apbs,
-                                                apbs_user_no: ft_customer.apbs_user_no,
-                                                apbs_user_name: ft_customer.apbs_user_name,
-                                                notification_sent_at: ft_customer.notification_sent_at,
-                                                force_saf: ft_customer.force_saf,
-                                                allowed_relns: ft_customer.allowed_relns,
-                                                bene_backend: ft_customer.bene_backend,
-                                                allow_upi: ft_customer.allow_upi,
-                                                beneficiary_sms_allowed: ft_customer.beneficiary_sms_allowed,
-                                                beneficiary_email_allowed: ft_customer.beneficiary_email_allowed,
-                                                is_special_client: ft_customer.is_special_client,
-                                                is_payment: ft_customer.is_payment,
-                                                is_bulk: ft_customer.is_bulk,
-                                                btid: ft_customer.btid,
-                                                customer_code: ft_customer.customer_code,
-                                                working_day_limit: ft_customer.working_day_limit,
-                                                non_working_day_limit: ft_customer.non_working_day_limit,
-                                                neft_limit_check: ft_customer.neft_limit_check,
-                                                n10_notification_enabled: ft_customer.n10_notification_enabled,
-                                                rtgs_confirmation_enabled: ft_customer.rtgs_confirmation_enabled,
+                                                needs_purpose_code: ft_cust1.needs_purpose_code,
+                                                reply_with_bene_name: ft_cust1.reply_with_bene_name,
+                                                allow_all_accounts: ft_cust1.allow_all_accounts,
+                                                notify_app_code: ft_cust1.notify_app_code,
+                                                notify_on_status_change: ft_cust1.notify_on_status_change,
+                                                is_filetoapi_allowed: ft_cust1.is_filetoapi_allowed,
+                                                allow_apbs: ft_cust1.allow_apbs,
+                                                apbs_user_no: ft_cust1.apbs_user_no,
+                                                apbs_user_name: ft_cust1.apbs_user_name,
+                                                notification_sent_at: ft_cust1.notification_sent_at,
+                                                force_saf: ft_cust1.force_saf,
+                                                allowed_relns: ft_cust1.allowed_relns,
+                                                bene_backend: ft_cust1.bene_backend,
+                                                allow_upi: ft_cust1.allow_upi,
+                                                beneficiary_sms_allowed: ft_cust1.beneficiary_sms_allowed,
+                                                beneficiary_email_allowed: ft_cust1.beneficiary_email_allowed,
+                                                is_special_client: ft_cust1.is_special_client,
+                                                is_payment: ft_cust1.is_payment,
+                                                is_bulk: ft_cust1.is_bulk,
+                                                btid: ft_cust1.btid,
+                                                customer_code: ft_cust1.customer_code,
+                                                working_day_limit: ft_cust1.working_day_limit,
+                                                non_working_day_limit: ft_cust1.non_working_day_limit,
+                                                neft_limit_check: ft_cust1.neft_limit_check,
+                                                n10_notification_enabled: ft_cust1.n10_notification_enabled,
+                                                rtgs_confirmation_enabled: ft_cust1.rtgs_confirmation_enabled,
                                                 category: "Child").save!
           end
         end
