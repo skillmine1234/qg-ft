@@ -179,8 +179,6 @@ class FundsTransferCustomersController < ApplicationController
                                                 allow_upi: ft_cust1.allow_upi,
                                                 beneficiary_sms_allowed: ft_cust1.beneficiary_sms_allowed,
                                                 beneficiary_email_allowed: ft_cust1.beneficiary_email_allowed,
-                                                is_special_client: ft_cust1.is_special_client,
-                                                is_payment: ft_cust1.is_payment,
                                                 is_bulk: ft_cust1.is_bulk,
                                                 btid: ft_cust1.btid,
                                                 customer_code: ft_cust1.customer_code,
@@ -195,7 +193,7 @@ class FundsTransferCustomersController < ApplicationController
         flash[:alert] = "Child Setup Created successfully"
         redirect_to "/funds_transfer_customers"
       else
-        flash[:alert] = "Child Setup can't be Created since Customer ID's are blank!"
+        flash[:alert] = "Child Setup can't be Created since Customer ID's are blank or FT Customer not linked with Master!"
         redirect_to "/funds_transfer_customers"
       end
     end
