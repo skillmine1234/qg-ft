@@ -142,11 +142,11 @@ class FundsTransferCustomersController < ApplicationController
 
   def create_child_ft_customers
     if params[:fund_transfer].present?
-      ft_cust1 = FundsTransferCustomer.find_by(app_id: params[:ft_app_id],category: ["Master",""])
+      ft_cust1 = FundsTransferCustomer.find_by(app_id: params[:ft_app_id],category: ["Master",nil])
       puts "--------FT Customer Present?----->#{ft_cust1.present?}----------"
       puts "--------App ID Value----->#{params[:ft_app_id]}----------"
       customer_id_params = params[:fund_transfer][:customer_id].reject { |c| c.empty? }
-      if customer_id_params.present?
+      if customer_id_params.present? && ft_cust1.present?
         customer_id_params.each do |customer_id|
           puts "--------Inside Each FT Customer Present?----->#{ft_cust1.present?}----------"
           puts "--------Inside Each App ID Value----->#{ft_cust1.app_id}----------" if ft_cust1.present?
