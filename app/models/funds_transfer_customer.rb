@@ -134,6 +134,14 @@ class FundsTransferCustomer < ActiveRecord::Base
   end
   
   def value_of_backend_code
-    errors.add(:bene_backend, "should be NETB when customer is retail") if is_retail == 'Y' && bene_backend != 'NETB'
+    errors.add(:bene_backend, "should be NE customer is retail") if is_retail == 'Y' && bene_backend != 'NETB'
+  end
+
+  def self.return_master_color_code(category)
+    if category == "Master"
+      "#FFFCC9"
+    else
+      ""
+    end
   end
 end

@@ -14,7 +14,8 @@
       Category
   .tbody
     - ft_customers.each do |funds_transfer_customer|
-      %tr
+      - master_ft_customer = FundsTransferCustomer.return_master_color_code(funds_transfer_customer.category)
+      %tr{:style => "background-color: #{master_ft_customer}"}
         %td{:style=>'text-align:left;'}
           = link_to 'Show', funds_transfer_customer
         %td{:style=>'text-align:left;'}
@@ -32,17 +33,20 @@
           = funds_transfer_customer.name
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.category
-
-= form_tag(create_child_ft_customers_funds_transfer_customers_path, method: 'post',id: "fund-transfer-form") do
-  = hidden_field_tag "authenticity_token", form_authenticity_token
-  = hidden_field_tag "ft_app_id"
-  #new_div
-  = link_to 'Add Multiple Customer', "#",:id => "add_customer_id"
-  %br
-  #submit-div{:style => 'display:none;'}
-    = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "multiple-customer-submit",disabled: true
-  %br
-  %h3 Note:- Maximum Clone limit for Customer ID is 20
+- if @funds_transfer_customer1.present?
+  = form_tag(create_child_ft_customers_funds_transfer_customers_path, method: 'post',id: "fund-transfer-form") do
+    = hidden_field_tag "authenticity_token", form_authenticity_token
+    = hidden_field_tag "ft_app_id"
+    #new_div
+    = link_to 'Add Multiple Customer', "#",:id => "add_customer_id"
+    %br
+    #submit-div{:style => 'display:none;'}
+      = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "multiple-customer-submit",disabled: true
+    %br
+    %h3 Note:- Maximum Clone limit for Customer ID is 20
+- else
+  %center
+    %h5{:style => "color:red;"} FT Customer with App ID:-#{params[:child_app_id1]} not linked with Master!
 
 
 :javascript

@@ -91,9 +91,7 @@
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.beneficiary_sms_allowed   
         %td{:style=>'text-align:left;'}
-          = funds_transfer_customer.beneficiary_email_allowed    
-        %td{:style=>'text-align:left;'}
-          =# link_to "Replicate", replicate_funds_transfer_customer_path(id: funds_transfer_customer.id), remote: true,:class => "btn btn-primary"
+          = funds_transfer_customer.beneficiary_email_allowed
 
 #my-modal.modal.hide.fade
   .modal-header
@@ -114,7 +112,6 @@
           = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;",id: "new-fund-transfer-customer"
       .form-actions{:style=>'display:none;'}
         = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "clone_ft_customer"
-    #replicate-form-div
 
 #child-setup.modal.hide.fade
   .modal-header
@@ -135,8 +132,6 @@
           = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;",id: "new-fund-transfer-customer"
       .form-actions{:style=>'display:none;'}
         = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "clone_ft_customer"
-    #replicate-form-div
-
 
 
 :javascript

@@ -117,6 +117,7 @@ class FundsTransferCustomersController < ApplicationController
   def validate_app_id_child_ft_customer
     if params[:child_app_id1].present?
       @funds_transfer_customer = FundsTransferCustomer.where(app_id: params[:child_app_id1])
+      @funds_transfer_customer1 = FundsTransferCustomer.where(app_id: params[:child_app_id1],category: "Master")
     end
   end
 
@@ -142,7 +143,7 @@ class FundsTransferCustomersController < ApplicationController
 
   def create_child_ft_customers
     if params[:fund_transfer].present?
-      ft_cust1 = FundsTransferCustomer.find_by(app_id: params[:ft_app_id],category: ["Master",nil])
+      ft_cust1 = FundsTransferCustomer.find_by(app_id: params[:ft_app_id],category: ["Master"])
       puts "--------FT Customer Present?----->#{ft_cust1.present?}----------"
       puts "--------App ID Value----->#{params[:ft_app_id]}----------"
       customer_id_params = params[:fund_transfer][:customer_id].reject { |c| c.empty? }
@@ -151,7 +152,7 @@ class FundsTransferCustomersController < ApplicationController
           puts "--------Inside Each FT Customer Present?----->#{ft_cust1.present?}----------"
           puts "--------Inside Each App ID Value----->#{ft_cust1.app_id}----------" if ft_cust1.present?
           ft_customer_child = FundsTransferCustomer.find_by(app_id: ft_cust1.app_id,customer_id: customer_id)
-          if !ft_customer_child.present?
+          if !ft_customer_child.present? && ft_cust1.present?
             ft_cust = FundsTransferCustomer.new(app_id: ft_cust1.app_id,
                                                 customer_id: customer_id,
                                                 name: ft_cust1.name,
@@ -193,7 +194,10 @@ class FundsTransferCustomersController < ApplicationController
         flash[:alert] = "Child Setup Created successfully"
         redirect_to "/funds_transfer_customers"
       else
-        flash[:alert] = "Child Setup can't be Created since Customer ID's are blank or FT Customer not linked with Master!"
+        message = "Child Setup can't be Created since Customer ID's are blank!" if customer_id_params.blank? && ft_cust1.present?
+        message = "Child Setup can't be Created since FT Customer not linked with Master!" if customer_id_params.present? && ft_cust1.blank?
+        message = "Child Setup can't be Created since Customer ID's are blank or FT Customer not linked with Master!" if customer_id_params.blank? && ft_cust1.blank?
+        flash[:alert] = "#{message}"
         redirect_to "/funds_transfer_customers"
       end
     end
@@ -235,10 +239,6 @@ class FundsTransferCustomersController < ApplicationController
     @funds_transfer_customer = FundsTransferCustomer.find(params[:id]) rescue nil
     flash[:alert] = @funds_transfer_customer.resend_setup
     redirect_to @funds_transfer_customer
-  end
-
-  def replicate
-    @fund_transfer_customer = FundsTransferCustomer.find_by(app_id: params[:app_id2])
   end
 
   private
