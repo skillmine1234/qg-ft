@@ -52,7 +52,8 @@
       Beneficiary EMAIL Allowed   
   .tbody
     - @funds_transfer_customers.each do |funds_transfer_customer|
-      %tr
+      - master_ft_customer = FundsTransferCustomer.return_master_color_code(funds_transfer_customer.category)
+      %tr{:style => "background-color: #{master_ft_customer}"}
         %td{:style=>'text-align:left;'}
           = link_to 'Show', funds_transfer_customer
         %td{:style=>'text-align:left;'}
