@@ -13,7 +13,12 @@
             %td.label Version
             %td.value
               = link_to "#{audit_count(@funds_transfer_customer)}", :controller => :funds_transfer_customers, :action => :audit_logs, :version_id => audit_count(@funds_transfer_customer), :id => @funds_transfer_customer.id
-
+          %tr
+            %td.label Intelligent Routing?
+            %td.value
+              = @funds_transfer_customer.intelligent_routing_check
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :intelligent_routing_check, :prepend_text => "")    
           %tr
             %td.label Neft Limit Check
             %td.value
