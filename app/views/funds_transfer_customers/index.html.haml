@@ -12,6 +12,7 @@
 = "Total Count: #{@funds_transfer_customers.count}"
 = link_to "Replicate", "#my-modal", :class => "btn btn-primary", "data-toggle" => "modal",style: "float:right;"
 = link_to "Child Setup", "#child-setup", :class => "btn btn-primary", "data-toggle" => "modal",style: "float:right;position: relative;right: 15px;"
+= link_to 'DeActivate Customer', deactivate_user_funds_transfer_customers_path, :class => "btn btn-primary",style: "float:right;position: relative;right: 20px;"
 %br
 = will_paginate @funds_transfer_customers, :page_links => true
 %br
@@ -113,6 +114,8 @@
           = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;",id: "new-fund-transfer-customer"
       .form-actions{:style=>'display:none;'}
         = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "clone_ft_customer"
+        
+= render 'customer_deactivation'        
 
 #child-setup.modal.hide.fade
   .modal-header

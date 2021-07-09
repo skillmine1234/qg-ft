@@ -1,0 +1,27 @@
+<br>
+    <table class="table table-bordered table-striped table-hover">
+      <div class="thead">
+        <th style="text-align:left; background-color: lightblue;">
+        <th style="text-align:left; background-color: lightblue;">
+          APP ID
+        </th>
+        <th style="text-align:left; background-color: lightblue;">
+          Customer ID
+        </th>
+      </div>
+      <div class="tbody">
+        <% @ft_disable_list.each do |ft_disable| %>
+          <tr>
+            <td style="text-align: left;">
+             <%= link_to 'Show',ft_disable%>
+            <td style="text-align:left;">
+              <%= ft_disable.app_id %>
+            </td>
+            <td style="text-align:left;">
+              <%= ft_disable.customer_id %>
+            </td>
+          </tr>
+        <% end %>
+      </div>
+    </table>
+</br> 

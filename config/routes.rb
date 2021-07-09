@@ -25,8 +25,13 @@ Rails.application.routes.draw do
       post :create_child_ft_customers
       get :check_duplicate_customer_id
       get :validate_app_id_customer_id_ft_customer
+      match :deactivate_user, via: [:get, :post]
+      post :deactivation_customer_final_list
     end
   end
+
+  resources :ft_customer_disable_lists
+  put '/ft_customer_disable_lists/:id/approve' => "ft_customer_disable_lists#approve"
 
   resources :ft_customer_accounts, :ft_purpose_codes, :ft_incoming_records do
     collection do

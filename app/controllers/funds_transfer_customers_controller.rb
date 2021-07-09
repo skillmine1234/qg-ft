@@ -245,6 +245,20 @@ class FundsTransferCustomersController < ApplicationController
     redirect_to @funds_transfer_customer
   end
 
+  def deactivate_user
+    @funds_transfer_customer = FundsTransferCustomer.where("app_id IN (?) OR customer_id IN (?)",params[:app_id],params[:customer_id])
+  end
+
+  def deactivation_customer_final_list
+    ft_dis_list = FtCustomerDisableList.new(app_id: params[:app_ids],
+                                            customer_id: params[:customer_ids],
+                                            created_by: params[:current_user])
+    ft_dis_list.save
+
+    flash[:alert] = "Request sent for approval"
+    redirect_to '/funds_transfer_customers'
+  end
+
   private
 
   def funds_transfer_customer_params

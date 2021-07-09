@@ -1,0 +1,15 @@
+#deactive_customer
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Customer Deactivate
+  .modal-body.a-unique-class
+    = form_tag '', :method => 'post', :class => 'form-horizontal', :autocomplete=>"off" ,:remote => true do
+      .control-group
+        = label_tag "App ID", "App ID", :class => 'control-label'
+        = text_field_tag :app_id
+      .control-group
+        = label_tag "Custom ID", "Customer ID", :class => 'control-label'
+        = text_field_tag :customer_id  
+      .control_group
+        = submit_tag "search Data", :name => nil, :class => 'btn btn-primary', :id => "clone_ft_customer",data: { disable_with: "Please wait.." }
+#ft_customer_list
