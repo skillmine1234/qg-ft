@@ -55,8 +55,6 @@ class FundsTransferDecorator < ApplicationDecorator
   end
   
   def ft_invoice_detail
-    if object.ft_invoice_detail.present?
-      h.link_to object.ft_invoice_detail_id, h.ft_invoice_detail_path(object.ft_invoice_detail)
-    end
+    "test"
   end
 end
