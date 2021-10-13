@@ -50,7 +50,7 @@ class FundsTransferCustomer < ActiveRecord::Base
   validate :value_of_backend_code
 
   validates_presence_of :non_working_day_limit, if: "neft_limit_check == 'Y'"
-   validates_presence_of :action_limit_breach, if: "neft_limit_check == 'Y'"
+  #validates_presence_of :action_limit_breach, if: "neft_limit_check == 'Y'"
 
   validates_presence_of :working_day_limit, if: "neft_limit_check == 'Y'"
   validates :working_day_limit, :numericality => { :greater_than => 0}, if:"neft_limit_check == 'Y'"
