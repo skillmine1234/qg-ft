@@ -18,6 +18,11 @@
       #msg-error
         = error_message_for(@funds_transfer_customer, :neft_limit_check, :prepend_text => "")
     .control-group
+      = f.label :action_limit_breach, "Action On Limit Breach", :class => 'control-label'
+      = f.select :action_limit_breach, [['Process','P'],['Reject','R']], {:include_blank => 'Select Action'}
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :action_limit_breach, :prepend_text => "")       
+    .control-group
       = f.label :working_day_limit, "Working Day Limit", :class => 'control-label'
       = f.text_field :working_day_limit, :maxlength => 20, :class => 'numbers'
       #msg-error
@@ -235,13 +240,17 @@
     if ($("#funds_transfer_customer_neft_limit_check").is(':checked')){
         $("#funds_transfer_customer_working_day_limit").prop("disabled", false);
         $("#funds_transfer_customer_non_working_day_limit").prop("disabled", false);
+        $("#funds_transfer_customer_action_limit_breach").prop("disabled", false);
 
       } 
     else{
         $("#funds_transfer_customer_working_day_limit").attr("value", "");
         $("#funds_transfer_customer_non_working_day_limit").attr("value", "");
+         $("#funds_transfer_customer_action_limit_breach").prop("value", "");
+
         $("#funds_transfer_customer_working_day_limit").prop("disabled", true);
         $("#funds_transfer_customer_non_working_day_limit").prop("disabled", true);
+        $("#funds_transfer_customer_action_limit_breach").prop("disabled", true);
 
       }
 
@@ -249,13 +258,17 @@
       if ($("#funds_transfer_customer_neft_limit_check").is(':checked')){
         $("#funds_transfer_customer_working_day_limit").prop("disabled", false);
         $("#funds_transfer_customer_non_working_day_limit").prop("disabled", false);
+        $("#funds_transfer_customer_action_limit_breach").prop("disabled", false);
 
       } 
       else{
         $("#funds_transfer_customer_working_day_limit").val('');
         $("#funds_transfer_customer_non_working_day_limit").val('');
+         $("#funds_transfer_customer_action_limit_breach").val('');
+
         $("#funds_transfer_customer_working_day_limit").prop("disabled", true);
         $("#funds_transfer_customer_non_working_day_limit").prop("disabled", true);
+         $("#funds_transfer_customer_action_limit_breach").prop("disabled", true);
       }
     });
 
