@@ -26,6 +26,12 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :neft_limit_check, :prepend_text => "")
           %tr
+            %td.label Action on Limit Breach
+            %td.value
+              = @funds_transfer_customer.action_limit_breach
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :action_limit_breach, :prepend_text => "")    
+          %tr
             %td.label Working Day Limit
             %td.value
               = @funds_transfer_customer.working_day_limit
