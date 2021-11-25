@@ -193,6 +193,11 @@
       = f.check_box :n10_notification_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@funds_transfer_customer, :n10_notification_enabled, :prepend_text => "")
+    .control-group
+      = f.label :notify_downtime, "Notify DownTime?", :class => 'control-label'
+      = f.check_box :notify_downtime, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :notify_downtime, :prepend_text => "")    
 
   .form-actions
     - (f.object.new_record? and f.object.app_id.nil?) ? label_name = "Create" : label_name = "Update"
