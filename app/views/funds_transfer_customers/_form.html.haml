@@ -175,7 +175,11 @@
       = f.text_field :customer_code, :maxlength => 20
       #msg-error
         = error_message_for(@funds_transfer_customer, :customer_code, :prepend_text => "")
-
+    .control-group
+      = f.label :bulk_backend, "Bulk Backend", :class => 'control-label'
+      = f.select :bulk_backend, [['IGTB','IGTB'],['CNB','CNB']], {:include_blank => 'Select Bulk Backend'}
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :bulk_backend, :prepend_text => "")    
     .control-group
       = f.label :beneficiary_sms_allowed, "Beneficiary SMS Allowed ?", :class => 'control-label'
       = f.check_box :beneficiary_sms_allowed, {},"Y","N"

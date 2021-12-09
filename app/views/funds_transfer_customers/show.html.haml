@@ -215,6 +215,12 @@
               = @funds_transfer_customer.customer_code
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :customer_code, :prepend_text => "")
+          %tr
+            %td.label Bulk Backend
+            %td.value
+              = @funds_transfer_customer.bulk_backend
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :bulk_backend, :prepend_text => "")    
 
           %tr
             %td.label Beneficiary SMS Allowed ?
