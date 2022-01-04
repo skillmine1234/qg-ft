@@ -6,6 +6,9 @@
   .control-group
     = label_tag "App ID", "App ID", :class => 'control-label'
     = text_field_tag :app_id, params[:app_id],placeholder: 'Multisearch Search Enabled'
+  .control-group
+    = label_tag "Customer ID", "Customer ID", :class => 'control-label'
+    = text_field_tag :customer_id, params[:customer_id],placeholder: 'Multisearch Search Enabled'  
   .form-actions
     = button_tag "Search", :class => 'btn btn-primary'
     = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'ft_customer_reset'
