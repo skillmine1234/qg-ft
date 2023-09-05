@@ -1,0 +1,50 @@
+= simple_form_for @ft_purge_saf_transfer, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "iam_cust_user_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@ft_purge_saf_transfer, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :reference_no, "*Reference Number", :class => 'control-label'
+      = f.text_field :reference_no, value: @ft_purge_saf_transfer.get_reference_no, readOnly: true
+      #msg-error
+        = error_message_for(@ft_purge_saf_transfer, :reference_no, :prepend_text => "")
+    .control-group
+      = f.label :from_req_timestamp, "*From Request Timestamp", :class => 'control-label'
+      = f.text_field :from_req_timestamp
+      #msg-error
+        = error_message_for(@ft_purge_saf_transfer, :from_req_timestamp, :prepend_text => "")
+    .control-group
+      = f.label :to_req_timestamp, "*To Request Timestamp", :class => 'control-label'
+      = f.text_field :to_req_timestamp
+      #msg-error
+        = error_message_for(@ft_purge_saf_transfer, :to_req_timestamp, :prepend_text => "")
+    .control-group
+      = f.label :customer_id, "Customer ID", :class => 'control-label'
+      = f.text_field :customer_id, maxlength: 15
+      #msg-error
+        = error_message_for(@ft_purge_saf_transfer, :customer_id, :prepend_text => "")
+    .control-group
+      = f.label :op_name, "Operation Name", :class => 'control-label'
+      = f.select :op_name, options_for_select(FtPurgeSafTransfer.options_for_op_name, @ft_purge_saf_transfer.op_name),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ft_purge_saf_transfer, :op_name, :prepend_text => "")
+    .control-group
+      = f.label :req_transfer_type, "Request Transfer Type", :class => 'control-label'
+      = f.select :req_transfer_type, options_for_select(FtPurgeSafTransfer.options_for_transfer_type, @ft_purge_saf_transfer.req_transfer_type),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ft_purge_saf_transfer, :req_transfer_type, :prepend_text => "")
+    .control-group
+      = f.label :status_code, "Status", :class => 'control-label'
+      = f.select :status_code, options_for_select(FtPurgeSafTransfer::STATUS_CODES, @ft_purge_saf_transfer.status_code),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ft_purge_saf_transfer, :status_code, :prepend_text => "")
+
+
+  .form-actions
+    - (f.object.new_record? and f.object.reference_no.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_code', :value => label_name + ' Purge SAF Transfer'
+    = link_to :Cancel,'/ft_purge_saf_transfers', :name => 'cancel', :class=>"cancel btn"

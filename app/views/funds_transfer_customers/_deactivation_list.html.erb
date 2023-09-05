@@ -1,0 +1,36 @@
+<br>
+  <%= form_tag deactivation_customer_final_list_funds_transfer_customers_path, :method => 'post', :class => 'form-horizontal', :autocomplete=>"off" do %>
+    <table class="table table-bordered table-striped table-hover">
+      <div class="thead">
+        <th style="text-align:left; background-color: lightblue;">
+          APP ID
+        </th>
+        <th style="text-align:left; background-color: lightblue;">
+          Customer ID
+        </th>
+        <th style="text-align:left; background-color: lightblue;">
+          Name
+        </th>
+      </div>
+      <div class="tbody">
+        <% ft_customer.each do |funds_transfer_customer| %>
+          <tr>
+            <td style="text-align:left;">
+              <%= funds_transfer_customer.app_id %>
+              <%= hidden_field_tag('app_ids[]',funds_transfer_customer.app_id)%>
+            </td>
+            <td style="text-align:left;">
+              <%= funds_transfer_customer.customer_id %>
+              <%= hidden_field_tag('customer_ids[]',funds_transfer_customer.customer_id)%>
+              <%= hidden_field_tag :current_user, current_user.id%>
+            </td>
+            <td style="text-align:left;">
+              <%= funds_transfer_customer.name %>
+            </td>
+          </tr>
+        <% end %>
+      </div>
+    </table>
+    <%= submit_tag "Disabled All", :name => nil, :class => 'btn btn-primary', :id => "clone_ft_customer",data: { disable_with: "Please wait.." }%>
+  <% end %>
+</br> 

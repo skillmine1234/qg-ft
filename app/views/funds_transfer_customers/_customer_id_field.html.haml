@@ -1,0 +1,113 @@
+%br
+%table.table.no-border
+  %tr
+    .control-group
+      = label_tag "Customer ID", "Customer ID", :class => 'control-label'
+      = select_tag(:customer_id4, options_for_select(ft_customer.present? ? ft_customer.pluck(:customer_id) : '', params[:customer_id] ),:prompt=>"Please Select Customer ID",class:"select")
+    %td.label
+      = form_tag(create_clone_accounts_funds_transfer_customers_path, method: 'post',id: "fund-transfer-form") do
+        = hidden_field_tag "authenticity_token", form_authenticity_token
+        = hidden_field_tag "ft_customer_id"
+        #new_div
+        = link_to 'Add Multiple Account', "#",:id => "add_account_no",style: "display:none;"
+        %br
+        #submit-div{:style => 'display:none;'}
+          = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "multiple-account-submit",disabled: true
+
+
+:javascript
+
+  var a = "<h5 id='blank-element' style='color:red;display:none;'>You can't submit form since you haven't filled Account No</h5><h5 id='already-exist-tag' style='color:red;display:none;'>Account No already exist,so you can't add Multiple Account</h5><div class='control-group'> <label class='control-label' for='account_no'>*Account No</label><a href='#' class='remove-btn' style='position:relative;left:50%;'><i class='fa fa-times ' aria-hidden='true' style='color:red;'></i></a><input type='number' name='fund_transfer[account_no][]' id='fund_transfer_account_no' class='abcd' style='position:relative;left:-16px;'></div>";
+
+  $('#add_account_no').click(function () {
+    $(this).prev().append(a);
+    $("#submit-div").show();
+    $("#multiple-account-submit").attr("disabled", true);
+  });
+
+  $(document).on('change', '.abcd', function() {
+    var arr = new Array();
+    $(".abcd").each(function(){
+      arr.push($(this).val());
+    });
+
+    for(var i=0; i<arr.length;i++){
+      for(var j=i+1;j<arr.length;j++){
+        if(arr[i]==arr[j]){
+          alert("Some Account No's are duplicate please correct it.");
+          $("#multiple-account-submit").attr("disabled", true);
+          return;
+        }
+      }
+    }
+
+    Number.prototype.between  = function (a, b) {
+      var min = Math.min(a,b),
+          max = Math.max(a,b);
+      return this > min && this < max;
+    };
+
+    var empty = false;
+    $('.abcd').each(function() {
+        if ($(this).val().length == 0) {
+          empty = true;
+        }
+        else if(!$(this).val().length.between(4, 16)) {
+          empty = 'maximum-value';
+        }
+    });
+
+    if (empty == true) {
+      $("#multiple-account-submit").attr("disabled", true);
+    }
+    else if(empty == 'maximum-value'){
+      alert("Account No length is not Valid - length should be minimum 5 and maximum 15");
+      $("#multiple-account-submit").attr("disabled", true);
+    }
+    else {
+      $("#multiple-account-submit").attr("disabled", false);
+    }
+
+    $.ajax({
+      type: 'GET',
+      url: "/funds_transfer_customers/check_duplicate_account_no",
+      data: { account_no1: $(this).val(),ft_customer_id2: $("#ft_customer_id").val(),app_id4: $("#app_id2").val()},
+      success: function(data){
+      },
+      error: function(error) {
+      }
+    });
+  });
+
+  $(document).ready(function(){
+    $("#ft_customer_id").val($("#customer_id4").find('option:selected').text());
+  });
+
+  $("#customer_id4").change(function() {
+    $("#ft_customer_id").val($(this).find('option:selected').text());
+    if($(this).val() == ''){
+      $("#add_account_no").hide();
+      $("#multiple-account-submit").hide();
+    }
+    else
+    {
+      $("#add_account_no").show();
+      $("#multiple-account-submit").show();
+    }
+  });
+
+  $(document).on('click', '.remove-btn', function() {
+    $(this).parent().remove();
+    var_input_element_count = document.querySelectorAll('#new_div .abcd').length;
+    if(var_input_element_count == 0){
+      $("#submit-div").hide();
+      $("#already-exist-tag").hide();
+    }
+
+    var non_empyty_count = $('.abcd').filter(function(){
+    return !$(this).val();
+    }).length;
+    if(non_empyty_count == 0){
+      $("#multiple-account-submit").attr("disabled", false);
+    }
+  });

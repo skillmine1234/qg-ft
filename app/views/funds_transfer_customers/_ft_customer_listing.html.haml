@@ -1,0 +1,138 @@
+%br
+%table.table
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      APP ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Category
+  .tbody
+    - ft_customers.each do |funds_transfer_customer|
+      - master_ft_customer = FundsTransferCustomer.return_master_color_code(funds_transfer_customer.category)
+      %tr{:style => "background-color: #{master_ft_customer}"}
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', funds_transfer_customer
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_funds_transfer_customer_path(funds_transfer_customer)
+        %td{:style=>'text-align:left;'}
+          - if funds_transfer_customer.approval_status == 'U'
+            = link_to 'Cancel', funds_transfer_customer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - else
+            = ""
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.app_id
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.customer_id
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.name
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.category
+- if @funds_transfer_customer1.present?
+  = form_tag(create_child_ft_customers_funds_transfer_customers_path, method: 'post',id: "fund-transfer-form") do
+    = hidden_field_tag "authenticity_token", form_authenticity_token
+    = hidden_field_tag "ft_app_id"
+    #new_div
+    = link_to 'Add Multiple Customer', "#",:id => "add_customer_id"
+    %br
+    #submit-div{:style => 'display:none;'}
+      = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "multiple-customer-submit",disabled: true
+    %br
+    %h3 Note:- Maximum Clone limit for Customer ID is 20
+- else
+  %center
+    %h5{:style => "color:red;"} Child Setup can't be Created since App ID:- #{params[:child_app_id1]} not linked with Master!
+
+
+:javascript
+
+  var a = "<div class='control-group'> <label class='control-label' for='customer_id'>*Customer ID</label><a href='#' class='remove-btn' style='position:relative;left:50%;'><i class='fa fa-times ' aria-hidden='true' style='color:red;'></i></a><input type='number' name='fund_transfer[customer_id][]' id='fund_transfer_customer_id' class='customer_id_field' oninput='javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);' maxlength='10' style='position:relative;left:-16px;'></div>";
+
+  $('#add_customer_id').click(function () {
+    $(this).prev().append(a);
+    $("#submit-div").show();
+    $("#multiple-customer-submit").attr("disabled", true);
+
+    var customer_id_field_length = $('.customer_id_field').length;
+
+    if (customer_id_field_length > 19 ) {
+      alert("Maximum Clone limit for Customer ID is 20!");
+      $("#add_customer_id").hide();
+    }
+    else {
+      $("#add_customer_id").show();
+    }
+  });
+
+  $(document).on('change', '.customer_id_field', function() {
+    var arr = new Array();
+    $(".customer_id_field").each(function(){
+      arr.push($(this).val());
+    });
+
+    for(var i=0; i<arr.length;i++){
+      for(var j=i+1;j<arr.length;j++){
+        if(arr[i]==arr[j]){
+          alert("Some Customer ID's are duplicate please correct it.");
+          $("#multiple-customer-submit").attr("disabled", true);
+          return;
+        }
+      }
+    }
+
+
+    $.ajax({
+      type: 'GET',
+      url: "/funds_transfer_customers/check_duplicate_customer_id",
+      data: { ft_customer_id2: $(this).val(),app_id4: $("#child_app_id2").val()},
+      success: function(data){
+      },
+      error: function(error) {
+      }
+    });
+  });
+
+  $(document).ready(function(){
+    $("#ft_app_id").val($("#child_app_id1").val()); 
+  });
+
+  $(document).on('click', '.remove-btn', function() {
+    $(this).parent().remove();
+    var_input_element_count = document.querySelectorAll('#new_div .customer_id_field').length;
+    if(var_input_element_count == 0){
+      $("#submit-div").hide();
+    }
+
+    var non_empyty_count = $('.customer_id_field').filter(function(){
+    return !$(this).val();
+    }).length;
+    if(non_empyty_count == 0){
+      $("#multiple-customer-submit").attr("disabled", false);
+    }
+
+    $.ajax({
+      type: 'GET',
+      url: "/funds_transfer_customers/check_duplicate_customer_id",
+      data: { ft_customer_id2: $(this).val(),app_id4: $("#child_app_id2").val()},
+      success: function(data){
+      },
+      error: function(error) {
+      }
+    });
+
+    var customer_id_field_length = $('.customer_id_field').length;
+
+    if (customer_id_field_length > 19 ) {
+      alert("Maximum Clone limit for Customer ID is 20!");
+      $("#add_customer_id").hide();
+    }
+    else if(customer_id_field_length > 1){
+      $("#add_customer_id").show();
+    }
+
+  });

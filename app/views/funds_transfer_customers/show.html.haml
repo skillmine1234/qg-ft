@@ -1,0 +1,279 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 100%; padding-bottom: 2%;'}
+    #form-details
+      %h3 Funds Transfer Customer Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @funds_transfer_customer
+        %a.btn{:href => "#{!(can) ? '#' : '/funds_transfer_customers/' + @funds_transfer_customer.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'unapproved_records/approve_and_resend', :@record => @funds_transfer_customer
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@funds_transfer_customer.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@funds_transfer_customer)}", :controller => :funds_transfer_customers, :action => :audit_logs, :version_id => audit_count(@funds_transfer_customer), :id => @funds_transfer_customer.id
+          %tr
+            %td.label Intelligent Routing?
+            %td.value
+              = @funds_transfer_customer.intelligent_routing_check
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :intelligent_routing_check, :prepend_text => "")    
+          %tr
+            %td.label Neft Limit Check
+            %td.value
+              = @funds_transfer_customer.neft_limit_check
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :neft_limit_check, :prepend_text => "")
+          %tr
+            %td.label Action on Limit Breach
+            %td.value
+              = @funds_transfer_customer.action_limit_breach
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :action_limit_breach, :prepend_text => "")    
+          %tr
+            %td.label Working Day Limit
+            %td.value
+              = @funds_transfer_customer.working_day_limit
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :working_day_limit, :prepend_text => "")
+          %tr
+            %td.label Non Working Day Limit
+            %td.value
+              = @funds_transfer_customer.non_working_day_limit
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :non_working_day_limit, :prepend_text => "")
+          %tr
+            %td.label Enabled
+            %td.value
+              = @funds_transfer_customer.enabled
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :enabled, :prepend_text => "")
+          %tr
+            %td.label Credit Confirmation ?
+            %td.value
+              = @funds_transfer_customer.try(:n10_notification_enabled)
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :n10_notification_enabled, :prepend_text => "")
+
+          %tr
+            %td.label Rtgs Confirmation Enabled ?
+            %td.value
+              = @funds_transfer_customer.try(:rtgs_confirmation_enabled)
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :rtgs_confirmation_enabled, :prepend_text => "")
+                  
+          %tr
+            %td.label App ID
+            %td.value
+              = @funds_transfer_customer.app_id
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :app_id, :prepend_text => "")
+
+          %tr
+            %td.label Category
+            %td.value
+              = @funds_transfer_customer.category
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :category, :prepend_text => "")
+          %tr
+            %td.label Customer ID
+            %td.value
+              = @funds_transfer_customer.customer_id
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
+          %tr
+            %td.label Use Standard Relationship ?
+            %td.value
+              = @funds_transfer_customer.use_std_relns_value
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :use_std_relns, :prepend_text => "")
+          %tr
+            %td.label Allowed Relationships
+            %td.value
+              = get_allowed_relns(@funds_transfer_customer)
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :allowed_relns, :prepend_text => "")
+          %tr
+            %td.label Name
+            %td.value
+              = @funds_transfer_customer.name
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :name, :prepend_text => "")
+          %tr
+            %td.label Reply With Beneficicary Name ?
+            %td.value
+              = @funds_transfer_customer.reply_with_bene_name
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :reply_with_bene_name, :prepend_text => "")
+          %tr
+            %td.label Low Balance Alert At
+            %td.value
+              = @funds_transfer_customer.low_balance_alert_at
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :low_balance_alert_at, :prepend_text => "")
+          %tr
+            %td.label Identity User ID
+            %td.value
+              = @funds_transfer_customer.identity_user_id
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :identity_user_id, :prepend_text => "")
+          %tr
+            %td.label Retail
+            %td.value
+              = @funds_transfer_customer.is_retail
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :is_retail, :prepend_text => "")
+          %tr
+            %td.label NEFT Allowed
+            %td.value
+              = @funds_transfer_customer.allow_neft
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :allow_neft, :prepend_text => "")
+          %tr
+            %td.label IMPS Allowed
+            %td.value
+              = @funds_transfer_customer.allow_imps
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :allow_imps, :prepend_text => "")
+          %tr
+            %td.label RTGS Allowed
+            %td.value
+              = @funds_transfer_customer.allow_rtgs
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :allow_rtgs, :prepend_text => "")
+          %tr
+            %td.label APBS Allowed
+            %td.value
+              = @funds_transfer_customer.allow_apbs
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :allow_apbs, :prepend_text => "")
+          %tr
+            %td.label APBS User Number
+            %td.value
+              = @funds_transfer_customer.apbs_user_no
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :apbs_user_no, :prepend_text => "")
+          %tr
+            %td.label APBS Username
+            %td.value
+              = @funds_transfer_customer.apbs_user_name
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :apbs_user_name, :prepend_text => "")
+          %tr
+            %td.label Needs Purpose Code
+            %td.value
+              = @funds_transfer_customer.needs_purpose_code
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :needs_purpose_code, :prepend_text => "")
+          %tr
+            %td.label Allow All Accounts
+            %td.value
+              = @funds_transfer_customer.allow_all_accounts
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :allow_all_accounts, :prepend_text => "")
+          %tr
+            %td.label FiletoApi Allowed?
+            %td.value
+              = @funds_transfer_customer.is_filetoapi_allowed
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :ais_filetoapi_allowed, :prepend_text => "")
+          %tr
+            %td.label Notify On Status Change ?
+            %td.value
+              = @funds_transfer_customer.notify_on_status_change
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :notify_on_status_change, :prepend_text => "")
+          %tr
+            %td.label Notify App Code
+            %td.value
+              = @funds_transfer_customer.notify_app_code
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :notify_app_code, :prepend_text => "")
+          %tr
+            %td.label Notify DownTime ?
+            %td.value
+              = @funds_transfer_customer.notify_downtime
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :notify_downtime, :prepend_text => "")
+          %tr
+            %td.label Is Bulk ?
+            %td.value
+              = @funds_transfer_customer.is_bulk
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :is_bulk, :prepend_text => "")
+          %tr
+            %td.label BTID
+            %td.value
+              = @funds_transfer_customer.btid
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :btid, :prepend_text => "")
+
+          %tr
+            %td.label Customer Code
+            %td.value
+              = @funds_transfer_customer.customer_code
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :customer_code, :prepend_text => "")
+          %tr
+            %td.label Bulk Backend
+            %td.value
+              = @funds_transfer_customer.bulk_backend
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :bulk_backend, :prepend_text => "")    
+
+          %tr
+            %td.label Beneficiary SMS Allowed ?
+            %td.value
+              = @funds_transfer_customer.beneficiary_sms_allowed
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :beneficiary_sms_allowed, :prepend_text => "")
+          %tr
+            %td.label Beneficiary EMAIL Allowed ?
+            %td.value
+              = @funds_transfer_customer.beneficiary_email_allowed
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :beneficiary_email_allowed, :prepend_text => "")
+
+          %tr
+            %td.label Notification Sent At
+            %td
+              = @funds_transfer_customer.notification_sent_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :notification_sent_at, :prepend_text => "")
+          %tr
+            %td.label Force Store & Forward ?
+            %td.value
+              = @funds_transfer_customer.force_saf
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :force_saf, :prepend_text => "")
+          %tr
+            %td.label Beneficiary Backend
+            %td.value
+              = @funds_transfer_customer.bene_backend
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :bene_backend, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @funds_transfer_customer.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @funds_transfer_customer.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @funds_transfer_customer.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @funds_transfer_customer.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :updated_at, :prepend_text => "")

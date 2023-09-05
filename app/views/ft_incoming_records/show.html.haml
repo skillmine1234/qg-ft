@@ -1,0 +1,189 @@
+.show_ticket      
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 180px; display: inline-block;'}
+    %h3
+      Request No:
+      = @ft_record.req_no
+    %h3
+      Request Version:
+      = @ft_record.req_version
+    %h3
+      App Id:
+      = @ft_record.app_id
+    %h3
+      Purpose Code:
+      = @ft_record.purpose_code
+    %h3
+      Version
+      = link_to "#{audit_count(@ft_record.incoming_file_record)}", :controller => :ft_incoming_records, :action => :audit_logs, :version_id => audit_count(@ft_record.incoming_file_record), :id => @ft_record.incoming_file_record_id
+
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 180px; display: inline-block;'}
+    %h3
+      Response No:
+      = @ft_record.rep_no
+    %h3
+      Response Version:
+      = @ft_record.rep_version
+    %h3
+      Response Attempt No:
+      = @ft_record.rep_attempt_no
+    %h3
+      Status:
+      = link_to "Show Status", "#", :class => 'show_status', :href => "#status", data: { status_code: @ft_record.txn_status_code, status_subcode: @ft_record.txn_status_subcode} 
+    %h3
+      Record Text:
+      - if @ft_record.incoming_file_record.record_txt.nil?
+        .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Record Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
+          Show Record Text
+      - else
+        = link_to "Show Record Text", "#", :class => 'show_record_text', :href => "#recordText", data: { record_txt: @ft_record.incoming_file_record.record_txt} 
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 500px; display: inline-block;'}
+    #ticket-details
+      %h3
+        Transfer Details:
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        %tr
+          %td.label Customer code
+          %td.value
+            = @ft_record.customer_code
+        %tr
+          %td.label Transfer Type
+          %td.value
+            = @ft_record.transfer_type
+        %tr
+          %td.label Request Transfer Type
+          %td.value
+            = @ft_record.req_transfer_type
+        %tr
+          %td.label Transfer Currency
+          %td.value
+            = @ft_record.transfer_ccy
+        %tr
+          %td.label Transfer Amount
+          %td.value
+            = @ft_record.transfer_amount
+        %tr
+          %td.label Debit Account No
+          %td.value
+            = @ft_record.debit_account_no
+        %tr
+          %td.label Beneficiary Account No
+          %td.value
+            = @ft_record.bene_account_no
+        %tr
+          %td.label Beneficiary Account IFSC
+          %td.value
+            = @ft_record.bene_ifsc_code
+        %tr
+          %td.label Beneficiary Account MMID
+          %td.value
+            = @ft_record.bene_mmid
+        %tr
+          %td.label Bank Reference
+          %td.value
+            = @ft_record.bank_ref_no
+        %tr
+          %td.label Beneficiary Reference
+          %td.value
+            = @ft_record.bene_ref_no
+        %tr
+          %td.label Low Balance Alert At
+          %td.value
+            = @ft_record.low_balance_alert
+        %tr
+          %td.label Aadhaar No
+          %td.value
+            = @ft_record.aadhaar_no
+        %tr
+          %td.label Aadhaar Mobile No
+          %td.value
+            = @ft_record.aadhaar_mobile_no
+
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 500px; display: inline-block;'}
+    #ticket-details
+      %h3
+        Beneficiary Details:
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        %tr
+          %td.label Code
+          %td.value
+            = @ft_record.bene_code
+        %tr
+          %td.label Name
+          %td.value
+            = @ft_record.bene_full_name
+        %tr
+          %td.label Address
+          %td.value
+            = @ft_record.bene_address1
+        %tr
+          %td.label
+          %td.value
+            = @ft_record.bene_address2
+        %tr
+          %td.label
+          %td.value
+            = @ft_record.bene_address3
+        %tr
+          %td.label Postal Code
+          %td.value
+            = @ft_record.bene_postal_code
+        %tr
+          %td.label City
+          %td.value
+            = @ft_record.bene_city
+        %tr
+          %td.label State
+          %td.value
+            = @ft_record.bene_state
+        %tr
+          %td.label Country
+          %td.value
+            = @ft_record.bene_country
+        %tr
+          %td.label Contact Email ID
+          %td.value
+            = @ft_record.bene_email_id
+        %tr
+          %td.label Account Mobile No
+          %td.value
+            = @ft_record.bene_mobile_no
+        %tr
+          %td.label MMID Mobile No
+          %td.value
+            = @ft_record.bene_mmid_mobile_no
+        %tr
+          %td.label Name With Beneficiary Bank
+          %td.value
+            = @ft_record.name_with_bene_bank
+
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 100%; display: inline-block; margin-bottom: 2%;'}
+    %table.table.no-border
+      %tr
+        %td.label Remitter To Beneficiary Note
+        %td= @ft_record.rmtr_to_bene_note
+#recordText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Record Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button1.my_clip_button1{"data-clipboard-target" => "record_txt"}
+        %b Copy To Clipboard...
+    %pre#record_txt{:style => 'word-wrap: break-word'}
+      .reply{:style => 'word-wrap: break-word'}
+#status.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Status
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
+      %tr
+        %td.label Status Code: 
+        %td
+          %label.status_code{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Status Subcode:
+        %td
+          %label.status_subcode{:style => 'word-wrap: break-word'}

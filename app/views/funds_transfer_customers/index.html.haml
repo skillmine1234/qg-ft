@@ -1,0 +1,181 @@
+%br
+= link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path
+%br
+%br
+%h1 Listing Funds Transfer Customers
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@funds_transfer_customers.count}"
+= link_to "Replicate", "#my-modal", :class => "btn btn-primary", "data-toggle" => "modal",style: "float:right;"
+= link_to "Child Setup", "#child-setup", :class => "btn btn-primary", "data-toggle" => "modal",style: "float:right;position: relative;right: 15px;"
+= link_to 'DeActivate Customer', deactivate_user_funds_transfer_customers_path, :class => "btn btn-primary",style: "float:right;position: relative;right: 20px;"
+%br
+= will_paginate @funds_transfer_customers, :page_links => true
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      APP ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Category
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      NEFT Allowed
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      IMPS Allowed
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      RTGS Allowed
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Needs Purpose Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Allow All Accounts
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      FiletoApi Allowed
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Bulk
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      BTID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Beneficiary SMS Allowed
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Beneficiary EMAIL Allowed   
+  .tbody
+    - @funds_transfer_customers.each do |funds_transfer_customer|
+      - master_ft_customer = FundsTransferCustomer.return_master_color_code(funds_transfer_customer.category)
+      %tr{:style => "background-color: #{master_ft_customer}"}
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', funds_transfer_customer
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_funds_transfer_customer_path(funds_transfer_customer)
+        %td{:style=>'text-align:left;'}
+          - if funds_transfer_customer.approval_status == 'U'
+            = link_to 'Cancel', funds_transfer_customer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - else
+            = ""
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.app_id
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.customer_id
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.name
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.category
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.allow_neft
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.allow_imps
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.allow_rtgs
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.needs_purpose_code
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.allow_all_accounts
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.is_filetoapi_allowed
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.is_bulk
+        %td{:style=>'text-align:left;',:title => "#{funds_transfer_customer.btid}"}
+          = funds_transfer_customer.btid.present? ? truncate(funds_transfer_customer.btid.html_safe, length:10) : ""
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.customer_code
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.beneficiary_sms_allowed   
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.beneficiary_email_allowed
+
+#my-modal.modal.hide.fade
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Clone Fund Transfer Account
+  .modal-body.a-unique-class
+    = form_tag '', :method => 'post', :class => 'form-horizontal', :autocomplete=>"off" do
+      = hidden_field_tag "app_id2"
+      .control-group
+        = label_tag "App ID", "App ID", :class => 'control-label'
+        = text_field_tag :app_id1
+        #customer-id-div1
+        #app-id-not-exist{:style=>'display:none;'}
+          %h5{:style => 'text-align:center;color:red;padding-left: 47px;'} App ID Not Present,please setup.
+          = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;"
+        #app-id-allow-account-not-exist{:style=>'display:none;'}
+          %h5{:style => 'text-align:center;color:red;padding-left: 47px;'}
+          = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;",id: "new-fund-transfer-customer"
+      .form-actions{:style=>'display:none;'}
+        = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "clone_ft_customer"
+        
+= render 'customer_deactivation'        
+
+#child-setup.modal.hide.fade
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Clone Child Setup
+  .modal-body.a-unique-class
+    = form_tag '', :method => 'post', :class => 'form-horizontal', :autocomplete=>"off" do
+      = hidden_field_tag "child_app_id2"
+      .control-group
+        = label_tag "App ID", "App ID", :class => 'control-label'
+        = text_field_tag :child_app_id1
+        #customer-id-listing-div
+        #app-id-not-exist1{:style=>'display:none;'}
+          %h5{:style => 'text-align:center;color:red;padding-left: 47px;'} App ID Not Present,please setup.
+          = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;"
+        #app-id-allow-account-not-exist{:style=>'display:none;'}
+          %h5{:style => 'text-align:center;color:red;padding-left: 47px;'}
+          = link_to 'New Funds Transfer Customer', new_funds_transfer_customer_path,:style => "padding-left: 185px;",id: "new-fund-transfer-customer"
+      .form-actions{:style=>'display:none;'}
+        = submit_tag "Submit", :name => nil, :class => 'btn btn-primary', :id => "clone_ft_customer"
+
+
+:javascript
+  $("#app_id1").change(function(){
+    $("#app_id2").val($(this).val());
+    var cur_val = $(this).val();
+    $.ajax({
+      type: 'GET',
+      url: "/funds_transfer_customers/validate_app_id_ft_customer",
+      data: { app_id1: $(this).val()},
+      success: function(data){
+      },
+      error: function(error) {
+      }
+    });
+  });
+
+  $('#add_account').click(function () {
+    $.ajax({
+      type: 'GET',
+      url: "/funds_transfer_customers/display_associated_customer_id",
+      data: { app_id2: $("#app_id2").val()},
+      success: function(data){
+      },
+      error: function(error) {
+      }
+    });
+  });
+
+  $("#child_app_id1").change(function(){
+    $("#child_app_id2").val($(this).val());
+    var cur_val = $(this).val();
+    $.ajax({
+      type: 'GET',
+      url: "/funds_transfer_customers/validate_app_id_child_ft_customer",
+      data: { child_app_id1: $(this).val()},
+      success: function(data){
+      },
+      error: function(error) {
+      }
+    });
+  });
+  

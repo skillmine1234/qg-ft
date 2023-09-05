@@ -1,0 +1,55 @@
+%h1 Listing Funds Transfers
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content{:style => params[:advanced_search].present? || params[:page].present? ? "display:none;" : "display:block;"}
+  = render :partial => 'advanced_search'
+%br
+- if params[:advanced_search].present? || params[:page].present?
+  = "Total Count: #{@funds_transfers.count}"
+  = will_paginate @funds_transfers, :page_links => true
+  %br
+  %table.table.table-bordered.table-striped.table-hover
+    .thead
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+      - if current_user.present? && current_user.try(:accessible_customers).try(:count) != 1
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Customer ID 
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Transfer Type  
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Beneficiary Name
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Transfer Amount
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Debit Account No
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Request Timestamp
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Response Timestamp
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Transfer Status
+
+    .tbody
+      - @funds_transfers.each do |funds_transfer|
+        %tr
+          %td{:style=>'text-align:left;'}
+            = link_to 'Show', funds_transfer
+          - if current_user.present? && current_user.try(:accessible_customers).try(:count) != 1
+            %td{:style=>'text-align:left;'}
+              = funds_transfer.customer_id
+          %td{:style=>'text-align:left;'}
+            = funds_transfer.transfer_type
+          %td{:style=>'text-align:left;'}
+            = funds_transfer.bene_full_name
+          %td{:style=>'text-align:left;'}
+            = number_to_currency(funds_transfer.transfer_amount, unit: 'Rs ')
+          %td{:style=>'text-align:left;'}
+            = funds_transfer.debit_account_no
+          %td{:style=>'text-align:left;'}
+            = funds_transfer.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td{:style=>'text-align:left;'}
+            = funds_transfer.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td{:style=>'text-align:left;'}
+            - btn_class = case funds_transfer.status_code; when :COMPLETED; 'btn-success'; when :FAILED; 'btn-danger'; when nil , "";  else 'btn-info'; end
+            = render partial: 'shared/status', locals: {id: "#{funds_transfer.class.name.demodulize}_status_code_#{funds_transfer.id}", object: funds_transfer}

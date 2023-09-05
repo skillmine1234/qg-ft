@@ -1,0 +1,5 @@
+<%if @ft_account.present? || @ft_account_all.present? || @ft_account_unapproved.present? %>
+  $("#already-exist-tag").show();
+<%else%>
+  $("#already-exist-tag").hide();
+<% end%>

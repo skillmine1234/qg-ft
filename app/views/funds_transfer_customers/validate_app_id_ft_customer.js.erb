@@ -1,0 +1,26 @@
+<%if @funds_transfer_customer.present?%>
+	<% funds_transfer_customer = @funds_transfer_customer.pluck(:allow_all_accounts) %>
+	<% if funds_transfer_customer.include? "N" %>
+		$("#app-id-not-exist").css("display", "none");
+		$("#link-div").css("display", "block");
+		$('#customer-id-div1').css("display", "block");
+		$('#customer-id-div1').html("<%= j render 'customer_id_field', ft_customer: @funds_transfer_customer %>");
+		$("#app-id-allow-account-not-exist").css("display", "none");
+		$("#app-id-allow-account-not-exist h5").html("");
+		$("#new-fund-transfer-customer").css("display", "block");
+	<% else %>
+		$("#app-id-not-exist").css("display", "none");
+		$("#link-div").css("display", "block");
+		$('#customer-id-div1').css("display", "none");
+		$('#customer-id-div1').html("<%= j render 'customer_id_field', ft_customer: @funds_transfer_customer %>");
+		$("#app-id-allow-account-not-exist").css("display", "block");
+		$("#app-id-allow-account-not-exist h5").html("Allow All Account Check should be disabled to add multiple Account for APP ID" + " " + $("#app_id1").val());
+		$("#new-fund-transfer-customer").css("display", "none");
+	<%end%>
+<%else%>
+	$("#app-id-not-exist").css("display", "block");
+	$("#link-div").css("display", "none");
+	$('#customer-id-div1').css("display", "none");
+	$("#app-id-allow-account-not-exist").css("display", "none");
+	$("#new-fund-transfer-customer").css("display", "block");
+<% end%>

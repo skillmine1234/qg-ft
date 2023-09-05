@@ -1,0 +1,19 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  = hidden_field_tag :approval_status, params[:approval_status]
+  .control-group
+    = label_tag "Customer ID", "Customer ID", :class => 'control-label'
+    = text_field_tag :customer_id, params[:customer_id]
+  .form-actions
+    = button_tag "Search", :class => 'btn btn-primary'
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'ft_customer_account_reset'
+  = hidden_field_tag :advanced_search, :true
+
+
+:javascript
+  $(document).ready(function(){
+    $('input[type="text"]'). attr("placeholder", "Multisearch Search Enabled");
+  });
+
+  $("#ft_customer_account_reset").click(function() {
+    $(this).closest('form').find("input").val("");
+  });

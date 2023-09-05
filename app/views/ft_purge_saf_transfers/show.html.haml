@@ -1,0 +1,72 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; margin: 1%; height: 600px;'}
+    #form-details
+      %h3 Purge SAF Transfer Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        = render 'ecol_customers/approve', :@record => @ft_purge_saf_transfer
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        %tr
+          %td.label Rows Count
+          %td.value
+            - if @ft_purge_saf_transfer.approval_status == 'U'
+              = @rows_count || @error
+            - else
+              = @ft_purge_saf_transfer.row_count
+          %td
+        %tr
+          %td.label Reference No
+          %td.value
+            = @ft_purge_saf_transfer.reference_no
+          %td
+        %tr
+          %td.label From Request Timestamp
+          %td.value
+            = @ft_purge_saf_transfer.from_req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td
+        %tr
+          %td.label To Request Timestamp
+          %td
+            = @ft_purge_saf_transfer.to_req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td
+        %tr
+          %td.label Customer ID
+          %td.value
+            = @ft_purge_saf_transfer.customer_id
+          %td
+        %tr
+          %td.label Operation Name
+          %td
+            = @ft_purge_saf_transfer.op_name
+          %td
+        %tr
+          %td.label Request Transfer Type
+          %td
+            = @ft_purge_saf_transfer.req_transfer_type
+          %td
+        %tr
+          %td.label Status
+          %td.value
+            = @ft_purge_saf_transfer.status_code
+          %td
+        %tr
+          %td.label Created By
+          %td.value
+            = @ft_purge_saf_transfer.created_user.try(:username)
+          %td
+        %tr
+          %td.label Updated By
+          %td.value
+            = @ft_purge_saf_transfer.updated_user.try(:username)
+          %td
+        %tr
+          %td.label Created At
+          %td.value
+            = @ft_purge_saf_transfer.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td
+        %tr
+          %td.label Updated At
+          %td.value
+            = @ft_purge_saf_transfer.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td
+              

@@ -1,0 +1,124 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 600px; padding-left: 10px'}
+    #form-details
+      %h3 SAF Transfer Details
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        %tr
+          %td.label App UUID
+          %td.value
+            = @ft_saf_transfer.app_uuid
+          %td
+        %tr
+          %td.label Customer ID
+          %td.value
+            = @ft_saf_transfer.customer_id
+          %td
+        %tr
+          %td.label App ID
+          %td.value
+            = @ft_saf_transfer.app_id
+          %td
+        %tr
+          %td.label Operation Name
+          %td.value
+            = @ft_saf_transfer.op_name
+          %td
+        %tr
+          %td.label Status
+          %td.value
+            = @ft_saf_transfer.status_code
+          %td.value
+            - if @ft_saf_transfer.status_code == "FAILED"
+              = link_to "Fault Text", "#", :class => 'fault-link', :href => "javascript:void()", :style => "font-weight:100"
+            - if @ft_saf_transfer.fault_bitstream.present?
+              = '|'
+              = link_to "Fault Bitstream", "#", :class => 'val-fault-link', :href => "javascript:void()", data: { fault: @ft_saf_transfer.fault_bitstream}
+        %tr
+          %td.label Request Transfer Type
+          %td.value
+            = @ft_saf_transfer.req_transfer_type
+          %td
+        %tr
+          %td.label Request Timestamp
+          %td.value
+            = @ft_saf_transfer.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td
+        %tr
+          %td.label Transfer Amount
+          %td.value
+            = @ft_saf_transfer.transfer_amount
+          %td
+        %tr
+          %td.label Transfer Currency
+          %td.value
+            = @ft_saf_transfer.transfer_ccy
+          %td
+        %tr
+          %td.label Request Bitstream
+          %td.value
+            = show_xml('Show Request','request-link',@ft_saf_transfer.req_bitstream)
+          %td
+        %tr
+          %td.label Reply Timestamp
+          %td.value
+            = @ft_saf_transfer.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td
+        %tr
+          %td.label Reply Bitstream
+          %td.value
+            = show_xml('Show Reply','reply-link',@ft_saf_transfer.rep_bitstream)
+          %td
+#requestText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Request
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button1.my_clip_button1{"data-clipboard-target" => "req_xml"}
+        %b Copy To Clipboard...
+    %pre#req_xml{:style => 'word-wrap: break-word'}
+      .request{:style => 'word-wrap: break-word'}
+#replyText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Reply
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "reply_xml"}
+        %b Copy To Clipboard...
+    %pre#reply_xml{:style => 'word-wrap: break-word'}
+      .reply{:style => 'word-wrap: break-word'}
+#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+    %pre#fault_text{:style => 'word-wrap: break-word'}
+    %table.table.no-border
+      %tr
+        %td.label Fault Code:
+        %td= @ft_saf_transfer.fault_code
+      %tr
+        %td.label Fault SubCode:
+        %td= @ft_saf_transfer.fault_subcode
+      %tr
+        %td.label Fault Timestamp:
+        %td= @ft_saf_transfer.fault_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+      %tr
+        %td.label Fault Reason:
+        %td= @ft_saf_transfer.fault_reason
+#faultLink.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button3.my_clip_button3{"data-clipboard-target" => "fault_xml"}
+        %b Copy To Clipboard...
+    %pre#fault_xml{:style => 'word-wrap: break-word'}
+      .fault{:style => 'word-wrap: break-word'}

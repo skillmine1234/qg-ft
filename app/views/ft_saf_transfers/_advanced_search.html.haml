@@ -1,0 +1,44 @@
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+    .control-group
+      = label_tag "App UUID", "App UUID", :class => 'control-label'
+      = text_field_tag :app_uuid, params[:app_uuid],placeholder: 'Multisearch Search Enabled'
+    .control-group
+      = label_tag "Customer ID", "Customer ID", :class => 'control-label'
+      = text_field_tag :customer_id, params[:customer_id],placeholder: 'Multisearch Search Enabled'
+    .control-group
+      = label_tag "Request No", "Request No", :class => 'control-label'
+      = text_field_tag :req_no, params[:req_no],placeholder: 'Multisearch Search Enabled'
+    .control-group
+      = label_tag "Operation Name", "Operation Name", :class => 'control-label'
+      = select_tag :op_name, options_for_select([['startTransfer','startTransfer'],['transfer','transfer']], params[:op_name]),:prompt => 'Select'
+    .control-group
+      = label_tag "Status", "Status", :class => 'control-label'
+      = select_tag :status, options_for_select([['NEW','NEW'],['FAILED','FAILED']],params[:status]),:prompt => 'Select'
+    .control-group
+      = label_tag "Request Transfer Type", "Request Transfer Type" , :class => 'control-label'
+      = select_tag :req_transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT'],['APBS','APBS'] ],params[:req_transfer_type]),:prompt => 'Select'
+    .control-group
+      = label_tag "Request Timestamp", "Request Timestamp", :class => 'control-label'
+      = date_field_tag(:from_request_timestamp1, params[:from_request_timestamp1])
+      To
+      = date_field_tag(:to_request_timestamp1, params[:to_request_timestamp1])
+    .control-group
+      = label_tag "Reply Timestamp", "Reply Timestamp", :class => 'control-label'
+      = date_field_tag(:from_reply_timestamp1, params[:from_reply_timestamp1])
+      To
+      = date_field_tag(:to_reply_timestamp1, params[:to_reply_timestamp1])
+    
+
+    .form-actions
+      = button_tag "Search", :class => 'btn btn-primary'
+      = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'ft_saf_transfer_reset'
+    = hidden_field_tag :advanced_search, :true
+
+:javascript
+  $("#ft_saf_transfer_reset").click(function() {
+    $(this).closest('form').find("input,select").val("");
+  });

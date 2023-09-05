@@ -1,0 +1,12 @@
+= search_form_for @searcher, {defaults: local_assigns[:defaults]} do |f|
+  = f.standard_fields
+  - if current_user.present? && current_user.try(:accessible_customers).try(:count) != 1
+    = f.input :customer_id
+  = f.input :status_code, as: :enum
+  = f.input :req_timestamp, as: :between
+  = f.input :req_no
+
+  = f.action_buttons
+%br
+= "Total Count: #{FtInvoiceDetail.all.size}"
+= pagination_links(@records)

@@ -1,0 +1,51 @@
+%br
+%br
+%h1 Listing SAF Transfers
+= render :partial => 'advanced_search'
+%br
+= "Total Count: #{@ft_saf_transfers.count}"
+= will_paginate @ft_saf_transfers, :page_links => true
+%br
+
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Request No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Operation Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Request Transfer Type
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Request Timestamp
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Reply Timestamp
+   
+
+  .tbody
+    - @ft_saf_transfers.each do |ft_saf_transfer|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', ft_saf_transfer
+        %td{:style=>'text-align:left;'}
+          = link_to 'Delete', ft_saf_transfer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td{:style=>'text-align:left;'}
+          = ft_saf_transfer.status_code
+        %td{:style=>'text-align:left;'}
+          = ft_saf_transfer.customer_id
+        %td{:style=>'text-align:left;'}
+          = ft_saf_transfer.req_no
+        %td{:style=>'text-align:left;'}
+          = ft_saf_transfer.op_name
+        %td{:style=>'text-align:left;'}
+          = ft_saf_transfer.req_transfer_type
+        %td{:style=>'text-align:left;'}
+          = ft_saf_transfer.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td{:style=>'text-align:left;'}
+          = ft_saf_transfer.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+       

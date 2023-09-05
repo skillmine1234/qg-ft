@@ -1,0 +1,5 @@
+<%if @ft_customers.present? %>
+  $("#multiple-customer-submit").attr("disabled", true); 
+<%else%>
+  $("#multiple-customer-submit").attr("disabled", false);
+<% end%>

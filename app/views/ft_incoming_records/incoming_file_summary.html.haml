@@ -1,0 +1,11 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;  height:630px;'}
+    #form-details
+      %h3 Funds Transfer Incoming File
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px;'}
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        %tr
+          %td.label Customer Code
+          %td.value
+            = @summary.try(:customer_code)

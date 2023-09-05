@@ -1,0 +1,9 @@
+= search_form_for @searcher, {defaults: local_assigns[:defaults]} do |f|
+  = f.standard_fields
+  = f.input :iin
+  = f.input :name
+  = f.action_buttons
+%br
+= "Total Count: #{@records.count}"
+%br
+= will_paginate @records, :page_links => true

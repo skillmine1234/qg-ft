@@ -1,0 +1,21 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  = hidden_field_tag :approval_status, params[:approval_status]
+  .control-group
+    = label_tag "Customer Name", "Customer Name", :class => 'control-label'
+    = text_field_tag :name, params[:name],placeholder: 'Multisearch Search Enabled'
+  .control-group
+    = label_tag "App ID", "App ID", :class => 'control-label'
+    = text_field_tag :app_id, params[:app_id],placeholder: 'Multisearch Search Enabled'
+  .control-group
+    = label_tag "Customer ID", "Customer ID", :class => 'control-label'
+    = text_field_tag :customer_id, params[:customer_id],placeholder: 'Multisearch Search Enabled'  
+  .form-actions
+    = button_tag "Search", :class => 'btn btn-primary'
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'ft_customer_reset'
+  = hidden_field_tag :advanced_search, :true
+
+
+:javascript
+  $("#ft_customer_reset").click(function() {
+    $(this).closest('form').find("input").val("");
+  });

@@ -1,0 +1,29 @@
+= simple_form_for @nach_member, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "nach_member_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@nach_member, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :is_enabled, "Enabled?", :class => 'control-label'
+      = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@nach_member, :is_enabled, :prepend_text => "")
+    .control-group
+      = f.label :iin, "*IIN", :class => 'control-label'
+      = f.text_field :iin, maxlength: 50
+      #msg-error
+        = error_message_for(@nach_member, :iin, :prepend_text => "")
+    .control-group
+      = f.label :name, "*Name", :class => 'control-label'
+      = f.text_field :name, maxlength: 50
+      #msg-error
+        = error_message_for(@nach_member, :name, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record? and f.object.iin.blank?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_nach_member', :value => label_name + ' NACH Member'
+    = link_to :Cancel,'/nach_members', :name => 'cancel', :class=>"cancel btn"

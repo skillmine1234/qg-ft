@@ -1,0 +1,105 @@
+%br
+%h1 Funds Transfer APBS Incoming Records
+%br
+= render :partial => 'advanced_search'
+%br
+%br
+
+= simple_form_for :ft_apbs_incoming_record, :url => override_records_path, :html => { :method => :get, :class => 'form-horizontal', :autocomplete=>"off", :id => 'update_records', :style=> 'overflow: auto;'} do |f| 
+  %table.table.table-bordered.table-striped.table-hover{:style => 'width:100%; border:1px'}
+    .thead
+      %tr
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          = check_box_tag(:select_all, value = "1", checked = false, options = {})
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          File Name
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          APBS Transaction Code
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Desination Bank IIN
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Sponsor Bank IIN
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Beneficiary Name
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Attempt No
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Status
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Fault Text
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Fault Bitstream
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Audit Steps
+    .tbody
+      - @records.each do |record|
+        %tr
+          %td{:style=>'text-align:left;'}
+            = link_to "show", record
+          %td{:style=>'text-align:left;'}
+            - if can_select?(record)
+              = check_box_tag "record_ids[]", record.incoming_file_record_id, false, class: 'txn_select'
+          %td{:style=>'text-align:left;'}
+            = record.file_name
+          %td{:style=>'text-align:left;'}
+            = record.apbs_trans_code
+          %td{:style=>'text-align:left;'}
+            = record.dest_bank_iin
+          %td{:style=>'text-align:left;'}
+            = record.sponser_bank_iin
+          %td{:style=>'text-align:left;'}
+            = record.bene_acct_name
+          %td{:style=>'text-align:left;'}
+            = record.incoming_file_record.attempt_no
+          %td{:style=>'text-align:left;'}
+            = record.incoming_file_record.status
+          %td{:style=>'text-align:left;'}
+            - if record.incoming_file_record.fault_code.nil?
+              - link_text = "Show Fault Text"
+            - else 
+              - link_text = record.incoming_file_record.fault_code
+            = link_to link_text, "#", :class => 'active-link', :href => "javascript:void()", data: { fault_reason: record.incoming_file_record.fault_reason, fault_code: record.incoming_file_record.fault_code, fault_subcode: record.incoming_file_record.fault_subcode}
+          %td{:style=>'text-align:left;'}
+            = link_to "Show Fault Bitstream", "#", :class => 'show_fault_bitstream', :href => "javascript:void()", data: { fault_bitstream: record.incoming_file_record.fault_bitstream}
+          %td{:style=>'text-align:left;'}
+            = link_to 'Show', {:controller => 'incoming_file_records', :action => 'audit_steps', :id => record.incoming_file_record_id, :step_name => 'ALL'}
+  .form-actions{:style=>"text-align: center;"}
+    = hidden_field_tag :file, params[:file_name]
+    - if !@incoming_file.nil? and @incoming_file.try(:pending_approval) == 'Y'
+      - can_override = (can? :override_records, IncomingFile)
+      - can_skip = (can? :skip_records, IncomingFile)
+      - can_retry = (can? :approve_restart, IncomingFile)
+      - can_reset = (can? :reset, IncomingFile)
+      = render :partial => "su_incoming_records/api_buttons", :locals => {:status => params[:status], :can_override => can_override, :can_skip => can_skip, :can_retry => can_retry, :can_reset => can_reset, :file_can_override => @incoming_file.incoming_file_type.try(:can_override), :file_can_skip => @incoming_file.incoming_file_type.try(:can_skip), :file_can_retry => @incoming_file.incoming_file_type.try(:can_retry)}
+
+#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
+      %tr
+        %td.label Fault Code: 
+        %td
+          %label.fault_code{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Fault Reason:
+        %td
+          %label.fault_reason{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Fault Subcode:
+        %td
+          %label.fault_subcode{:style => 'word-wrap: break-word'}
+#faultBitstream.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Bitstream
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "fault_bitstream"}
+        %b Copy To Clipboard...
+    %pre#fault_bitstream{:style => 'word-wrap: break-word'}
+      .reply{:style => 'word-wrap: break-word'}

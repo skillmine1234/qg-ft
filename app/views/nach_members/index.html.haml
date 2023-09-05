@@ -1,0 +1,35 @@
+%br
+= link_to 'New NACH Member', new_nach_member_path
+%br
+%h1 Listing NACH Members
+= render 'advanced_search'
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      IIN
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Enabled?
+
+  .tbody
+    - @records.each do |nach_member|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', nach_member
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_nach_member_path(nach_member)
+        %td{:style=>'text-align:left;'}
+          = nach_member.iin
+        %td{:style=>'text-align:left;'}
+          = nach_member.name
+        %td{:style=>'text-align:left;'}
+          = nach_member.is_enabled
+
+:javascript
+  $(document).ready(function(){
+    $('input[type="text"]'). attr("placeholder", "Multisearch Search Enabled");
+  });

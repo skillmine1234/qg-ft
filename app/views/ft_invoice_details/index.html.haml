@@ -1,0 +1,8 @@
+- index_model = FtInvoiceDetail
+- index_columns = [:req_no, :req_timestamp, :customer_id, :status_code, :invoice_number, :invoice_date, :user_action]
+= render partial: 'shared/index', locals: { index_model: index_model, index_columns: index_columns, records: @records }
+
+:javascript
+  $(document).ready(function(){
+    $('input[type="text"]'). attr("placeholder", "Multisearch Search Enabled");
+  });

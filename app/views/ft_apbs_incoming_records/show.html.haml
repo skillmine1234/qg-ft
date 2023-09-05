@@ -1,0 +1,99 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;  height:630px;'}
+    #form-details
+      %h3 Funds Transfer APBS Incoming Record
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px;'}
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        %tr
+          %td.label Version
+          %td.value
+            = link_to "#{audit_count(@ft_apbs_record.incoming_file_record)}", :controller => :ft_apbs_incoming_records, :action => :audit_logs, :version_id => audit_count(@ft_apbs_record.incoming_file_record), :id => @ft_apbs_record.incoming_file_record_id
+        %tr
+          %td.label Record Text
+          %td.value
+            - if @ft_apbs_record.incoming_file_record.record_txt.nil?
+              .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Record Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
+                Show Record Text
+            - else
+              = link_to "Show Record Text", "#", :class => 'show_record_text', :href => "#recordText", data: { record_txt: @ft_apbs_record.incoming_file_record.record_txt} 
+        %tr
+          %td.label File Name 
+          %td.value
+            = @ft_apbs_record.file_name
+        %tr
+          %td.label APBS Transaction Code
+          %td.value
+            = @ft_apbs_record.apbs_trans_code
+        %tr
+          %td.label Destination Bank IIN
+          %td.value
+            = @ft_apbs_record.dest_bank_iin
+        %tr
+          %td.label Destination Account Type
+          %td.value
+            = @ft_apbs_record.dest_acctype
+        %tr
+          %td.label Ledger Folio Number
+          %td.value
+            = @ft_apbs_record.ledger_folio_num
+        %tr
+          %td.label Beneficiary Aadhaar Number
+          %td.value
+            = @ft_apbs_record.bene_aadhar_num
+        %tr
+          %td.label Beneficiary Name
+          %td.value
+            = @ft_apbs_record.bene_acct_name
+        %tr
+          %td.label Sponsor Bank IIN
+          %td.value
+            = @ft_apbs_record.sponser_bank_iin
+        %tr
+          %td.label NPCI User Number
+          %td.value
+            = @ft_apbs_record.user_num
+        %tr
+          %td.label Username
+          %td.value
+            = @ft_apbs_record.user_name
+        %tr
+          %td.label User Credit Reference
+          %td.value
+            = @ft_apbs_record.user_credit_ref
+        %tr
+          %td.label Amount
+          %td.value
+            = @ft_apbs_record.amount
+        %tr
+          %td.label Checksum
+          %td.value
+            = @ft_apbs_record.checksum
+        %tr
+          %td.label Success Flag
+          %td.value
+            = @ft_apbs_record.success_flag
+        %tr
+          %td.label Filler
+          %td.value
+            = @ft_apbs_record.filler
+        %tr
+          %td.label Reason Code
+          %td.value
+            = @ft_apbs_record.reason_code
+        %tr
+          %td.label Destination Bank Account No
+          %td.value
+            = @ft_apbs_record.dest_bank_acctnum
+
+#recordText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Record Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button1.my_clip_button1{"data-clipboard-target" => "record_txt"}
+        %b Copy To Clipboard...
+    %pre#record_txt{:style => 'word-wrap: break-word'}
+      .reply{:style => 'word-wrap: break-word'}

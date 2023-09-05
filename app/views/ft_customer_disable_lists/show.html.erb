@@ -1,0 +1,34 @@
+<br>
+<br>
+<div class="form-horizontal show_form">
+  <div class="form-main-with-color" style="background-color: #F1F2F8;">
+    <div id="form-details">
+      <h3>Funds Transfer Customer Disable List</h3>
+      <br/>
+      <p style="text-align:left; padding-left:6px; padding-bottom:17px">
+        <% can = can? :edit, @ft_disable_list %>
+        <%= render 'approve', :@record => @ft_disable_list %>
+      </p>
+      <table class="table no-border" style="table-layout: fixed; width: 100%;">
+      	<tr>
+            <td class="label">App IDs</td>
+            <td class="value">
+              <%= @ft_disable_list.app_id %>
+            </td>
+            <td id="msg-error">
+              <%= error_message_for(@ft_disable_list, :app_id, :prepend_text => "") %>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Customer IDs</td>
+            <td class="value">
+              <%= @ft_disable_list.customer_id %>
+            </td>
+            <td id="msg-error">
+              <%= error_message_for(@ft_disable_list, :customer_id, :prepend_text => "") %>
+            </td>
+          </tr>
+      </table>
+    </div>
+  </div>
+</div>

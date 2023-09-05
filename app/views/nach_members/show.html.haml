@@ -1,0 +1,50 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 800px;'}
+    #form-details
+      %h3 NACH Member
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @nach_member
+        %a.btn{:href => "#{!(can) ? '#' : '/nach_members/' + @nach_member.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'unapproved_records/approve', :@record => @nach_member
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@nach_member.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@nach_member)}", :controller => :nach_members, :action => :audit_logs, :version_id => audit_count(@nach_member), :id => @nach_member.id
+          %tr
+            %td.label Enabled?
+            %td.value
+              = @nach_member.is_enabled
+            %td              
+          %tr
+            %td.label IIN
+            %td.value
+              = @nach_member.iin
+            %td
+          %tr
+            %td.label Name
+            %td.value
+              = @nach_member.name
+            %td
+          %tr
+            %td.label Created By
+            %td.value
+              = @nach_member.created_user.try(:username)
+            %td
+          %tr
+            %td.label Updated By
+            %td.value
+              = @nach_member.updated_user.try(:username)
+            %td
+          %tr
+            %td.label Created At
+            %td.value
+              = @nach_member.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td
+          %tr
+            %td.label Updated At
+            %td.value
+              = @nach_member.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td

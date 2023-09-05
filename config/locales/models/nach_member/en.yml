@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      nach_member: "NACH Member"
+    attributes:
+      nach_member: &attributes
+        iin:  "IIN"
+        name: "Name"
+  activemodel:
+    models:
+      nach_member_searcher: "NACH Member"
+    attributes:
+      nach_member_searcher:
+        <<: *attributes
