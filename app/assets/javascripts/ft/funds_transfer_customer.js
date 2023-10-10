@@ -100,8 +100,8 @@ $(document).ready(function(){
      $('#funds_transfer_customer_bulk_backend').val(''); 
      $("#funds_transfer_customer_bulk_backend").prop("disabled", true);
 
-    $('#funds_transfer_customer_bulk_2f_enabled').val();
-    $('#funds_transfer_customer_bulk_2f_method').val();
+    $('#funds_transfer_customer_bulk_2f_enabled').val('');
+    $('#funds_transfer_customer_bulk_2f_method').val('');
      $('#funds_transfer_customer_bulk_2f_enabled').prop('disabled',true);
     $('#funds_transfer_customer_bulk_2f_method').prop('disabled',true);
   }
@@ -124,16 +124,17 @@ $(document).ready(function(){
       $('#funds_transfer_customer_customer_code').prop('readOnly',true);
 
 
-      $('#funds_transfer_customer_bulk_2f_enabled').val();
-      $('#funds_transfer_customer_bulk_2f_method').val();
-
+      $('#funds_transfer_customer_bulk_2f_enabled').val('');
       $('#funds_transfer_customer_bulk_2f_enabled').prop('disabled',true);
+
+      $('#funds_transfer_customer_bulk_2f_method').val('');
       $('#funds_transfer_customer_bulk_2f_method').prop('disabled',true);
 
       $('#funds_transfer_customer_bulk_backend').val(''); 
       $("#funds_transfer_customer_bulk_backend").prop("disabled", true);
     }
     else {
+
       $('#funds_transfer_customer_btid').prop('readOnly',false);
       
       $('#funds_transfer_customer_bulk_2f_enabled').prop('disabled',false);
