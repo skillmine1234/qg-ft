@@ -216,6 +216,19 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :customer_code, :prepend_text => "")
           %tr
+            %td.label FT 2F Enabled
+            %td.value
+              = @funds_transfer_customer.ft_2f_enabled
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :ft_2f_enabled, :prepend_text => "")
+          %tr
+            %td.label FT 2F Method
+            %td.value
+              = @funds_transfer_customer.ft_2f_method
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :ft_2f_method, :prepend_text => "")
+
+          %tr
             %td.label Bulk Backend
             %td.value
               = @funds_transfer_customer.bulk_backend

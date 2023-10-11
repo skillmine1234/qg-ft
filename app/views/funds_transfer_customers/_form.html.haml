@@ -177,24 +177,14 @@
         = error_message_for(@funds_transfer_customer, :customer_code, :prepend_text => "")
     .control-group
       = f.label :ft_2f_enabled, "FT 2F Enabled", :class => 'control-label'
-      = f.select :ft_2f_enabled, [['YES','Y'],['No','N']], {:include_blank => 'Please Select'}
+      = f.select :ft_2f_enabled, [['No','N'],['YES','Y']] 
       #msg-error
         = error_message_for(@funds_transfer_customer, :ft_2f_enabled, :prepend_text => "")
     .control-group
       = f.label :ft_2f_method, "FT 2F Method", :class => 'control-label'
-      = f.select :ft_2f_method, [['CONSOLE','CONSOLE'],['STP','STP']], {:include_blank => 'Please Select'}
+      = f.select :ft_2f_method, [['STP','STP'],['CONSOLE','CONSOLE']],{},{:disabled => true}
       #msg-error
         = error_message_for(@funds_transfer_customer, :ft_2f_method, :prepend_text => "")
-    .control-group
-      = f.label :bulk_2f_enabled, "Bulk 2F Enabled", :class => 'control-label'
-      = f.select :bulk_2f_enabled, [['YES','Y'],['No','N']], {:include_blank => 'Please Select'}
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :bulk_2f_enabled, :prepend_text => "")
-    .control-group
-      = f.label :bulk_2f_method, "Bulk 2F Method", :class => 'control-label'
-      = f.select :bulk_2f_method, [['CONSOLE','CONSOLE'],['STP','STP'],['IGTB','IGTB']], {:include_blank => 'Please Select'}
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :bulk_2f_method, :prepend_text => "")        
     .control-group
       = f.label :bulk_backend, "Bulk Backend", :class => 'control-label'
       = f.select :bulk_backend, [['IGTB','IGTB'],['CNB','CNB']], {:include_blank => 'Select Bulk Backend'}

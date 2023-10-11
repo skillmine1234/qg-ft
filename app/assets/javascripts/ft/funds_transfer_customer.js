@@ -156,6 +156,22 @@ $(document).ready(function(){
     toggle_required_fields('N'); 
   }
 
+
+
+   $("#funds_transfer_customer_ft_2f_enabled").on("change",function(){
+    if ($("#funds_transfer_customer_ft_2f_enabled").val() == 'Y')
+    {
+      $('#funds_transfer_customer_ft_2f_method').prop("disabled", false);
+      
+    }
+    else
+    {
+      $('#funds_transfer_customer_ft_2f_method').prop("disabled", true);
+      $("#funds_transfer_customer_ft_2f_method").val('STP');
+    }
+    
+  });
+
   $("#funds_transfer_customer_notify_on_status_change").on("change",function(){
     if ($(this).is(":checked")) {
       toggle_required_fields('Y');
