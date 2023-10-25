@@ -158,14 +158,16 @@ $(document).ready(function(){
 
   if ($("#funds_transfer_customer_ft_2f_enabled").val() == 'Y')
     {
-      $('#funds_transfer_customer_ft_2f_method').prop("disabled", false);
+      $('#funds_transfer_customer_ft_2f_method').prop("disabled", true);
+      $("#funds_transfer_customer_ft_2f_method").val('CONSOLE');
       
     }
 
    $("#funds_transfer_customer_ft_2f_enabled").on("change",function(){
     if ($("#funds_transfer_customer_ft_2f_enabled").val() == 'Y')
     {
-      $('#funds_transfer_customer_ft_2f_method').prop("disabled", false);
+      $('#funds_transfer_customer_ft_2f_method').prop("disabled", true);
+      $("#funds_transfer_customer_ft_2f_method").val('CONSOLE');
       
     }
     else
