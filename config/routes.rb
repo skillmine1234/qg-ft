@@ -36,7 +36,6 @@ Rails.application.routes.draw do
 
   resources :ft_customer_accounts, :ft_purpose_codes, :ft_incoming_records do
     collection do
-      post :index
       patch :index
     end
   end
@@ -44,14 +43,12 @@ Rails.application.routes.draw do
   resources :ft_apbs_incoming_records, except: :index do
     collection do
       get :index
-      post :index
       patch :index
     end
   end
   resources :ft_saf_transfers, except: :index do
     collection do
       get :index
-      post :index
       patch :index
     end
     member do
@@ -69,7 +66,6 @@ Rails.application.routes.draw do
   resources :nach_members do
     collection do
       get :index
-      post :index
       patch :index
     end
     member do
@@ -80,7 +76,6 @@ Rails.application.routes.draw do
   
   resources :ft_invoice_details do
     collection do
-      post :index
       patch :index
     end
     member do
