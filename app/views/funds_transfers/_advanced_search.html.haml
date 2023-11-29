@@ -1,4 +1,4 @@
-= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+= form_tag '', :method => 'patch', :class => 'form-horizontal', :autocomplete=>"off" do
   - if current_user.present? && current_user.try(:accessible_customers).try(:count) != 1
     .control-group
       = label_tag "Customer ID", "Customer ID", :class => 'control-label'

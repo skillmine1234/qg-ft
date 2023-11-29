@@ -5,7 +5,7 @@
 %br
 %br
 
-= simple_form_for :ft_apbs_incoming_record, :url => override_records_path, :html => { :method => :get, :class => 'form-horizontal', :autocomplete=>"off", :id => 'update_records', :style=> 'overflow: auto;'} do |f| 
+= simple_form_for :ft_apbs_incoming_record, :url => override_records_path, :html => { :method => :post, :class => 'form-horizontal', :autocomplete=>"off", :id => 'update_records', :style=> 'overflow: auto;'} do |f| 
   %table.table.table-bordered.table-striped.table-hover{:style => 'width:100%; border:1px'}
     .thead
       %tr

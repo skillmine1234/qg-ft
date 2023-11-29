@@ -1,7 +1,7 @@
 .form-horizontal.show_form
   .form-main-with-color{:style=>'background-color: #F1F2F8;'}
     #form-details
-      = form_for "audit_logs", :url => "", :method => :get do |f|
+      = form_for "audit_logs", :url => "", :method => :post do |f|
         %h3{:style => 'display:inline;'} 
           = "Values at version" 
           = select_tag :version_id, options_for_select(version_ids(@ft_purpose_code),params[:version_id]), :prompt => 'Select'

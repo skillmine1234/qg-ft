@@ -7,7 +7,7 @@
     %h3#myModalLabel  Approve
     #error_message{:style => 'color:red'}
   .modal-body
-    = simple_form_for @record, :url => {:action => 'approve'}, :method => :put, :html=>{:id=>"transition"} do |ef|
+    = simple_form_for @record, :url => {:action => 'approve'}, :method => :post, :html=>{:id=>"transition"} do |ef|
       = ef.input :updated_by, :as => :hidden, :input_html => {:value => current_user.id}
       = submit_tag "Approve", :class=>"btn btn-primary transition_button", :id => "transition_button"
 %p{:style => 'color:green;'}

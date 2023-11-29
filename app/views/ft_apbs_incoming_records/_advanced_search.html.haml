@@ -2,7 +2,7 @@
   Advanced Search
   %span.caret
 .collapsible-content
-  = form_tag ft_apbs_incoming_records_path, :method => :post, :class => 'form-horizontal', :autocomplete=>"off" do
+  = form_tag ft_apbs_incoming_records_path, :method => :patch, :class => 'form-horizontal', :autocomplete=>"off" do
     .control-group
       = label_tag "APBS Transaction Code", "APBS Transaction Code", :class => 'control-label'
       = text_field_tag :apbs_trans_code, params[:apbs_trans_code]
