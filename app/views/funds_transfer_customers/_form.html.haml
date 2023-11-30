@@ -176,13 +176,13 @@
       #msg-error
         = error_message_for(@funds_transfer_customer, :customer_code, :prepend_text => "")
     .control-group
-      = #f.label :ft_2f_enabled, "FT 2FA Enabled", :class => 'control-label'
-      = #f.select :ft_2f_enabled, [['No','N'],['YES','Y']] 
+      = f.label :ft_2f_enabled, "FT 2FA Enabled", :class => 'control-label'
+      = f.select :ft_2f_enabled, [['No','N'],['YES','Y']] 
       #msg-error
         = error_message_for(@funds_transfer_customer, :ft_2f_enabled, :prepend_text => "")
     .control-group
-      = #f.label :ft_2f_method, "FT 2FA Method", :class => 'control-label'
-      = #f.select :ft_2f_method, [['STP','STP'],['CONSOLE','CONSOLE']],{},{:disabled => true}
+      = f.label :ft_2f_method, "FT 2FA Method", :class => 'control-label'
+      = f.select :ft_2f_method, [['STP','STP'],['CONSOLE','CONSOLE']],{},{:disabled => true}
       #msg-error
         = error_message_for(@funds_transfer_customer, :ft_2f_method, :prepend_text => "")
     .control-group
