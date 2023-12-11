@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       post :resend_notification
     end
     collection do
-      post :index
+      get :index
       get :validate_customer_id_ft_customer
       get :validate_app_id_ft_customer
       post :create_clone_accounts
