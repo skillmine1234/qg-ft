@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :funds_transfers, :inward_remittances, :whitelisted_identities, only: [:index, :show] do
+  resources :funds_transfers, only: [:index, :show] do
     collection do
       post :index
     end
