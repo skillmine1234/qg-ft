@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   
   resources :funds_transfers, only: [:index, :show] do
     collection do
-      post :index
+      patch :index
+      get :index
     end
     member do
       get :steps

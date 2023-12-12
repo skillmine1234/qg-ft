@@ -1,5 +1,5 @@
 module Qg
   module Ft
-	VERSION = "9.9.0"                
+	VERSION = "10.0.0"                
   end
 end
