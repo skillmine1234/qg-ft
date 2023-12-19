@@ -27,9 +27,9 @@ class FtSafTransferSearcher
     reln = reln.where("app_uuid IN (?) ", app_uuid.split(",").collect(&:strip)) if app_uuid.present?
     reln = reln.where("customer_id IN (?) ", customer_id.split(",").collect(&:strip)) if customer_id.present?
     reln = reln.where("req_no IN (?)", req_no.split(",").collect(&:strip)) if req_no.present?
-    reln = reln.where("op_name=?",op_name) if op_name.present?
-    reln = reln.where("status_code=?",status) if status.present?
-    reln = reln.where("req_transfer_type=?",req_transfer_type) if req_transfer_type.present?
+    reln = reln.where("op_name= LIKE ?", "#{op_name}%") if op_name.present?
+    reln = reln.where("status_code LIKE ?","#{status}%") if status.present?
+    reln = reln.where("req_transfer_type LIKE ?","#{req_transfer_type}%") if req_transfer_type.present?
     reln = reln.where("req_timestamp>=? and req_timestamp<=?",Time.zone.parse(from_request_timestamp),Time.zone.parse(to_request_timestamp)) if from_request_timestamp.present? and to_request_timestamp.present?
     reln = reln.where("rep_timestamp>=? and rep_timestamp<=?",Time.zone.parse(from_reply_timestamp),Time.zone.parse(to_reply_timestamp)) if from_reply_timestamp.present? and to_reply_timestamp.present?
     reln
